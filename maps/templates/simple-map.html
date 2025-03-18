@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Bản đồ cơ bản
+{% endblock %}
+
+{% block map %}
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/map/map.css' %}">
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <section class="special-services">
+        <div class="container-fluid">
+            <div class="section-title text-center" data-aos="fade-up">
+                <h2>Bản đồ cơ bản</h2>
+            </div>
+            <div class="marker-position"></div>
+            <div class="row" style="height: 800px">
+                <div id="map"></div>
+            </div>
+            <div class="services_mask">
+                <img src="{% static 'assets/img/mask/mask09.svg' %}" alt="Icon" class="img-fluid mask_01" />
+            </div>
+        </div>[]
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/map/simple.js' %}"></script>
+{% endblock %}

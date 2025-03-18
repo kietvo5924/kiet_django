@@ -1,0 +1,20 @@
+{% extends "layout.html" %} 
+
+{%block title %} 
+    Danh sách bài viết
+{%endblock%} 
+
+{% block content %}
+    <section>
+        <h1>Danh sách bài viết</h1>
+        <div class="text-center" data-aos="fade-up">
+            {% for post in posts %}
+                <article class="post">
+                    <h2><a href="{% url 'posts:page' slug=post.slug %}">{{ post.title }}</a></h2>
+                    <p>{{ post.date }}</p>
+                    <p>{{ post.body }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

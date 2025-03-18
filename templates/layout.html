@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        Ứng dụng bài viết
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+
+    {% block map %}
+
+    {% endblock %}
+</head>
+<body>
+    <header id="header" class="header-area">
+        <div class="container custom-container">
+            <nav class="menu-area d-flex align-items-center">
+                <div class="logo">
+                    <a href="index.html"><img src="{% static 'assets/img/logo/logo.png' %}" alt="logo" /></a>
+                </div>
+                <ul class="main-menu d-flex align-items-center">
+                    <li>
+                        <a class="{% if request.path == '/' %}active{% endif %}" href="/">Home</a>
+                    </li>
+                    <li>
+                        <a class="javascript:void(0)">Bản đồ</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'maps:co-ban' %}">Cơ bản</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="{% if request.path == '/gioi-thieu/' %}active{% endif %}" href="/gioi-thieu">About</a>
+                    </li>
+                    <li>
+                        <a class="{% if request.path == '/posts/' %}active{% endif %}" href="{% url 'posts:list' %}">Post</a>
+                    </li>
+                </ul>                                           
+                <div class="right-content ml-auto">
+                    <div class="search-bar">
+                        <img src="{% static 'assets/img/logo/search.svg' %}" alt="search logo" />
+                    </div>
+                </div>
+                <div class="hamburger-menu"><span></span><span></span><span></span></div>
+            </nav>
+            <aside>
+                <div class="sidebar-menu">
+                    <div class="close-sidebar"><span></span><span></span></div>
+                    <div class="logo">
+                        <a href="/">
+                            <img src="{% static 'assets/img/logo/logo.png' %}" alt="logo" />
+                        </a>
+                    </div>
+                    <form class="asidesearch-bar">
+                        <input type="text" name="search" />
+                        <img src="{% static 'assets/img/logo/search.svg' %}" alt="search logo" />
+                    </form>
+                    <ul class="main-menu">
+                        <li>
+                            <a class="active" href="index.html">Home</a>
+                        </li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="project.html">Portfolio</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                    <a class="primary__button primary__button-bgBlack contacprimary__button" href="tel:+987 45478 547">
+                        <img src="{% static 'assets/img/logo/phone-alt.svg' %}" alt="phone alt" />
+                        +987 45478 547
+                    </a>
+                </div>
+                <div class="overlay"></div>
+            </aside>
+        </div>
+        <div class="search-box">
+            <div class="search-form">
+                <form action="#">
+                    <input type="text" placeholder="Enter Your Kayword" />
+                    <button type="submit">
+                        <img src="{% static 'assets/img/logo/search.svg' %}" alt="search logo" />
+                    </button>
+                </form>
+            </div>
+            <a class="search-close" href="javascript:void(0)"><i class="fas fa-times"></i></a>
+        </div>
+    </header>
+
+<main style="position: relative; min-height: 100%; height: 100%">
+        {% block content %}
+        
+        {% endblock %}
+
+        {% block script %}
+
+        {% endblock %}
+</main>
+
+<footer>
+    <div class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 order-lg-0 order-4">
+                    <div class="footer-area-about mb-50" data-aos="fade-up">
+                        <h4>About Us</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut scelerisque arcu, at porttitor lacus. Integer.
+                        </p>
+                        <div class="footer-area-links">
+                            <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mr-lg-65 col-md-4 col-6 order-lg-0 order-md-1">
+                    <div class="footer-area-lists mb-30" data-aos="fade-up" data-aos-delay="300">
+                        <h4>Company</h4>
+                        <ul>
+                            <li>
+                                <a href="/gioi-thieu">About us</a>
+                            </li>
+                            <li>
+                                <a href="/">Contact us</a>
+                            </li>
+                            <li>
+                                <a href="/">Careers</a>
+                            </li>
+                            <li>
+                                <a href="/">Press</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 mr-lg-65 col-md-4 col-6 order-lg-0 order-2">
+                    <div class="footer-area-lists mb-30" data-aos="fade-up" data-aos-delay="400">
+                        <h4>Products</h4>
+                        <ul>
+                            <li>
+                                <a href="/">Features</a>
+                            </li>
+                            <li>
+                                <a href="/">Pricing</a>
+                            </li>
+                            <li>
+                                <a href="/">News</a>
+                            </li>
+                            <li>
+                                <a href="/">Help desk</a>
+                            </li>
+                            <li>
+                                <a href="/">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 order-lg-0 order-md-3">
+                    <div class="footer-area-lists" data-aos="fade-up" data-aos-delay="500">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li>
+                                <a href="/">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="/">Terms & Conditions</a>
+                            </li>
+                            <li>
+                                <a href="/">Return Policy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-area-shape">
+            <img data-aos="fade-down" data-aos-easing="linear" data-aos-delay="600" src="{% static 'assets/img/mask/penta-02.svg' %}" alt="shape" class="img-fluid ft-shape-01" />
+            <img data-aos="fade-down" data-aos-easing="linear" data-aos-delay="700" src="{% static 'assets/img/mask/downShape.svg' %}" alt="shape" class="img-fluid ft-shape-02" />
+            <img data-aos="fade-left" data-aos-easing="linear" data-aos-delay="500" src="{% static 'assets/img/mask/circle-01.svg' %}" alt="shape" class="img-fluid ft-shape-03" />
+        </div>
+    </div>
+    <!-- copyright area -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row align-items-center copyright-area">
+                <div class="col-lg-5 col-md-4 col-sm-12">
+                    <div class="copyright-area-text">
+                        <p>Copyright 2020. All Rights Reserved by us!</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-sm-12">
+                    <div class="copyright-area-logo">
+                        <a href="/">
+                            <img src="{% static 'assets/img/logo/logo.png' %}" alt="logo" class="img-fluid" />
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5 col-md-4 col-sm-12">
+                    <div class="copyright-area-top text-lg-right">
+                        <a href="#header" id="to-top">Back to Top <i class="fas fa-angle-up"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="{% static 'assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'assets/js/slider.js' %}"></script>
+    <script src="{% static 'assets/js/aos.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>
