@@ -40,23 +40,40 @@ label {
   cursor: pointer;
 }
 
-#map {
-  width: 100%;
-  height: 100%;
-}
-
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .layers {
+  position: absolute;
+  bottom: 20px;
+  /* Đặt cách dưới 20px */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Đưa phần tử về giữa */
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
   gap: 10px;
+  justify-content: center;
+  /* Đặt các nút checkbox vào giữa */
 }
 
 .leaflet-marker-icon {

@@ -14,6 +14,7 @@ Tìm kiếm địa chỉ
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/css/autocomplete.min.css"
     />
+    
 <script src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/js/autocomplete.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.js"></script>
@@ -21,12 +22,10 @@ Tìm kiếm địa chỉ
 {% endblock %}
 
 {% block content %}
-<section class="special-services">
-    <div class="row" style="height: 800px">
-        <div id="map"></div>
-        <ul class="layers"></ul>
-      </div>
-</section>
+<div class="container">
+    <div id="map"></div>
+    <ul class="layers"></ul>
+</div>
 {% endblock %} 
 
 {% block script %}

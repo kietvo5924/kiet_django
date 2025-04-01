@@ -7,6 +7,7 @@
 let config = {
     minZoom: 7,
     maxZoom: 18,
+    fullscreenControl: true,
   };
   // magnification with which the map will start
   const zoom = 18;
@@ -87,11 +88,11 @@ let config = {
   generateButton(layersButton);
   
   // add data to geoJSON layer and add to LayerGroup
-  const arrayLayers = ["bar", "pharmacy", "restaurant"];
+  const arrayLayers = ["bar", "pharmacy", "restaurant","hospital"];
   
   arrayLayers.map((json) => {
     generateButton(json);
-    fetchData(`.map/static/data/${json}.json`).then((data) => {
+    fetchData(`/static/data/${json}.json`).then((data) => {
       window["layer_" + json] = L.geoJSON(data, geojsonOpts).addTo(map);
     });
   });
@@ -120,6 +121,7 @@ let config = {
     document.querySelector("#all-layers").checked =
       checkedBoxes.length - (document.querySelector("#all-layers").checked === true ? 1 : 0) < 3 ? false : true;
   }
+  
   
   function checkedType(id, type) {
     map[type ? "addLayer" : "removeLayer"](window["layer_" + id]);

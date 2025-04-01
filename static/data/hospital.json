@@ -1,0 +1,148 @@
+{
+    "type": "FeatureCollection",
+    "generator": "Grok 3 by xAI",
+    "copyright": "Dữ liệu dựa trên thông tin công khai từ www.openstreetmap.org và các nguồn đáng tin cậy khác. Dữ liệu được cung cấp theo ODbL.",
+    "timestamp": "2025-04-01T01:50:00Z",
+    "features": [
+      {
+        "type": "Feature",
+        "id": "node/1",
+        "properties": {
+          "@id": "node/1",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện FV",
+          "address": "Số 6 Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.7325, 10.7297]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/2",
+        "properties": {
+          "@id": "node/2",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Quốc tế Vinmec Central Park",
+          "address": "208 Nguyễn Hữu Cảnh, Quận Bình Thạnh, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.7212, 10.8003]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/3",
+        "properties": {
+          "@id": "node/3",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Quốc tế City",
+          "address": "Số 3, Đường 17A, Phường Bình Trị Đông B, Quận Bình Tân, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.6178, 10.7475]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/4",
+        "properties": {
+          "@id": "node/4",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Chợ Rẫy",
+          "address": "201B Nguyễn Chí Thanh, Quận 5, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.6702, 10.7548]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/5",
+        "properties": {
+          "@id": "node/5",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Columbia Asia Gia Định",
+          "address": "Số 1 Nơ Trang Long, Quận Bình Thạnh, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.6985, 10.8032]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/6",
+        "properties": {
+          "@id": "node/6",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Hoàn Mỹ Sài Gòn",
+          "address": "60-60A Phan Xích Long, Quận Phú Nhuận, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.6882, 10.7945]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/7",
+        "properties": {
+          "@id": "node/7",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Từ Dũ",
+          "address": "284 Cống Quỳnh, Quận 1, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.6898, 10.7652]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/8",
+        "properties": {
+          "@id": "node/8",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Nhi Đồng 1",
+          "address": "341 Sư Vạn Hạnh, Quận 10, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.6695, 10.7710]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/9",
+        "properties": {
+          "@id": "node/9",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Nhi Đồng 2",
+          "address": "14 Lý Tự Trọng, Quận 1, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.7005, 10.7815]
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "node/10",
+        "properties": {
+          "@id": "node/10",
+          "amenity": "bệnh viện",
+          "name": "Bệnh viện Đại học Y Dược TP.HCM",
+          "address": "215 Hồng Bàng, Quận 5, TP. Hồ Chí Minh"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [106.6680, 10.7555]
+        }
+      }
+    ]
+  }
