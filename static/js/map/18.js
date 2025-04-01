@@ -91,7 +91,7 @@ let config = {
   
   arrayLayers.map((json) => {
     generateButton(json);
-    fetchData(`./data/${json}.json`).then((data) => {
+    fetchData(`.map/static/data/${json}.json`).then((data) => {
       window["layer_" + json] = L.geoJSON(data, geojsonOpts).addTo(map);
     });
   });
