@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Bản đồ cơ bản
+{% endblock %}
+
+{% block map %}
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/map/18.css' %}">
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <section class="special-services">
+        <div class="row" style="height: 800px">
+            <div id="map"></div>
+            <ul class="layers"></ul>
+          </div>
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/map/18.js' %}"></script>
+{% endblock %}
