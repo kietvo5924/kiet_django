@@ -1,0 +1,33 @@
+{% extends "layout.html" %} 
+{% load static %} 
+
+{% block title %} 
+Tìm kiếm địa chỉ 
+{% endblock %} 
+
+{% block map %}
+<link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
+<link rel="stylesheet" href="{% static 'css/map/18.css' %}" />
+<script src="{% static 'leaflet/leaflet.js' %}"></script>
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/css/autocomplete.min.css"
+    />
+    
+<script src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/js/autocomplete.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div id="map"></div>
+    <ul class="layers"></ul>
+</div>
+{% endblock %} 
+
+{% block script %}
+<script src="{% static 'js/map/18.js' %}"></script>
+{% endblock %}
