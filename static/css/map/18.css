@@ -57,13 +57,13 @@ label {
   bottom: 0;
 }
 
-.layers {
+/* .layers {
   position: absolute;
   bottom: 20px;
-  /* Đặt cách dưới 20px */
+
   left: 50%;
   transform: translateX(-50%);
-  /* Đưa phần tử về giữa */
+
   background: rgba(255, 255, 255, 0.8);
   padding: 10px;
   border-radius: 8px;
@@ -73,8 +73,8 @@ label {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  /* Đặt các nút checkbox vào giữa */
-}
+
+} */
 
 .leaflet-marker-icon {
   display: flex;
@@ -107,6 +107,11 @@ label {
 .restaurant.leaflet-marker-icon {
   background: #ff3939;
 }
+.hospital,
+.hospital.search-tip b,
+.hospital.leaflet-marker-icon {
+  background: #ff3939;
+}
 
 /* checkbox */
 input[type="checkbox"] {
@@ -125,4 +130,59 @@ input[type="checkbox"]:checked {
 
 .layer-element > span {
   border: 1px soslid red;
+}
+
+.description {
+  width: 250px;
+  font-size: 16px;
+  color: #333;
+  padding: 10px 14px;
+  background-color: hsla(0, 0%, 100%, 0.8);
+  box-shadow: 0 0 15px rgb(0 0 0 / 20%);
+  border-radius: 5px;
+  line-height: 120%;
+  border: 1px solid grey;
+  z-index: 1000;
+}
+
+/* Adjust layers positioning to avoid overlap with routing controls */
+.layers {
+  position: absolute;
+  bottom: 60px; /* Increased from 20px to avoid overlap with routing controls */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.start-marker {
+  background-color: #00cc00; /* Màu xanh lá cho điểm bắt đầu */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0px 0px 10px rgba(0, 204, 0, 0.8);
+  border: 2px solid #fff;
+}
+
+.end-marker {
+  background-color: #ff0000; /* Màu đỏ cho điểm kết thúc */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+  border: 2px solid #fff;
 }
