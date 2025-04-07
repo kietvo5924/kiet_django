@@ -1,0 +1,450 @@
+{
+  "type": "FeatureCollection",
+  "generator": "Grok 3 by xAI",
+  "copyright": "Dữ liệu dựa trên thông tin công khai từ các nguồn đáng tin cậy.",
+  "timestamp": "2025-04-01T01:50:00Z",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "node/1",
+      "properties": {
+        "@id": "node/1",
+        "amenity": "police",
+        "name": "Công an Quận 1",
+        "address": "68 Lý Tự Trọng, Phường Bến Nghé, Quận 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.773,
+          106.700
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/2",
+      "properties": {
+        "@id": "node/2",
+        "amenity": "police",
+        "name": "Công an Quận 2",
+        "address": "1 Trần Não, Phường Bình An, Quận 2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.776,
+          106.756
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/3",
+      "properties": {
+        "@id": "node/3",
+        "amenity": "police",
+        "name": "Công an Quận 3",
+        "address": "103 Lý Chính Thắng, Phường 8, Quận 3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.776,
+          106.695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/4",
+      "properties": {
+        "@id": "node/4",
+        "amenity": "police",
+        "name": "Công an Quận 4",
+        "address": "183C Tôn Thất Thuyết, Phường 4, Quận 4"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.759,
+          106.694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/5",
+      "properties": {
+        "@id": "node/5",
+        "amenity": "police",
+        "name": "Công an Quận 5",
+        "address": "72 Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 5"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.758,
+          106.631
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/6",
+      "properties": {
+        "@id": "node/6",
+        "amenity": "police",
+        "name": "Công an Quận 6",
+        "address": "149 Cao Văn Lầu, Phường 1, Quận 6"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.755,
+          106.617
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/7",
+      "properties": {
+        "@id": "node/7",
+        "amenity": "police",
+        "name": "Công an Quận 7",
+        "address": "1180 Nguyễn Văn Linh, Phường Tân Phong, Quận 7"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.736,
+          106.703
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/8",
+      "properties": {
+        "@id": "node/8",
+        "amenity": "police",
+        "name": "Công an Quận 8",
+        "address": "250 Tùng Thiện Vương, Phường 11, Quận 8"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.745,
+          106.612
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/9",
+      "properties": {
+        "@id": "node/9",
+        "amenity": "police",
+        "name": "Công an Quận 9",
+        "address": "02 Xa Lộ Hà Nội, Phường Hiệp Phú, Quận 9"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.816,
+          106.749
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/10",
+      "properties": {
+        "@id": "node/10",
+        "amenity": "police",
+        "name": "Công an Quận 10",
+        "address": "225 Lý Thường Kiệt, Phường 15, Quận 10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.762,
+          106.677
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/11",
+      "properties": {
+        "@id": "node/11",
+        "amenity": "police",
+        "name": "Công an Quận 11",
+        "address": "52 Lý Thường Kiệt, Phường 6, Quận 11"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.751,
+          106.661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/12",
+      "properties": {
+        "@id": "node/12",
+        "amenity": "police",
+        "name": "Công an Quận 12",
+        "address": "2368 Quốc Lộ 1A, Khu phố 2, Phường Trung Mỹ Tây, Quận 12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.853,
+          106.624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/13",
+      "properties": {
+        "@id": "node/13",
+        "amenity": "police",
+        "name": "Công an Quận Tân Bình",
+        "address": "342 Trường Chinh, Phường 13, Quận Tân Bình"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.774,
+          106.640
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/14",
+      "properties": {
+        "@id": "node/14",
+        "amenity": "police",
+        "name": "Công an Quận Gò Vấp",
+        "address": "1 Quang Trung, Phường 10, Quận Gò Vấp"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.818,
+          106.700
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/15",
+      "properties": {
+        "@id": "node/15",
+        "amenity": "police",
+        "name": "Công an Quận Bình Tân",
+        "address": "428 Kinh Dương Vương, Phường An Lạc, Quận Bình Tân"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.751,
+          106.616
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/16",
+      "properties": {
+        "@id": "node/16",
+        "amenity": "police",
+        "name": "Công an Quận Bình Thạnh",
+        "address": "107 Bạch Đằng, Phường 2, Quận Bình Thạnh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.800,
+          106.705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/17",
+      "properties": {
+        "@id": "node/17",
+        "amenity": "police",
+        "name": "Công an Quận Phú Nhuận",
+        "address": "18 Hoàng Văn Thụ, Phường 9, Quận Phú Nhuận"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.792,
+          106.684
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/18",
+      "properties": {
+        "@id": "node/18",
+        "amenity": "police",
+        "name": "Công an Quận Tân Phú",
+        "address": "35 Nguyễn Sơn, Phường Phú Thạnh, Quận Tân Phú"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.774,
+          106.617
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/19",
+      "properties": {
+        "@id": "node/19",
+        "amenity": "police",
+        "name": "Công an Phường 1 Quận Tân Bình",
+        "address": "Số 1 Trường Chinh, Phường 1, Quận Tân Bình"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.766,
+          106.637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/20",
+      "properties": {
+        "@id": "node/20",
+        "amenity": "police",
+        "name": "Công an Phường 3 Quận Gò Vấp",
+        "address": "Số 1 Phan Huy Ích, Phường 3, Quận Gò Vấp"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.805,
+          106.690
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/21",
+      "properties": {
+        "@id": "node/21",
+        "amenity": "police",
+        "name": "Công an Phường 10 Quận Bình Tân",
+        "address": "Dưới Cầu Bến Lội, Phường Bình Hưng Hòa, Quận Bình Tân"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.764,
+          106.609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/22",
+      "properties": {
+        "@id": "node/22",
+        "amenity": "police",
+        "name": "Công an Phường 1 Quận Gò Vấp",
+        "address": "59 Phan Văn Trị, Phường 1, Quận Gò Vấp"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.788,
+          106.694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/23",
+      "properties": {
+        "@id": "node/23",
+        "amenity": "police",
+        "name": "Công an Phường 5 Quận Bình Thạnh",
+        "address": "75 Nguyễn Xí, Phường 5, Quận Bình Thạnh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.798,
+          106.709
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/24",
+      "properties": {
+        "@id": "node/24",
+        "amenity": "police",
+        "name": "Công an Phường 4 Quận Tân Phú",
+        "address": "40 Nguyễn Trãi, Phường 4, Quận Tân Phú"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.779,
+          106.601
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/25",
+      "properties": {
+        "@id": "node/25",
+        "amenity": "police",
+        "name": "Công an Phường 8 Quận Phú Nhuận",
+        "address": "60 Nguyễn Thượng Hiền, Phường 8, Quận Phú Nhuận"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.792,
+          106.690
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/26",
+      "properties": {
+        "@id": "node/26",
+        "amenity": "police",
+        "name": "Công an Phường 10 Quận Tân Bình",
+        "address": "22 Hoàng Văn Thụ, Phường 10, Quận Tân Bình"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.757,
+          106.630
+        ]
+      }
+    }
+  ]
+}
