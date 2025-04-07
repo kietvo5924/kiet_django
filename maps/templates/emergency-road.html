@@ -1,13 +1,13 @@
-{% extends "layout.html" %} 
-{% load static %} 
+{% extends "layout.html" %}
+{% load static %}
 
-{% block title %} 
-Tìm kiếm địa chỉ 
-{% endblock %} 
+{% block title %}
+Đường khẩn cấp
+{% endblock %}
 
 {% block map %}
 <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
-<link rel="stylesheet" href="{% static 'css/map/18.css' %}" />
+<link rel="stylesheet" href="{% static 'css/map/emergency-road.css' %}" />
 <script src="{% static 'leaflet/leaflet.js' %}"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/css/autocomplete.min.css" />
@@ -22,11 +22,12 @@ Tìm kiếm địa chỉ
 
 {% block content %}
 <div class="container">
+    <button id="getLocationBtn">Lấy vị trí của tôi</button>
     <div id="map"></div>
     <ul class="layers"></ul>
 </div>
-{% endblock %} 
+{% endblock %}
 
 {% block script %}
-<script src="{% static 'js/map/18.js' %}"></script>
+<script src="{% static 'js/map/emergency-road.js' %}"></script>
 {% endblock %}

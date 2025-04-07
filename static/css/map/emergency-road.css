@@ -57,25 +57,6 @@ label {
   bottom: 0;
 }
 
-/* .layers {
-  position: absolute;
-  bottom: 20px;
-
-  left: 50%;
-  transform: translateX(-50%);
-
-  background: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-
-} */
-
 .leaflet-marker-icon {
   display: flex;
   justify-content: center;
@@ -96,25 +77,26 @@ label {
   background: #be4dff;
 }
 
-.pharmacy,
-.pharmacy.search-tip b,
-.pharmacy.leaflet-marker-icon {
-  background: #ff8146;
+.police,
+.police.search-tip b,
+.police.leaflet-marker-icon {
+  background: #2b66fb;
 }
 
-.restaurant,
-.restaurant.search-tip b,
-.restaurant.leaflet-marker-icon {
+.PCCC,
+.PCCC.search-tip b,
+.PCCC.leaflet-marker-icon {
   background: #ff3939;
 }
+
 .hospital,
 .hospital.search-tip b,
 .hospital.leaflet-marker-icon {
   background: #ff3939;
 }
 
-/* checkbox */
-input[type="checkbox"] {
+/* radio */
+input[type="radio"] {
   appearance: none;
   width: 20px;
   height: 20px;
@@ -122,13 +104,15 @@ input[type="checkbox"] {
   background-clip: content-box;
   padding: 3px;
   cursor: pointer;
+  border-radius: 50%;
 }
 
-input[type="checkbox"]:checked {
+input[type="radio"]:checked {
   background-color: #525252;
 }
 
-.layer-element > span {
+
+.layer-element>span {
   border: 1px soslid red;
 }
 
@@ -148,7 +132,8 @@ input[type="checkbox"]:checked {
 /* Adjust layers positioning to avoid overlap with routing controls */
 .layers {
   position: absolute;
-  bottom: 60px; /* Increased from 20px to avoid overlap with routing controls */
+  bottom: 60px;
+  /* Increased from 20px to avoid overlap with routing controls */
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.8);
@@ -161,8 +146,10 @@ input[type="checkbox"]:checked {
   gap: 10px;
   justify-content: center;
 }
+
 .start-marker {
-  background-color: #00cc00; /* Màu xanh lá cho điểm bắt đầu */
+  background-color: #00cc00;
+  /* Màu xanh lá cho điểm bắt đầu */
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -175,7 +162,8 @@ input[type="checkbox"]:checked {
 }
 
 .end-marker {
-  background-color: #ff0000; /* Màu đỏ cho điểm kết thúc */
+  background-color: #ff0000;
+  /* Màu đỏ cho điểm kết thúc */
   border-radius: 50%;
   display: flex;
   justify-content: center;

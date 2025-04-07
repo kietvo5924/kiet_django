@@ -1,148 +1,824 @@
 {
-    "type": "FeatureCollection",
-    "generator": "Grok 3 by xAI",
-    "copyright": "Dữ liệu dựa trên thông tin công khai từ www.openstreetmap.org và các nguồn đáng tin cậy khác. Dữ liệu được cung cấp theo ODbL.",
-    "timestamp": "2025-04-01T01:50:00Z",
-    "features": [
-      {
-        "type": "Feature",
-        "id": "node/1",
-        "properties": {
-          "@id": "node/1",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện FV",
-          "address": "Số 6 Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.7325, 10.7297]
-        }
+  "type": "FeatureCollection",
+  "generator": "Grok 3 by xAI",
+  "copyright": "Dữ liệu dựa trên thông tin công khai từ www.openstreetmap.org và các nguồn đáng tin cậy khác. Dữ liệu được cung cấp theo ODbL.",
+  "timestamp": "2025-04-01T01:50:00Z",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "node/1",
+      "properties": {
+        "@id": "node/1",
+        "amenity": "hospital",
+        "name": "Bệnh viện FV",
+        "address": "Số 6 Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh"
       },
-      {
-        "type": "Feature",
-        "id": "node/2",
-        "properties": {
-          "@id": "node/2",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Quốc tế Vinmec Central Park",
-          "address": "208 Nguyễn Hữu Cảnh, Quận Bình Thạnh, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.7212, 10.8003]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/3",
-        "properties": {
-          "@id": "node/3",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Quốc tế City",
-          "address": "Số 3, Đường 17A, Phường Bình Trị Đông B, Quận Bình Tân, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.6178, 10.7475]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/4",
-        "properties": {
-          "@id": "node/4",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Chợ Rẫy",
-          "address": "201B Nguyễn Chí Thanh, Quận 5, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.6702, 10.7548]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/5",
-        "properties": {
-          "@id": "node/5",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Columbia Asia Gia Định",
-          "address": "Số 1 Nơ Trang Long, Quận Bình Thạnh, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.6985, 10.8032]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/6",
-        "properties": {
-          "@id": "node/6",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Hoàn Mỹ Sài Gòn",
-          "address": "60-60A Phan Xích Long, Quận Phú Nhuận, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.6882, 10.7945]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/7",
-        "properties": {
-          "@id": "node/7",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Từ Dũ",
-          "address": "284 Cống Quỳnh, Quận 1, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.6898, 10.7652]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/8",
-        "properties": {
-          "@id": "node/8",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Nhi Đồng 1",
-          "address": "341 Sư Vạn Hạnh, Quận 10, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.6695, 10.7710]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/9",
-        "properties": {
-          "@id": "node/9",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Nhi Đồng 2",
-          "address": "14 Lý Tự Trọng, Quận 1, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.7005, 10.7815]
-        }
-      },
-      {
-        "type": "Feature",
-        "id": "node/10",
-        "properties": {
-          "@id": "node/10",
-          "amenity": "bệnh viện",
-          "name": "Bệnh viện Đại học Y Dược TP.HCM",
-          "address": "215 Hồng Bàng, Quận 5, TP. Hồ Chí Minh"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [106.6680, 10.7555]
-        }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.732757881935237,
+          106.71800728241233
+        ]
       }
-    ]
-  }
+    },
+    {
+      "type": "Feature",
+      "id": "node/2",
+      "properties": {
+        "@id": "node/2",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quốc tế Vinmec Central Park",
+        "address": "208 Nguyễn Hữu Cảnh, Quận Bình Thạnh, TP. Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794203688616621,
+          106.72035356436633
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/3",
+      "properties": {
+        "@id": "node/3",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quốc tế City",
+        "address": "Số 3, Đường 17A, Phường Bình Trị Đông B, Quận Bình Tân, TP. Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.741244327267667,
+          106.60913399131442
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/4",
+      "properties": {
+        "@id": "node/4",
+        "amenity": "hospital",
+        "name": "Bệnh viện Chợ Rẫy",
+        "address": "201B Nguyễn Chí Thanh, Quận 5, TP. Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.758080675544937,
+          106.65949700668662
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/5",
+      "properties": {
+        "@id": "node/5",
+        "amenity": "hospital",
+        "name": "Bệnh viện Columbia Asia Gia Định",
+        "address": "Số 1 Nơ Trang Long, Quận Bình Thạnh, TP. Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.803264527027144,
+          106.69454244903164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/6",
+      "properties": {
+        "@id": "node/6",
+        "amenity": "hospital",
+        "name": "Bệnh viện Hoàn Mỹ Sài Gòn",
+        "address": "60-60A Phan Xích Long, Quận Phú Nhuận, TP. Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.800270873671186,
+          106.68420344898074
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/7",
+      "properties": {
+        "@id": "node/7",
+        "amenity": "hospital",
+        "name": "Làng Hòa Bình Bệnh viện Từ Dũ",
+        "address": "QM9P+CGQ, Phường Phạm Ngũ Lão, Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.76874433224522,
+          106.68635564628892
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/54",
+      "properties": {
+        "@id": "node/54",
+        "amenity": "hospital",
+        "name": "Bệnh viện Từ Dũ chi nhánh 2",
+        "address": "265 Đ. Nguyễn Thị Minh Khai, Phường Phạm Ngũ Lão, Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.769661301613604,
+          106.68610888308322
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/55",
+      "properties": {
+        "@id": "node/55",
+        "amenity": "hospital",
+        "name": "Bệnh viện Từ Dũ chi nhánh 3",
+        "address": "247 Đ. Cống Quỳnh, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.768333276110456,
+          106.68489652466549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/8",
+      "properties": {
+        "@id": "node/8",
+        "amenity": "hospital",
+        "name": "Bệnh viện Nhi Đồng 1",
+        "address": "341 Sư Vạn Hạnh, Quận 10, TP. Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.768927275328888,
+          106.6701713081592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/10",
+      "properties": {
+        "@id": "node/10",
+        "amenity": "hospital",
+        "name": "Bệnh viện Đại học Y Dược TP.HCM",
+        "address": "215 Hồng Bàng, Quận 5, TP. Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.755335151473007,
+          106.66446016428884
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/11",
+      "properties": {
+        "@id": "node/11",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận 1 - Cơ sở 1",
+        "address": "338 Hai Bà Trưng, P. Tân Định"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.791531454880872,
+          106.68926270576388
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/12",
+      "properties": {
+        "@id": "node/12",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận 1 - Cơ sở 2",
+        "address": "237 Trần Hưng Đạo, Phường Cô Giang, Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.766320881654192,
+          106.69346840930149
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/13",
+      "properties": {
+        "@id": "node/13",
+        "amenity": "hospital",
+        "name": "Bệnh viện Đa khoa Sài Gòn",
+        "address": "125 Lê Lợi, P. Bến Thành"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.77661617920256,
+          106.7003479958097
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/14",
+      "properties": {
+        "@id": "node/14",
+        "amenity": "hospital",
+        "name": "Bệnh viện Tai Mũi Họng TP.HCM",
+        "address": "153 - 155 - 157 Trần Quốc Thảo, Phường 9, Quận 3, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78451869592682,
+          106.68402804896711
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/15",
+      "properties": {
+        "@id": "node/15",
+        "amenity": "hospital",
+        "name": "Bệnh viện Răng Hàm Mặt TP.HCM",
+        "address": "263 - 265 Trần Hưng Đạo, Phường Cô Giang, Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.764674069020963,
+          106.69174500123935
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/16",
+      "properties": {
+        "@id": "node/16",
+        "amenity": "hospital",
+        "name": "Bệnh viện Mắt TP.HCM",
+        "address": "280 Điện Biên Phủ, Phường Võ Thị Sáu, Quận 3, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.777115080781442,
+          106.68689311673766
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/17",
+      "properties": {
+        "@id": "node/17",
+        "amenity": "hospital",
+        "name": "Bệnh viện Lê Văn Thịnh (Bệnh viện Quận 2 cũ)",
+        "address": "130 Đường Lê Văn Thịnh, Phường Bình Trưng Tây, Thủ Đức, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.782734560764512,
+          106.76904539128688
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/18",
+      "properties": {
+        "@id": "node/18",
+        "amenity": "hospital",
+        "name": "Bệnh viện Bình Dân",
+        "address": "371 Điện Biên Phủ, Phường 4, Quận 3, Hồ Chí Minh 700000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.774209044851156,
+          106.68123754897266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/19",
+      "properties": {
+        "@id": "node/19",
+        "amenity": "hospital",
+        "name": "Bệnh viện Da Liễu TP.HCM",
+        "address": "2 Nguyễn Thông, Phường 6, Quận 3, Hồ Chí Minh 700000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.776591743374466,
+          106.68662177967218
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/22",
+      "properties": {
+        "@id": "node/22",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận 4",
+        "address": "65 Bến Vân Đồn, Phường 12, Quận 4, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.765612970146995,
+          106.70213995087347
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/23",
+      "properties": {
+        "@id": "node/23",
+        "amenity": "hospital",
+        "name": "Bệnh viện Chợ Rẫy",
+        "address": "201B Đ. Nguyễn Chí Thanh, Phường 12, Quận 5, Hồ Chí Minh 700000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.758070135253387,
+          106.65958283727366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/25",
+      "properties": {
+        "@id": "node/25",
+        "amenity": "hospital",
+        "name": "Bệnh viện Nguyễn Tri Phương",
+        "address": "468 Nguyễn Trãi, Phường 7, Quận 5, Hồ Chí Minh 70000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.755250198693998,
+          106.67052913547931
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/58",
+      "properties": {
+        "@id": "node/5858",
+        "amenity": "hospital",
+        "name": "Bệnh viện Nguyễn Tri Phương cơ sở 2",
+        "address": "493 Nguyễn Trãi, Phường 7, Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.75497614906313,
+          106.67027164342599
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/26",
+      "properties": {
+        "@id": "node/26",
+        "amenity": "hospital",
+        "name": "Bệnh viện Hùng Vương",
+        "address": "Đ. Lý Thường Kiệt, Phường 12, Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.756971794123592,
+          106.66211354154177
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/27",
+      "properties": {
+        "@id": "node/27",
+        "amenity": "hospital",
+        "name": "Bệnh viện Bệnh Nhiệt Đới",
+        "address": "764 Võ Văn Kiệt, Phường 1, Quận 5, Hồ Chí Minh 700000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.752859840810418,
+          106.67894556968885
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/28",
+      "properties": {
+        "@id": "node/28",
+        "amenity": "hospital",
+        "name": "Bệnh viện An Bình",
+        "address": "146 Đ. An Bình, Phường 7, Quận 5, Hồ Chí Minh 70000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.75454420127322,
+          106.67155470668115
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/60",
+      "properties": {
+        "@id": "node/6060",
+        "amenity": "hospital",
+        "name": "Bệnh viện Nguyễn Trãi",
+        "address": "314 Đ. Nguyễn Trãi, Phường 7, Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.756325521992967,
+          106.67491283229111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/29",
+      "properties": {
+        "@id": "node/29",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quân Y 7A",
+        "address": "466 Đ. Nguyễn Trãi, Phường 7, Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.75543631779092,
+          106.67096706431843
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/30",
+      "properties": {
+        "@id": "node/30",
+        "amenity": "hospital",
+        "name": "Bệnh viện Phạm Ngọc Thạch",
+        "address": "QM58+36 Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.757913554644764,
+          106.66561851041291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/31",
+      "properties": {
+        "@id": "node/31",
+        "amenity": "hospital",
+        "name": "Bệnh viện Chấn Thương Chỉnh Hình",
+        "address": "929 Trần Hưng Đạo, Phường 1, Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.754821949297035,
+          106.67817180766673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/32",
+      "properties": {
+        "@id": "node/32",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận 6",
+        "address": "2D Đ. Chợ Lớn, Phường 11, Quận 6, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.746750002734887,
+          106.63455161041273
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/33",
+      "properties": {
+        "@id": "node/33",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận 7",
+        "address": "101 Đ. Nguyễn Thị Thập, Tân Phú, Quận 7, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.737594814085995,
+          106.72414423739885
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/34",
+      "properties": {
+        "@id": "node/34",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận 8",
+        "address": "PMRG+MH Quận 8, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.74171939361033,
+          106.67643181041272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/35",
+      "properties": {
+        "@id": "node/35",
+        "amenity": "hospital",
+        "name": "Bệnh viện Điều Dưỡng - Phục Hồi Chức Năng - Điều Trị Bệnh Nghề Nghiệp",
+        "address": "PMRP+FF Quận 8, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.741383720494758,
+          106.68616752390571
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/36",
+      "properties": {
+        "@id": "node/36",
+        "amenity": "hospital",
+        "name": "Bệnh viện Lê Văn Việt",
+        "address": "387 Lê Văn Việt, Tăng Nhơn Phú A, Thủ Đức, Hồ Chí Minh 715143, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.84844789807538,
+          106.79056736659719
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/37",
+      "properties": {
+        "@id": "node/37",
+        "amenity": "hospital",
+        "name": "Bệnh viện Nhân Dân 115",
+        "address": "527 Đ. Sư Vạn Hạnh, Phường 12, Quận 10, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.774096266621859,
+          106.66600884531691
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/38",
+      "properties": {
+        "@id": "node/38",
+        "amenity": "hospital",
+        "name": "Bệnh viện Nhi Đồng 1",
+        "address": "341 Sư Vạn Hạnh, Phường 10, Quận 10, Hồ Chí Minh 700000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.769137248765166,
+          106.67032181895114
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/39",
+      "properties": {
+        "@id": "node/39",
+        "amenity": "hospital",
+        "name": "Bệnh viện Bình Dân",
+        "address": "371 Điện Biên Phủ, Phường 4, Quận 3, Hồ Chí Minh 700000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.774169760281712,
+          106.68125944322088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/40",
+      "properties": {
+        "@id": "node/40",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận 10",
+        "address": "QMG8+FM Quận 10, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7765268989265,
+          106.66664740856366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/41",
+      "properties": {
+        "@id": "node/41",
+        "amenity": "hospital",
+        "name": "Bệnh viện Từ Dũ",
+        "address": "247 Đ. Cống Quỳnh, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.768412314806426,
+          106.68494479958963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/42",
+      "properties": {
+        "@id": "node/42",
+        "amenity": "hospital",
+        "name": "Bệnh viện Đa Khoa Sài Gòn",
+        "address": "125 Lê Lợi, Phường Bến Thành, Quận 1, Hồ Chí Minh 700000, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.772891560915868,
+          106.69902095897847
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/44",
+      "properties": {
+        "@id": "node/44",
+        "amenity": "hospital",
+        "name": "Bệnh viện Chấn Thương Chỉnh Hình TP.HCM",
+        "address": "929 Trần Hưng Đạo, Phường 1, Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.754370076194915,
+          106.67819822390592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/47",
+      "properties": {
+        "@id": "node/47",
+        "amenity": "hospital",
+        "name": "Bệnh viện Thống Nhất",
+        "address": "QMR3+J9 Tân Bình, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.791736410308358,
+          106.65349681041332
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/48",
+      "properties": {
+        "@id": "node/48",
+        "amenity": "hospital",
+        "name": "Bệnh viện Gò Vấp",
+        "address": "641 Quang Trung, Phường 11, Gò Vấp, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.834838265725518,
+          106.6614640643861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/49",
+      "properties": {
+        "@id": "node/49",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quân Y 175",
+        "address": "786 Nguyễn Kiệm, Phường 3, Gò Vấp, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.820282135066641,
+          106.68000191041358
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/50",
+      "properties": {
+        "@id": "node/50",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quân Y 7A",
+        "address": "QM4C+39 Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.755420496669451,
+          106.67099388157727
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/51",
+      "properties": {
+        "@id": "node/51",
+        "amenity": "hospital",
+        "name": "Bệnh viện Nhi Đồng 2",
+        "address": "QPJ3+67 Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.78065440260884,
+          106.70319377972801
+        ]
+      }
+    }
+  ]
+}

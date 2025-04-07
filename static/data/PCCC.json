@@ -1,0 +1,263 @@
+{
+  "type": "FeatureCollection",
+  "generator": "Grok 3 by xAI",
+  "copyright": "Dữ liệu dựa trên thông tin công khai từ www.openstreetmap.org và các nguồn đáng tin cậy khác. Dữ liệu được cung cấp theo ODbL.",
+  "timestamp": "2025-04-01T01:50:00Z",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "node/1",
+      "properties": {
+        "@id": "node/1",
+        "amenity": "Phòng Cảnh sát PCCC & CNCH",
+        "name": "Phòng Cảnh sát Phòng cháy Chữa cháy và Cứu nạn Cứu hộ Quận 11",
+        "address": "258 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.760854732499883,
+          106.68844768447067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/2",
+      "properties": {
+        "@id": "node/2",
+        "amenity": "PCCC",
+        "name": "Phòng Cảnh sát PCCC & CNCH Quận 2",
+        "address": "QPRW+G4 Thủ Đức, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.791464654088374,
+          106.74536351041334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/3",
+      "properties": {
+        "@id": "node/3",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận 3",
+        "address": "QMQP+R5 Quận 3, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.789786311745917,
+          106.68540556438562
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/4",
+      "properties": {
+        "@id": "node/4",
+        "amenity": "PCCC",
+        "name": "Phòng Cảnh sát PCCC & CNCH Quận 4",
+        "address": "QP33+88M, Phường 4, Quận 4, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.753441226219609,
+          106.70323612806058
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/115",
+      "properties": {
+        "@id": "node/115",
+        "amenity": "PCCC",
+        "name": "Phòng Cảnh sát PCCC & CNCH Quận 5",
+        "address": "1350 Võ Văn Kiệt, Phường 13, Quận 5, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.747899186348807,
+          106.6561956085632
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/5",
+      "properties": {
+        "@id": "node/5",
+        "amenity": "PCCC",
+        "name": "Phòng Cảnh sát PCCC & CNCH Quận 6",
+        "address": "149 Đ. Cao Văn Lầu, Phường 1, Quận 6, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.747680455094773,
+          106.64900679507019
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/6",
+      "properties": {
+        "@id": "node/6",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận 7",
+        "address": "1181 Đ. Nguyễn Văn Linh, Tân Phong, Quận 7, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.72808600917428,
+          106.70303309294717
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/7",
+      "properties": {
+        "@id": "node/7",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận 8",
+        "address": "250 Đ.Tùng Thiện Vương, Phường Xóm Củi, Quận 8, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.747239702392466,
+          106.66124735089205
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/8",
+      "properties": {
+        "@id": "node/8",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận 9, Trung Tâm Đào Tạo Và Huấn Luyện PCCC Và CNCH CATP Hồ Chí Minh",
+        "address": "22A Quang Trung, Hiệp Phú, Quận 9, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.844229162641472,
+          106.77297899849684
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/9",
+      "properties": {
+        "@id": "node/9",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận 11",
+        "address": "225 Đ. Lý Thường Kiệt, Phường 15, Quận 11, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.770914045993853,
+          106.65781143924872
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/10",
+      "properties": {
+        "@id": "node/10",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận 12",
+        "address": "2368 Quốc Lộ 1A, Khu phố 2, Phường Trung Mỹ Tây, Quận 12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.848370771616223,
+          106.62119490856443
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/11",
+      "properties": {
+        "@id": "node/11",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận Bình Thạnh",
+        "address": "18A Phan Đăng Lưu, Phường 7, Bình Thạnh, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.803633498737936,
+          106.6909642662352
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/12",
+      "properties": {
+        "@id": "node/12",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận Gò Vấp",
+        "address": "108 Phan Văn Trị, Phường 1, Gò Vấp, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.828456781001783,
+          106.68504575343408
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/13",
+      "properties": {
+        "@id": "node/13",
+        "amenity": "PCCC",
+        "name": "Đội Cảnh Sát PCCC&CNCH-Công An Quận Bình Tân",
+        "address": "1121 QL1A, Tân Tạo, Bình Tân, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.767749672481669,
+          106.58960138032064
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/14",
+      "properties": {
+        "@id": "node/14",
+        "amenity": "PCCC",
+        "name": "Đội PCCC & CNCH Quận Tân Phú",
+        "address": "số 2 Đường T6, Tây Thạnh, Tân Phú, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.809907966155597,
+          106.61729333924906
+        ]
+      }
+    }
+  ]
+}

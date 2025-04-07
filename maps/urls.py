@@ -4,8 +4,7 @@ from . import views  # Import views từ app maps
 app_name = 'maps'
 
 urlpatterns = [
-    path('', views.simplemap, name="home"),  # Thêm name để định danh URL
-    path('co-ban/', views.simplemap, name="co-ban"),
-    path('18/', views.simplemap2, name="18"),
-
+    path('', views.simplemap, name="home"),  # maps/
+    path('co-ban/', views.simplemap, name="co-ban"),  # maps/co-ban/
+    path('emergency-road/', views.simplemap2, name="emergency-road"),  # maps/emergency-road/
 ]
