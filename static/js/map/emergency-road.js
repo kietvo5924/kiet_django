@@ -18,21 +18,21 @@ const defaultLng = 106.7009;
 
 // Biến toàn cục
 const map = L.map("map", config);
-let routingControl = null; // Lưu trữ routing control hiện tại
-let startMarker = null; // Lưu trữ marker điểm bắt đầu
-let endMarker = null; // Lưu trữ marker điểm kết thúc
-let currentStartLocation = { lat: defaultLat, lng: defaultLng }; // Lưu vị trí bắt đầu hiện tại
-let allFeaturesData = { // Lưu trữ features của tất cả các lớp
+let routingControl = null;
+let startMarker = null;
+let endMarker = null;
+let currentStartLocation = { lat: defaultLat, lng: defaultLng };
+let allFeaturesData = {
   'police': [],
   'PCCC': [],
   'hospital': []
 };
-let layers = {}; // Lưu trữ các layer Leaflet L.geoJSON
+let layers = {};
 const layersContainer = document.querySelector(".layers");
-const layersButton = "không chọn"; // Giá trị của nút radio mặc định
-const arrayLayers = ["police", "PCCC", "hospital"]; // Các loại layer hợp lệ
+const layersButton = "không chọn";
+const arrayLayers = ["police", "PCCC", "hospital"];
 
-// Icons (định nghĩa một lần)
+// Icons
 const startIcon = L.divIcon({
   className: "start-marker",
   html: '<span>S</span>',
@@ -40,20 +40,12 @@ const startIcon = L.divIcon({
   iconAnchor: [15, 15],
 });
 
-// Có thể tùy chỉnh icon kết thúc cho từng loại nếu muốn
 const endIcon = L.divIcon({
-  className: "end-marker", // Class chung
-  html: '<span>Đ</span>', // Đích
+  className: "end-marker",
+  html: '<span>Đ</span>',
   iconSize: [30, 30],
   iconAnchor: [15, 15],
 });
-// Hoặc dùng nhiều icon:
-// const endIcons = {
-//     'hospital': L.divIcon({ className: "end-marker hospital", html: 'H', iconSize: [30, 30], iconAnchor: [15, 15] }),
-//     'police':   L.divIcon({ className: "end-marker police", html: 'P', iconSize: [30, 30], iconAnchor: [15, 15] }),
-//     'PCCC':     L.divIcon({ className: "end-marker PCCC", html: 'F', iconSize: [30, 30], iconAnchor: [15, 15] })
-// };
-
 
 // --- CÁC HÀM TIỆN ÍCH ---
 
@@ -76,8 +68,11 @@ async function fetchData(url) {
 }
 
 function getDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371e3; const φ1 = lat1 * Math.PI / 180; const φ2 = lat2 * Math.PI / 180;
-  const Δφ = (lat2 - lat1) * Math.PI / 180; const Δλ = (lon2 - lon1) * Math.PI / 180;
+  const R = 6371e3;
+  const φ1 = lat1 * Math.PI / 180;
+  const φ2 = lat2 * Math.PI / 180;
+  const Δφ = (lat2 - lat1) * Math.PI / 180;
+  const Δλ = (lon2 - lon1) * Math.PI / 180;
   const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
@@ -87,25 +82,28 @@ function clickZoom(e) {
   map.setView(e.target.getLatLng(), clickMarkerZoom);
 }
 
-// --- HÀM XỬ LÝ TỌA ĐỘ VÀ TẠO MARKER (ĐÃ SỬA ĐỂ NHẬN [Lat, Lng]) ---
+// --- HÀM XỬ LÝ TỌA ĐỘ VÀ TẠO MARKER ---
 let geojsonOpts = {
   pointToLayer: function (feature, latlng_placeholder) {
     const coords = feature.geometry.coordinates;
     if (!coords || typeof coords[0] !== 'number' || typeof coords[1] !== 'number') {
-      console.warn("Tọa độ không hợp lệ trong feature:", feature.properties.name, coords); return null;
+      console.warn("Tọa độ không hợp lệ trong feature:", feature.properties.name, coords);
+      return null;
     }
-    const sourceLat = coords[0]; const sourceLng = coords[1];
+    const sourceLat = coords[0];
+    const sourceLng = coords[1];
     if (sourceLat < -90 || sourceLat > 90 || sourceLng < -180 || sourceLng > 180) {
-      console.warn(`Tọa độ đọc từ JSON không hợp lệ cho "${feature.properties.name || 'N/A'}": [Lat ${sourceLat}, Lng ${sourceLng}]`); return null;
+      console.warn(`Tọa độ đọc từ JSON không hợp lệ cho "${feature.properties.name || 'N/A'}": [Lat ${sourceLat}, Lng ${sourceLng}]`);
+      return null;
     }
-    const correctLatLng = L.latLng(sourceLat, sourceLng); // Tạo LatLng đúng
+    const correctLatLng = L.latLng(sourceLat, sourceLng);
 
-    const amenity = feature.properties.amenity; // Ví dụ: 'hospital', 'police', 'PCCC'
+    const amenity = feature.properties.amenity;
     const name = feature.properties.name || "Không có tên";
-    const className = typeof amenity === 'string' && arrayLayers.includes(amenity) ? amenity : 'default-marker'; // Dùng class chuẩn
+    const className = typeof amenity === 'string' && arrayLayers.includes(amenity) ? amenity : 'default-marker';
     const htmlContent = typeof amenity === 'string' && amenity ? amenity[0].toUpperCase() : '?';
 
-    return L.marker(correctLatLng, { // Dùng LatLng đúng
+    return L.marker(correctLatLng, {
       icon: L.divIcon({ className: className, iconSize: L.point(16, 16), html: htmlContent, popupAnchor: [3, -5] }),
     })
       .bindPopup(`${amenity || 'Địa điểm'}<br><b>${name}</b>`)
@@ -113,11 +111,11 @@ let geojsonOpts = {
   },
 };
 
-// --- HÀM TÌM ĐIỂM GẦN NHẤT (ĐÃ SỬA ĐỂ NHẬN [Lat, Lng] và featureType) ---
+// --- HÀM TÌM ĐIỂM GẦN NHẤT ---
 function findNearest(featureType, currentLat, currentLng) {
   let nearestFeature = null;
   let minDistance = Infinity;
-  const featuresToSearch = allFeaturesData[featureType]; // Lấy danh sách features của loại cần tìm
+  const featuresToSearch = allFeaturesData[featureType];
 
   if (!featuresToSearch || featuresToSearch.length === 0) {
     console.warn(`Không có dữ liệu features cho loại: ${featureType}`);
@@ -128,15 +126,19 @@ function findNearest(featureType, currentLat, currentLng) {
 
   featuresToSearch.forEach((feature, index) => {
     if (!feature?.geometry?.coordinates || feature.geometry.type !== 'Point') {
-      console.warn(`Đối tượng ${featureType} ${index} có cấu trúc không hợp lệ.`); return;
+      console.warn(`Đối tượng ${featureType} ${index} có cấu trúc không hợp lệ.`);
+      return;
     }
-    const coords = feature.geometry.coordinates; // [Lat, Lng]
+    const coords = feature.geometry.coordinates;
     if (typeof coords[0] !== 'number' || typeof coords[1] !== 'number') {
-      console.warn(`${featureType} "${feature.properties.name || 'N/A'}" (${index}) có tọa độ không phải dạng số.`); return;
+      console.warn(`${featureType} "${feature.properties.name || 'N/A'}" (${index}) có tọa độ không phải dạng số.`);
+      return;
     }
-    const targetLat = coords[0]; const targetLng = coords[1];
+    const targetLat = coords[0];
+    const targetLng = coords[1];
     if (targetLat < -90 || targetLat > 90 || targetLng < -180 || targetLng > 180) {
-      console.warn(`Tọa độ JSON ${featureType} "${feature.properties.name || 'N/A'}" (${index}) không hợp lệ: [Lat ${targetLat}, Lng ${targetLng}]`); return;
+      console.warn(`Tọa độ JSON ${featureType} "${feature.properties.name || 'N/A'}" (${index}) không hợp lệ: [Lat ${targetLat}, Lng ${targetLng}]`);
+      return;
     }
 
     try {
@@ -144,19 +146,22 @@ function findNearest(featureType, currentLat, currentLng) {
       if (distance < minDistance) {
         minDistance = distance;
         nearestFeature = feature;
-        // Không log nhiều ở đây nữa trừ khi debug
       }
-    } catch (e) { console.error(`Lỗi khi tính khoảng cách cho ${featureType} ${index}:`, e); }
+    } catch (e) {
+      console.error(`Lỗi khi tính khoảng cách cho ${featureType} ${index}:`, e);
+    }
   });
 
   if (nearestFeature) {
     const finalCoords = nearestFeature.geometry.coordinates;
-    const finalLat = finalCoords[0]; const finalLng = finalCoords[1];
+    const finalLat = finalCoords[0];
+    const finalLng = finalCoords[1];
     if (typeof finalLng === 'number' && typeof finalLat === 'number' && finalLat >= -90 && finalLat <= 90 && finalLng >= -180 && finalLng <= 180) {
       console.log(`${featureType} gần nhất được chọn: "${nearestFeature.properties.name || 'N/A'}". Trả về Lat: ${finalLat}, Lng: ${finalLng}`);
-      return { lat: finalLat, lng: finalLng, name: nearestFeature.properties.name || "Không có tên" }; // Trả về cả tên
+      return { lat: finalLat, lng: finalLng, name: nearestFeature.properties.name || "Không có tên" };
     } else {
-      console.error(`Tọa độ của ${featureType} gần nhất được chọn không hợp lệ:`, nearestFeature.properties.name, finalCoords); return null;
+      console.error(`Tọa độ của ${featureType} gần nhất được chọn không hợp lệ:`, nearestFeature.properties.name, finalCoords);
+      return null;
     }
   } else {
     console.log(`Không tìm thấy ${featureType} nào gần đó.`);
@@ -191,7 +196,6 @@ function showOnlyLayer(selectedId) {
       console.warn(`Layer ${selectedId} chưa được khởi tạo.`);
     }
   });
-  // Xử lý "không chọn"
   if (selectedId === layersButton) {
     arrayLayers.forEach((id) => {
       const layer = layers["layer_" + id];
@@ -206,7 +210,6 @@ function updateRoute(startLat, startLng) {
   if (!selectedRadio) return;
   const selectedType = selectedRadio.value;
 
-  // Xóa tuyến đường và marker đích cũ
   if (routingControl) {
     map.removeControl(routingControl);
     routingControl = null;
@@ -216,7 +219,6 @@ function updateRoute(startLat, startLng) {
     endMarker = null;
   }
 
-  // Nếu chọn "không chọn" hoặc loại không hợp lệ thì dừng
   if (selectedType === layersButton || !arrayLayers.includes(selectedType)) {
     console.log("Không chọn loại địa điểm hoặc loại không hợp lệ, xóa tuyến đường.");
     return;
@@ -234,30 +236,30 @@ function updateRoute(startLat, startLng) {
 
     routingControl = L.Routing.control({
       waypoints: waypoints,
-      routeWhileDragging: false, // Kéo thả marker bắt đầu sẽ tự cập nhật
+      routeWhileDragging: false,
       lineOptions: { styles: [{ color: "red", opacity: 0.7, weight: 8 }] },
-      show: true, // Hiển thị bảng chỉ dẫn
-      addWaypoints: false, // Không cho thêm điểm trung gian
-      draggableWaypoints: false, // Marker S và Đ đã tự quản lý
-      createMarker: () => null, // Không để routing control tự tạo marker
-      // serviceUrl: '...'
+      show: true,
+      addWaypoints: false,
+      draggableWaypoints: false,
+      createMarker: () => null,
     }).addTo(map);
 
     routingControl.on('routingerror', function (e) {
       console.error("Lỗi Routing Control:", e.error);
       alert(`Không thể tìm thấy đường đi: ${e.error ? e.error.message : 'Lỗi không xác định'}.`);
-      if (routingControl) map.removeControl(routingControl); routingControl = null;
-      if (endMarker) map.removeLayer(endMarker); endMarker = null; // Xóa marker đích nếu lỗi
+      if (routingControl) map.removeControl(routingControl);
+      routingControl = null;
+      if (endMarker) map.removeLayer(endMarker);
+      endMarker = null;
     });
-    routingControl.on('routesfound', function (e) { console.log('Tìm thấy tuyến đường.'); });
+    routingControl.on('routesfound', function (e) {
+      console.log('Tìm thấy tuyến đường.');
+    });
 
-    // Tạo marker điểm đích (không cho kéo thả)
-    // const targetIcon = endIcons[selectedType] || endIcon; // Lấy icon tương ứng nếu dùng object endIcons
     endMarker = L.marker([nearestTarget.lat, nearestTarget.lng], {
-      icon: endIcon, // Dùng icon chung hoặc targetIcon
+      icon: endIcon,
       draggable: false
     }).addTo(map).bindPopup(`${selectedType.toUpperCase()}: ${nearestTarget.name}`);
-
   } else {
     console.error(`Không tìm thấy ${selectedType} nào gần đó.`);
     alert(`Không tìm thấy ${selectedType} nào gần vị trí của bạn.`);
@@ -268,30 +270,81 @@ function updateRoute(startLat, startLng) {
 function handleStartMarkerDragEnd(e) {
   const newLatLng = e.target.getLatLng();
   console.log("Điểm bắt đầu mới (kéo thả):", newLatLng);
-  currentStartLocation = { lat: newLatLng.lat, lng: newLatLng.lng }; // Cập nhật vị trí bắt đầu
+  currentStartLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
 
-  // Cập nhật lại tuyến đường dựa trên vị trí mới và lựa chọn radio hiện tại
   updateRoute(newLatLng.lat, newLatLng.lng);
 }
 
+// --- Trở về vị trí hiện tại ---
+function returnToCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        // Di chuyển bản đồ đến vị trí hiện tại
+        map.setView([lat, lng], initialZoom);
+
+        // Cập nhật marker điểm bắt đầu (S)
+        if (startMarker) map.removeLayer(startMarker);
+        startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true })
+          .addTo(map)
+          .bindPopup("Vị trí của bạn (kéo thả để cập nhật)")
+          .openPopup();
+        startMarker.on('dragend', handleStartMarkerDragEnd);
+
+        // Cập nhật vị trí hiện tại
+        currentStartLocation = { lat, lng };
+
+        // Cập nhật tuyến đường nếu đã chọn loại địa điểm
+        updateRoute(lat, lng);
+      },
+      (error) => {
+        console.error("Không thể lấy vị trí hiện tại:", error);
+        alert("Không thể lấy vị trí hiện tại. Vui lòng kiểm tra quyền truy cập vị trí.");
+      },
+      { enableHighAccuracy: true }
+    );
+  } else {
+    alert("Trình duyệt của bạn không hỗ trợ định vị.");
+  }
+}
+
+// --- Tạo control tùy chỉnh cho nút "Trở về vị trí của tôi" ---
+L.Control.CurrentLocation = L.Control.extend({
+  onAdd: function (map) {
+    const div = L.DomUtil.create("div", "leaflet-control-current-location");
+    div.innerHTML = "Trở về vị trí của tôi";
+    div.onclick = function () {
+      returnToCurrentLocation();
+    };
+    return div;
+  },
+
+  onRemove: function (map) {
+    // Không cần xử lý gì khi xóa control
+  },
+});
+
+L.control.currentLocation = function (opts) {
+  return new L.Control.CurrentLocation(opts);
+};
 
 // --- HÀM KHỞI TẠO BAN ĐẦU ---
 function initializeMapAndData(initialLat, initialLng) {
   console.log(`Khởi tạo bản đồ tại: Lat ${initialLat}, Lng ${initialLng}`);
-  currentStartLocation = { lat: initialLat, lng: initialLng }; // Lưu vị trí ban đầu
+  currentStartLocation = { lat: initialLat, lng: initialLng };
   map.setView([initialLat, initialLng], initialZoom);
 
-  // Thêm marker điểm bắt đầu (chỉ marker, chưa có route)
-  if (startMarker) map.removeLayer(startMarker); // Xóa nếu có từ lần load trước (ít xảy ra)
+  if (startMarker) map.removeLayer(startMarker);
   startMarker = L.marker([initialLat, initialLng], {
     icon: startIcon,
     draggable: true
   }).addTo(map).bindPopup("Vị trí của bạn (kéo thả để cập nhật)");
 
-  // Gắn sự kiện kéo thả
   startMarker.on('dragend', handleStartMarkerDragEnd);
 
-  // Đặt nút radio "không chọn" làm mặc định
   const defaultRadio = document.getElementById(layersButton);
   if (defaultRadio) {
     defaultRadio.checked = true;
@@ -300,8 +353,10 @@ function initializeMapAndData(initialLat, initialLng) {
     console.error("Không tìm thấy nút radio 'không chọn'!");
   }
 
-  // Không tự động vẽ đường đi khi khởi tạo
   console.log("Khởi tạo bản đồ hoàn tất. Chờ người dùng chọn loại địa điểm.");
+
+  // Thêm nút "Trở về vị trí của tôi" vào bản đồ
+  L.control.currentLocation({ position: "topright" }).addTo(map);
 }
 
 // === QUÁ TRÌNH TẢI DỮ LIỆU VÀ KHỞI TẠO ===
@@ -314,26 +369,21 @@ Promise.all(
   arrayLayers.map(json =>
     fetchData(`/static/data/${json}.json`).then(data => {
       if (data && data.features) {
-        // Lưu trữ features vào cấu trúc dữ liệu chung
         allFeaturesData[json] = data.features;
-        // Tạo và lưu trữ layer Leaflet (sử dụng geojsonOpts đã sửa)
         layers["layer_" + json] = L.geoJSON(data, geojsonOpts);
         console.log(`Đã xử lý ${data.features.length} features cho lớp ${json}.`);
-        // Tạo nút radio cho lớp này
         generateButton(json);
       } else {
         console.warn(`Không có dữ liệu hoặc features hợp lệ cho lớp: ${json}`);
-        // Vẫn tạo nút nhưng không có dữ liệu
         generateButton(json);
-        layers["layer_" + json] = L.geoJSON({ type: "FeatureCollection", features: [] }, geojsonOpts); // Layer rỗng
-        allFeaturesData[json] = []; // Mảng rỗng
+        layers["layer_" + json] = L.geoJSON({ type: "FeatureCollection", features: [] }, geojsonOpts);
+        allFeaturesData[json] = [];
       }
     })
   )
 ).then(() => {
   console.log("Tất cả dữ liệu GeoJSON đã được tải và xử lý.");
 
-  // 3. Sau khi có dữ liệu, lấy vị trí người dùng và khởi tạo bản đồ
   if (navigator.geolocation) {
     console.log("Bắt đầu lấy vị trí người dùng...");
     navigator.geolocation.getCurrentPosition(
@@ -354,35 +404,31 @@ Promise.all(
 }).catch(error => {
   console.error("Lỗi nghiêm trọng trong quá trình tải dữ liệu:", error);
   alert("Không thể tải dữ liệu bản đồ cần thiết. Vui lòng tải lại trang.");
-  // Có thể thử khởi tạo với mặc định dù lỗi data
   initializeMapAndData(defaultLat, defaultLng);
 });
 
 // === GẮN SỰ KIỆN CHO RADIO BUTTON ===
 document.addEventListener('change', (e) => {
   const target = e.target;
-  // Chỉ xử lý nếu là input radio thuộc nhóm layer-group
   if (target.matches('input[type="radio"].item[name="layer-group"]')) {
     console.log(`Radio button thay đổi: ${target.value}`);
-    showOnlyLayer(target.value); // Hiển thị/ẩn marker tương ứng
+    showOnlyLayer(target.value);
 
-    // Cập nhật tuyến đường dựa trên lựa chọn mới và vị trí hiện tại của marker S
     if (startMarker) {
       const currentStartLatLng = startMarker.getLatLng();
       updateRoute(currentStartLatLng.lat, currentStartLatLng.lng);
     } else {
-      // Nếu chưa có marker S (trường hợp hiếm), dùng vị trí đã lưu
       updateRoute(currentStartLocation.lat, currentStartLocation.lng);
     }
   }
 });
 
-// Add legend - Không đổi
+// Add legend
 const legend = L.control({ position: "bottomleft" });
 legend.onAdd = function () {
   let div = L.DomUtil.create("div", "description");
   L.DomEvent.disableClickPropagation(div);
-  const text = "Chọn loại địa điểm (Police, PCCC, Hospital) để tìm đường đi ngắn nhất từ vị trí của bạn (S)."; // Cập nhật mô tả
+  const text = "Chọn loại địa điểm (Police, PCCC, Hospital) để tìm đường đi ngắn nhất từ vị trí của bạn (S).";
   div.insertAdjacentHTML("beforeend", text);
   return div;
 };

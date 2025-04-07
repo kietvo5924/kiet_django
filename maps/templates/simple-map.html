@@ -1,35 +1,50 @@
-{% extends "layout.html" %} 
-{% load static %} 
+{% extends "layout.html" %}
+{% load static %}
 
-{% block title %} 
-Tìm kiếm địa chỉ 
-{% endblock %} 
+{% block title %}
+Chỉ đường TP.HCM
+{% endblock %}
 
 {% block map %}
 <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
 <link rel="stylesheet" href="{% static 'css/map/map.css' %}" />
 <script src="{% static 'leaflet/leaflet.js' %}"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
-    <link
+<link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/css/autocomplete.min.css"
-    />
+/>
 <script src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/js/autocomplete.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.js"></script>
-
 {% endblock %}
 
 {% block content %}
 <section class="special-services">
     <div class="container mb-3">
-        <div class="auto-search-wrapper loupe text-center">
-            <input
-                type="text"
-                autocomplete="off"
-                id="search"
-                placeholder="Nhập vào tên thành phố"
-            />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="auto-search-wrapper loupe text-center">
+                    <input
+                        type="text"
+                        autocomplete="off"
+                        id="start-search"
+                        placeholder="Điểm bắt đầu (S) - Mặc định: Vị trí hiện tại"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="auto-search-wrapper loupe text-center">
+                    <input
+                        type="text"
+                        autocomplete="off"
+                        id="end-search"
+                        placeholder="Điểm kết thúc (Đ)"
+                    />
+                </div>
+            </div>
         </div>
     </div>
 
@@ -39,39 +54,9 @@ Tìm kiếm địa chỉ
         </div>
     </div>
 </section>
-{% endblock %} 
+
+{% endblock %}
 
 {% block script %}
 <script src="{% static 'js/map/search-address.js' %}"></script>
-{% endblock %}
-
-{% block extra_style %}
-<style>
-    .description {
-        width: 300px;
-        font-size: 16px;
-        color: #333;
-        padding: 10px 14px;
-        background-color: hsla(0, 0%, 100%, 0.8);
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        line-height: 120%;
-        border: 1px solid grey;
-    }
-    .tourist-attractions {
-        margin-top: 20px;
-    }
-    .tourist-attractions article {
-        margin-bottom: 20px;
-        padding: 15px;
-        background: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .tourist-attractions img {
-        width: 100%;
-        max-width: 600px;
-        border-radius: 5px;
-    }
-</style>
 {% endblock %}
