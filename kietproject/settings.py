@@ -77,13 +77,12 @@ WSGI_APPLICATION = 'kietproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        # Sử dụng engine PostgreSQL chuẩn
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gis_db',              # Tên database
-        'USER': 'postgres',  # User PostgreSQL
-        'PASSWORD': '123', # Password
-        'HOST': 'localhost',           # Host
-        'PORT': '5432',                # Port
+        'NAME': 'QLGIS',
+        'USER': 'postgres',
+        'PASSWORD': '123abc',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
 
