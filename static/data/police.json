@@ -16,8 +16,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.773,
-          106.700
+          10.767157268572893,
+          106.69710783545095
         ]
       }
     },
@@ -33,8 +33,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.776,
-          106.756
+          10.780582005215527,
+          106.75655917962894
         ]
       }
     },
@@ -50,8 +50,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.776,
-          106.695
+          10.77711251912013,
+          106.68272204099803
         ]
       }
     },
@@ -67,8 +67,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.759,
-          106.694
+          10.766940948813904,
+          106.70576906613545
         ]
       }
     },
@@ -84,8 +84,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.758,
-          106.631
+          10.752305657104975,
+          106.66060356891447
         ]
       }
     },
@@ -96,13 +96,13 @@
         "@id": "node/6",
         "amenity": "police",
         "name": "Công an Quận 6",
-        "address": "149 Cao Văn Lầu, Phường 1, Quận 6"
+        "address": "114 Đ. Phạm Văn Chí, Phường 1, Quận 6, Hồ Chí Minh, Việt Nam"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.755,
-          106.617
+          10.746528036796072,
+          106.64885487962857
         ]
       }
     },
@@ -118,8 +118,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.736,
-          106.703
+          10.734121041688194,
+          106.72624425311851
         ]
       }
     },
@@ -135,8 +135,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.745,
-          106.612
+          10.742454024089358,
+          106.66785981031295
         ]
       }
     },
@@ -152,8 +152,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.816,
-          106.749
+          10.859061277385704,
+          106.77930007084616
         ]
       }
     },
@@ -169,8 +169,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.762,
-          106.677
+          10.772386764324972,
+          106.66516725264229
         ]
       }
     },
@@ -186,8 +186,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.751,
-          106.661
+          10.76376511066752,
+          106.64305889497108
         ]
       }
     },
@@ -203,8 +203,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.853,
-          106.624
+          10.868785559372997,
+          106.64034299919804
         ]
       }
     },
@@ -220,8 +220,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.774,
-          106.640
+          10.797716072586763,
+          106.65759705240119
         ]
       }
     },
@@ -232,13 +232,13 @@
         "@id": "node/14",
         "amenity": "police",
         "name": "Công an Quận Gò Vấp",
-        "address": "1 Quang Trung, Phường 10, Quận Gò Vấp"
+        "address": "584 Quang Trung, Phường 11, Gò Vấp, Hồ Chí Minh, Việt Nam"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.818,
-          106.700
+          10.83657515222802,
+          106.66234158123738
         ]
       }
     },
@@ -254,42 +254,76 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.751,
-          106.616
+          10.731106884622882,
+          106.6015917389073
         ]
       }
     },
     {
       "type": "Feature",
-      "id": "node/16",
+      "id": "node/30",
       "properties": {
-        "@id": "node/16",
+        "@id": "node/30",
         "amenity": "police",
-        "name": "Công an Quận Bình Thạnh",
-        "address": "107 Bạch Đằng, Phường 2, Quận Bình Thạnh"
+        "name": "Công an phường 19 Quận Bình Thạnh",
+        "address": "1 Đ. Huỳnh Tịnh Của, Phường 19, Bình Thạnh, Hồ Chí Minh, Việt Nam"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.800,
-          106.705
+          10.793468567510393,
+          106.70925249080803
         ]
       }
     },
     {
       "type": "Feature",
-      "id": "node/17",
+      "id": "node/31",
       "properties": {
-        "@id": "node/17",
+        "@id": "node/31",
         "amenity": "police",
-        "name": "Công an Quận Phú Nhuận",
-        "address": "18 Hoàng Văn Thụ, Phường 9, Quận Phú Nhuận"
+        "name": "Công an phường 25 Quận Bình Thạnh",
+        "address": "2A Đ. Điện Biên Phủ, Phường 25, Bình Thạnh, Hồ Chí Minh, Việt Nam"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.792,
-          106.684
+          10.800794695442734,
+          106.72081899875235
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/33",
+      "properties": {
+        "@id": "node/33",
+        "amenity": "police",
+        "name": "Công an phường 15, quận Phú Nhuận",
+        "address": "24b Nguyễn Văn Trỗi, Phường 15, Phú Nhuận, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.794670264828193,
+          106.68076858764707
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/40",
+      "properties": {
+        "@id": "node/40",
+        "amenity": "police",
+        "name": "Công an phường 8, quận Phú Nhuận",
+        "address": "196 Nguyễn Trọng Tuyển, Phường 8, Phú Nhuận, Hồ Chí Minh, Việt Nam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.802290254508252,
+          106.6738277962611
         ]
       }
     },
