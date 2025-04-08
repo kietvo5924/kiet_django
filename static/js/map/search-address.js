@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /**
  * Routing with Nominatim Start and Client-Side Static JSON Search for End (Emergency Locations)
- * Super Cleaned version.
+ * Super Cleaned and Fixed version.
  */
 
 // --- Configs ---
@@ -41,24 +41,24 @@ async function fetchStaticData(url) {
         const data = await response.json();
         return data?.features || [];
     } catch (err) {
-        console.error(`Workspace Static Error (${url}):`, err); // Keep critical errors
+        console.error(`Workspace Static Error (${url}):`, err);
         throw err;
     }
 }
 
 async function loadEmergencyData() {
     const filesToLoad = ['/static/data/hospital.json', '/static/data/PCCC.json', '/static/data/police.json'];
-    console.log("Loading emergency locations..."); // Keep important status
+    console.log("Loading emergency locations...");
     const endSearchInput = document.getElementById('end-search');
     if (endSearchInput) { endSearchInput.placeholder = "Đang tải..."; endSearchInput.disabled = true; }
     try {
         const results = await Promise.all(filesToLoad.map(url => fetchStaticData(url)));
         emergencyLocations = results.flat().filter(f => f?.geometry?.coordinates?.length === 2);
         emergencyDataLoaded = true;
-        console.log(`Loaded ${emergencyLocations.length} emergency locations.`); // Keep success log
+        console.log(`Loaded ${emergencyLocations.length} emergency locations.`);
         if (endSearchInput) { endSearchInput.disabled = false; endSearchInput.placeholder = "Tìm BV, PCCC, CA..."; }
     } catch (error) {
-        console.error("Failed loading emergency data:", error); // Keep critical errors
+        console.error("Failed loading emergency data:", error);
         alert("Lỗi tải dữ liệu điểm đến khẩn cấp.");
         if (endSearchInput) { endSearchInput.placeholder = "Lỗi tải dữ liệu"; endSearchInput.disabled = false; }
         emergencyDataLoaded = false;
@@ -107,19 +107,18 @@ function setupAutocomplete(inputId, searchType) {
             const regex = new RegExp(currentValue.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "i");
             return matches.map((element) => {
                 let mainDisplay = "N/A", detailsDisplay = "", resultObject = element;
-                let props = element.properties;
-                if (!props) return '';
-                const { name, address, amenity, display_name } = props;
+                if (!element.properties) return '';
+                const { name, address, amenity, display_name } = element.properties;
                 mainDisplay = (name || display_name || "Không rõ").replace(regex, str => `<b>${str}</b>`);
                 if (searchType === 'nominatim') {
-                    const details = [address?.road, address?.suburb, address?.city].filter(Boolean).join(", ");
+                    const details = [element.properties.address?.road, element.properties.address?.suburb, element.properties.address?.city].filter(Boolean).join(", ");
                     if (details) detailsDisplay = `<div class="address-details">${details}</div>`;
                 } else {
                     if (address && address.toLowerCase() !== (name || '').toLowerCase()) detailsDisplay += `<div class="address-details">${address}</div>`;
                     if (amenity) detailsDisplay += `<div class="place-item ${amenity.toLowerCase()}">(${amenity.toUpperCase()})</div>`;
                 }
                 try {
-                    const resultString = JSON.stringify(resultObject).replace(/'/g, "&apos;").replace(/"/g, "&quot;");
+                    const resultString = JSON.stringify(resultObject).replace(/'/g, "'").replace(/"/g, "");
                     return `<li role="option" data-result='${resultString}'><div class="address-main">${mainDisplay}</div>${detailsDisplay}</li>`;
                 } catch (e) { console.error("Stringify error:", e); return ''; }
             }).join("");
@@ -142,21 +141,27 @@ function setupAutocomplete(inputId, searchType) {
                 } else {
                     const coords = object.geometry?.coordinates;
                     if (!coords || coords.length !== 2) throw new Error("Invalid coords (JSON)");
-                    lat = coords[0]; lng = coords[1]; // JSON is [lat, lng]
+                    lng = coords[1]; lat = coords[0]; // Sửa lại: JSON là [lat, lng], nhưng Leaflet cần [lat, lng]
                     if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Invalid values (JSON)");
                     locationName = object.properties?.name || locationName;
                     popupContent = `<b>Điểm đến:</b><br>${locationName}`;
-                    const { address, amenity } = object.properties || {};
-                    if (address) popupContent += `<br><small>${address}</small>`;
+                    const { address, amenity, phone, description, image_url } = object.properties || {};
+                    if (address) popupContent += `<br><small>Địa chỉ: ${address}</small>`;
                     if (amenity) popupContent += `<br><small>(${amenity.toUpperCase()})</small>`;
+                    if (phone) popupContent += `<br><small>Điện thoại: ${phone}</small>`;
+                    if (description) popupContent += `<br><small>Mô tả: ${description}</small>`;
+                    if (image_url) popupContent += `<br><img src="${image_url}" alt="${locationName}" style="max-width: 200px; max-height: 150px; margin-top: 10px;">`;
                     currentEndLocation = { lat, lng };
                     if (endMarker) map.removeLayer(endMarker);
                     endMarker = L.marker([lat, lng], { icon: endIcon, draggable: true }).addTo(map).bindPopup(popupContent).openPopup().on('dragend', handleEndMarkerDragEnd);
                 }
-                if (input) input.value = locationName; // Set input text to selected name
-                updateRoute();
-                if (currentStartLocation && currentEndLocation) map.fitBounds([[currentStartLocation.lat, currentStartLocation.lng], [currentEndLocation.lat, currentEndLocation.lng]], { padding: [50, 50], maxZoom: 16 });
-                else map.setView([lat, lng], clickMarkerZoom);
+                if (input) input.value = locationName;
+                updateRoute(); // Gọi updateRoute ngay sau khi chọn điểm
+                if (currentStartLocation && currentEndLocation) {
+                    map.fitBounds([[currentStartLocation.lat, currentStartLocation.lng], [currentEndLocation.lat, currentEndLocation.lng]], { padding: [50, 50], maxZoom: 16 });
+                } else {
+                    map.setView([lat, lng], clickMarkerZoom);
+                }
             } catch (error) {
                 console.error("Error processing selection:", error, object);
                 alert("Lỗi khi chọn địa điểm.");
@@ -169,24 +174,44 @@ function setupAutocomplete(inputId, searchType) {
 
 // --- Update/Draw Route ---
 function updateRoute() {
-    if (routingControl) map.removeControl(routingControl);
-    routingControl = null;
-    if (currentStartLocation?.lat != null && currentEndLocation?.lat != null) {
-        const waypoints = [L.latLng(currentStartLocation.lat, currentStartLocation.lng), L.latLng(currentEndLocation.lat, currentEndLocation.lng)];
-        routingControl = L.Routing.control({
-            waypoints, routeWhileDragging: false, show: false,
-            lineOptions: { styles: [{ color: "blue", opacity: 0.8, weight: 6 }] },
-            addWaypoints: false, draggableWaypoints: false, createMarker: () => null,
-        }).addTo(map);
-        routingControl.on('routingerror', (e) => {
-            console.error("Routing Error:", e.error?.message || e.error); // Log only message
-            alert(`Không tìm thấy đường đi.`);
-            if (routingControl) map.removeControl(routingControl); routingControl = null;
-        });
-        routingControl.on('routesfound', (e) => {
-            if (e.routes?.length > 0) console.log(`Route found: ${(e.routes[0].summary.totalDistance / 1000).toFixed(1)} km`); // Shorter log
-        });
+    if (routingControl) {
+        map.removeControl(routingControl);
+        routingControl = null;
     }
+    if (!currentStartLocation || !currentEndLocation) {
+        console.log("Route not drawn: Missing start or end location.");
+        return;
+    }
+
+    const waypoints = [
+        L.latLng(currentStartLocation.lat, currentStartLocation.lng),
+        L.latLng(currentEndLocation.lat, currentEndLocation.lng)
+    ];
+
+    routingControl = L.Routing.control({
+        waypoints,
+        routeWhileDragging: false,
+        show: true, // Hiển thị thông tin tuyến đường
+        lineOptions: { styles: [{ color: "blue", opacity: 0.8, weight: 6 }] },
+        addWaypoints: false,
+        draggableWaypoints: false,
+        createMarker: () => null,
+    }).addTo(map);
+
+    routingControl.on('routingerror', (e) => {
+        console.error("Routing Error:", e.error?.message || e.error);
+        alert("Không tìm thấy đường đi giữa hai điểm.");
+        if (routingControl) {
+            map.removeControl(routingControl);
+            routingControl = null;
+        }
+    });
+
+    routingControl.on('routesfound', (e) => {
+        if (e.routes?.length > 0) {
+            console.log(`Route found: ${(e.routes[0].summary.totalDistance / 1000).toFixed(1)} km`);
+        }
+    });
 }
 
 // --- Event Handlers ---
@@ -195,11 +220,13 @@ function handleStartMarkerDragEnd(e) {
     updateRoute();
     document.getElementById('start-search').value = '';
 }
+
 function handleEndMarkerDragEnd(e) {
     currentEndLocation = e.target.getLatLng().wrap();
     updateRoute();
     document.getElementById('end-search').value = '';
 }
+
 function returnToCurrentLocation() {
     if (!navigator.geolocation) return alert("Trình duyệt không hỗ trợ định vị.");
     document.body.style.cursor = 'wait';
@@ -216,7 +243,7 @@ function returnToCurrentLocation() {
     },
         (error) => {
             document.body.style.cursor = 'default';
-            console.error("Geolocation Error:", error.code, error.message); // Log code and message
+            console.error("Geolocation Error:", error.code, error.message);
             alert(`Không thể lấy vị trí.\nLỗi: ${error.message}`);
         },
         { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 });
@@ -238,9 +265,9 @@ L.control.currentLocation = (opts) => new L.Control.CurrentLocation(opts);
 L.Control.Legend = L.Control.extend({
     options: { position: 'bottomleft' },
     onAdd: function (map) {
-        const div = L.DomUtil.create("div", "description"); // Ensure this class matches your CSS
+        const div = L.DomUtil.create("div", "description");
         L.DomEvent.disableClickPropagation(div);
-        div.innerHTML = "Tìm điểm bắt đầu (S). Tìm điểm đến khẩn cấp (Đ)."; // Shorter legend text
+        div.innerHTML = "Tìm điểm bắt đầu (S). Tìm điểm đến khẩn cấp (Đ).";
         return div;
     }
 });
@@ -248,12 +275,11 @@ L.control.legend = (opts) => new L.Control.Legend(opts);
 
 // --- Initialization ---
 function initializeMapAndData(initialLat, initialLng) {
-    console.log(`Initializing map at: [${initialLat.toFixed(5)}, ${initialLng.toFixed(5)}]`); // Log coords
+    console.log(`Initializing map at: [${initialLat.toFixed(5)}, ${initialLng.toFixed(5)}]`);
     currentStartLocation = { lat: initialLat, lng: initialLng };
     currentEndLocation = null;
     map.setView([initialLat, initialLng], initialZoom);
 
-    // Clear previous state
     if (startMarker) map.removeLayer(startMarker);
     if (endMarker) map.removeLayer(endMarker);
     if (routingControl) map.removeControl(routingControl);
@@ -263,20 +289,15 @@ function initializeMapAndData(initialLat, initialLng) {
     if (startInput) startInput.value = '';
     if (endInput) endInput.value = '';
 
-    // Create initial start marker
     startMarker = L.marker([initialLat, initialLng], { icon: startIcon, draggable: true })
         .addTo(map).bindPopup("Vị trí bắt đầu (kéo thả)").on('dragend', handleStartMarkerDragEnd);
 
-    // Setup Autocomplete
     setupAutocomplete("start-search", 'nominatim');
     setupAutocomplete("end-search", 'clientSide');
 
-    // Add Controls
     L.control.currentLocation({ position: 'topright' }).addTo(map);
     L.control.legend().addTo(map);
-    // L.control.fullscreen().addTo(map); // Optional
 
-    // Load static JSON data
     loadEmergencyData();
 }
 

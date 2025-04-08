@@ -1,17 +1,18 @@
 {
   "type": "FeatureCollection",
-  "generator": "Grok 3 by xAI",
   "copyright": "Dữ liệu dựa trên thông tin công khai từ các nguồn đáng tin cậy.",
-  "timestamp": "2025-04-01T01:50:00Z",
   "features": [
     {
       "type": "Feature",
       "id": "node/1",
       "properties": {
         "@id": "node/1",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 1",
-        "address": "68 Lý Tự Trọng, Phường Bến Nghé, Quận 1"
+        "address": "68 Lý Tự Trọng, Phường Bến Nghé, Quận 1",
+        "phone": "02838297643",
+        "description": "Sở cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipMquWdtR1SaT5GqGROS9BAyjCgVMRHiVJAzOCcZ=w152-h86-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -26,9 +27,12 @@
       "id": "node/2",
       "properties": {
         "@id": "node/2",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 2",
-        "address": "1 Trần Não, Phường Bình An, Quận 2"
+        "address": "1 Trần Não, Phường Bình An, Quận 2",
+        "phone": "02837415327",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9V74vjBLF0cLxB2veEP7RTSW1g6wb5pxyzr5Mtn7PuDgXVEneVzGvK2oUpQGmjvzWRkB9pGxzqKXuuix1AxgtIFvhfpWXDQMp7Zhg8c43i4BUba43JJax4GeR2B8FOmac5JFtz=w203-h152-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -43,9 +47,12 @@
       "id": "node/3",
       "properties": {
         "@id": "node/3",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 3",
-        "address": "103 Lý Chính Thắng, Phường 8, Quận 3"
+        "address": "103 Lý Chính Thắng, Phường 8, Quận 3",
+        "phone": "02838392764",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipP37kTRZKhhrhFcmlTrdrkbHpI1MFzCIKXKOzrS=w203-h152-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -60,9 +67,12 @@
       "id": "node/4",
       "properties": {
         "@id": "node/4",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 4",
-        "address": "183C Tôn Thất Thuyết, Phường 4, Quận 4"
+        "address": "14 Đ. Đoàn Như Hài, Phường 12, Quận 4, Hồ Chí Minh, Việt Nam",
+        "phone": "02839400188",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9qL8LxLKUAVwhQhJANqfx7hGJAjrXdjt-MDVIoAJPaFrRa3FemQP4BWt3qaeFE2gPI-lSF5w0gMF1KDlXulZ_sjMueju8FFcr69uDh-2LuWS_ZDkzfkhu4ibm5eMvWDgZMIHUf=w203-h152-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -77,9 +87,12 @@
       "id": "node/5",
       "properties": {
         "@id": "node/5",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 5",
-        "address": "72 Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 5"
+        "address": "359 Trần Hưng Đạo, Phường 11, Quận 5, Hồ Chí Minh, Việt Nam",
+        "phone": "02838550878",
+        "description": "Sở cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOKeNp5NNm3izuRYCC2jss1O6aUdIdqlRLkZhfq=w203-h149-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -94,9 +107,13 @@
       "id": "node/6",
       "properties": {
         "@id": "node/6",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 6",
-        "address": "114 Đ. Phạm Văn Chí, Phường 1, Quận 6, Hồ Chí Minh, Việt Nam"
+        "address": "114 Đ. Phạm Văn Chí, Phường 1, Quận 6, Hồ Chí Minh, Việt Nam",
+        "phone": "02839670694",
+        "description": "Sở cảnh sát",
+        "website": "http://www.quan6.hochiminhcity.gov.vn/",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8Ac02IOj6oBNNeucYTBQ_bMbi3bjknjZzA_OpQ7n7SDjZfanTBbp37fjGv3wiieomI2UeplYQhK2WxdO5HM7vYOlTr-YOZ_qSAT1s_Kclva2W3jr8GYFy-etr9dZ6NBCBw_GQ8iw=w203-h270-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -111,9 +128,12 @@
       "id": "node/7",
       "properties": {
         "@id": "node/7",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 7",
-        "address": "1180 Nguyễn Văn Linh, Phường Tân Phong, Quận 7"
+        "address": "2 Hoàng Văn Thái, Tân Phú, Quận 7, Hồ Chí Minh, Việt Nam",
+        "phone": "02837851787",
+        "description": "Cảnh sát dân sự",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOin6y5qnwRKNpAnfOrEnIWX0IdqUY6L52o5_ow=w203-h152-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -128,9 +148,12 @@
       "id": "node/8",
       "properties": {
         "@id": "node/8",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 8",
-        "address": "250 Tùng Thiện Vương, Phường 11, Quận 8"
+        "address": "250 Tùng Thiện Vương, Phường 11, Quận 8",
+        "phone": "113",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipMXWH6_cm085NAOGBP8g8_AjAuKkxRQqhYl6pUn=w86-h114-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -145,9 +168,9 @@
       "id": "node/9",
       "properties": {
         "@id": "node/9",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 9",
-        "address": "02 Xa Lộ Hà Nội, Phường Hiệp Phú, Quận 9"
+        "address": "9 Xa lộ Hà Nội, Hiệp Phú, Thủ Đức, Hồ Chí Minh, Việt Nam"
       },
       "geometry": {
         "type": "Point",
@@ -162,9 +185,12 @@
       "id": "node/10",
       "properties": {
         "@id": "node/10",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 10",
-        "address": "225 Lý Thường Kiệt, Phường 15, Quận 10"
+        "address": "225 Lý Thường Kiệt, Phường 15, Quận 10",
+        "phone": "02838657261",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9PjcXZaASthtRNsc-F7xGwIJWZtdhQ71F8M20O0iexyvusdFTtsSko3ud_WNqdDdChyVS8ypygKAuHUEuDv1GFpKXES6ghTvUH2IRXbumfb2KITDAPHUxsIIGReZBK6AkRvTBC=w203-h152-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -179,9 +205,12 @@
       "id": "node/11",
       "properties": {
         "@id": "node/11",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 11",
-        "address": "52 Lý Thường Kiệt, Phường 6, Quận 11"
+        "address": "272 Đ. Bình Thới, Phường 10, Quận 11, Hồ Chí Minh, Việt Nam",
+        "phone": "02838581581",
+        "description": "Cảnh sát dân sự",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB_6uuJhALdn1ZlaNvPY34m5hxsqDVmN9BJr8fdeof7JCkEbaoqcXyUMaGbATAC9NmAf5wyX60YYFPa3rhOHgoV-1aUXuZUJvDpg2YmZR30scQhbHkw4ucdmTLul2bSGg8L3WGL0=w203-h270-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -196,9 +225,12 @@
       "id": "node/12",
       "properties": {
         "@id": "node/12",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận 12",
-        "address": "2368 Quốc Lộ 1A, Khu phố 2, Phường Trung Mỹ Tây, Quận 12"
+        "address": "2368 Quốc Lộ 1A, Khu phố 2, Phường Trung Mỹ Tây, Quận 12",
+        "phone": "02838916754",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOPwqrrleQC-7AMm3A_miFj30j8N4f6aaGY0QUm=w152-h86-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -213,9 +245,12 @@
       "id": "node/13",
       "properties": {
         "@id": "node/13",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận Tân Bình",
-        "address": "342 Trường Chinh, Phường 13, Quận Tân Bình"
+        "address": "342 Trường Chinh, Phường 13, Quận Tân Bình",
+        "phone": "02838444996",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9W4LmidYe3Ye1RZiFji6OEWbukbcPBS3T9HMqRVw2ow4SMFciw6e4AtjawCCBh8KQD6fWCxmCBKyknbQjhUUouziZfY39kKxbfdE7tPo6UdMJEAgu-bBa8Zhne2zgFdGiLe5iVBA=w203-h114-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -230,9 +265,13 @@
       "id": "node/14",
       "properties": {
         "@id": "node/14",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận Gò Vấp",
-        "address": "584 Quang Trung, Phường 11, Gò Vấp, Hồ Chí Minh, Việt Nam"
+        "address": "584 Quang Trung, Phường 11, Gò Vấp, Hồ Chí Minh, Việt Nam",
+        "phone": "02838940278",
+        "description": "Đồn cảnh sát",
+        "website": "https://www.facebook.com/CongAnQuanGoVap/",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9-jlsVwAAumW0I2baczBLsRRWibRiGX1UtKDOFB7TV5DxaTvy89m0KS60E_gx10N3vRVPU1J3XLnQ51cO5Sq1T5l8D1CJ3r0opc3UazGbxprsBzsIvUW3AIwCwEzo7cUf6DKFy4g=w210-h100-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -247,9 +286,12 @@
       "id": "node/15",
       "properties": {
         "@id": "node/15",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận Bình Tân",
-        "address": "428 Kinh Dương Vương, Phường An Lạc, Quận Bình Tân"
+        "address": "1114 QL1A, Bình Trị Đông B, Bình Tân, Hồ Chí Minh, Việt Nam",
+        "phone": "02837560128",
+        "description": "Sở cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipP0rHJ2sfFi1vSsZRE_F-QGrklovyMqWz2oDUM-=w203-h270-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -264,9 +306,12 @@
       "id": "node/30",
       "properties": {
         "@id": "node/30",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an phường 19 Quận Bình Thạnh",
-        "address": "1 Đ. Huỳnh Tịnh Của, Phường 19, Bình Thạnh, Hồ Chí Minh, Việt Nam"
+        "address": "1 Đ. Huỳnh Tịnh Của, Phường 19, Bình Thạnh, Hồ Chí Minh, Việt Nam",
+        "phone": "02838994600",
+        "description": "Sở cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-yPmGivIFDiLMVTjkj8W3-XMtwf92ucm9174U7eektRMRX1-B20kVRO21hNbTKVh8_wnwGa6d0oEhwU-q2c_LBvilizmDJ29KiSYjK_JO9SKEd7UHJD85PZwImrrnqCncmkk0=w203-h144-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -281,9 +326,12 @@
       "id": "node/31",
       "properties": {
         "@id": "node/31",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an phường 25 Quận Bình Thạnh",
-        "address": "2A Đ. Điện Biên Phủ, Phường 25, Bình Thạnh, Hồ Chí Minh, Việt Nam"
+        "address": "2A Đ. Điện Biên Phủ, Phường 25, Bình Thạnh, Hồ Chí Minh, Việt Nam",
+        "phone": "02838990782",
+        "description": "Sở cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOfLuH5mneVnDUX3iP_1WrWB86DQsGvLOinwGos=w86-h114-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -298,9 +346,12 @@
       "id": "node/33",
       "properties": {
         "@id": "node/33",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an phường 15, quận Phú Nhuận",
-        "address": "24b Nguyễn Văn Trỗi, Phường 15, Phú Nhuận, Hồ Chí Minh, Việt Nam"
+        "address": "24b Nguyễn Văn Trỗi, Phường 15, Phú Nhuận, Hồ Chí Minh, Việt Nam",
+        "phone": "02838441577",
+        "description": "Cảnh sát dân sự",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipMFfXFdB8aAz0m9u7Pp6pn02giuTQIwA1dtGfZr=w129-h86-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -315,9 +366,13 @@
       "id": "node/40",
       "properties": {
         "@id": "node/40",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an phường 8, quận Phú Nhuận",
-        "address": "196 Nguyễn Trọng Tuyển, Phường 8, Phú Nhuận, Hồ Chí Minh, Việt Nam"
+        "address": "196 Nguyễn Trọng Tuyển, Phường 8, Phú Nhuận, Hồ Chí Minh, Việt Nam ",
+        "phone": "02838442573",
+        "description": "Văn phòng chính phủ",
+        "website": "http://www.phunhuan.hochiminhcity.gov.vn/Pages/default.aspx",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipMKvhLERqjOUNpAwjyYzO2N9KJtiI9ZBYf9dCq1=w86-h152-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -332,15 +387,17 @@
       "id": "node/18",
       "properties": {
         "@id": "node/18",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Quận Tân Phú",
-        "address": "35 Nguyễn Sơn, Phường Phú Thạnh, Quận Tân Phú"
+        "address": "687 Đ. Âu Cơ, Tân Thành, Tân Phú, Hồ Chí Minh, Việt Nam",
+        "phone": "02838474549",
+        "description": "Phòng cảnh sát trưởng",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipP-NSvY3yoIIwVjSvzK1NTmxIXo76hAHlPQQwMh=w114-h86-k-no"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.774,
-          106.617
+         10.79046441814295, 106.63960138572192
         ]
       }
     },
@@ -349,15 +406,17 @@
       "id": "node/19",
       "properties": {
         "@id": "node/19",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Phường 1 Quận Tân Bình",
-        "address": "Số 1 Trường Chinh, Phường 1, Quận Tân Bình"
+        "address": "291 Lê Văn Sỹ, Phường 1, Tân Bình, Hồ Chí Minh, Việt Nam",
+        "phone": "02838444870",
+        "description": "Đồn cảnh sát",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipNRer1pgi4IIT3fp9DzOY05eDxZLRq5nd-kX0XH=w152-h86-k-no"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.766,
-          106.637
+       10.794919337240117, 106.66755871349393
         ]
       }
     },
@@ -366,15 +425,16 @@
       "id": "node/20",
       "properties": {
         "@id": "node/20",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Phường 3 Quận Gò Vấp",
-        "address": "Số 1 Phan Huy Ích, Phường 3, Quận Gò Vấp"
+        "address": "1 Nguyễn Thái Sơn, Phường 3, Gò Vấp, Hồ Chí Minh, Việt Nam",
+        "phone": "02838943422",
+        "description": "Đồn cảnh sát"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.805,
-          106.690
+         10.821225440786684, 106.67397282354462
         ]
       }
     },
@@ -383,15 +443,17 @@
       "id": "node/21",
       "properties": {
         "@id": "node/21",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Phường 10 Quận Bình Tân",
-        "address": "Dưới Cầu Bến Lội, Phường Bình Hưng Hòa, Quận Bình Tân"
+        "address": "290 Đ. Âu Cơ, Phường 9, Tân Bình, Hồ Chí Minh, Việt Nam",
+        "phone": "02838650410",
+        "description": "Cảnh sát dân sự",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOmdJxhC_ZHeKlkatfi7GgqhiEj5tTUt3v5lZdq=w86-h114-k-no"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.764,
-          106.609
+          10.775915440316941, 106.64755324787181
         ]
       }
     },
@@ -400,9 +462,12 @@
       "id": "node/22",
       "properties": {
         "@id": "node/22",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Phường 1 Quận Gò Vấp",
-        "address": "59 Phan Văn Trị, Phường 1, Quận Gò Vấp"
+        "address": "467 Lê Quang Định, Phường 1, Bình Thạnh, Hồ Chí Minh 700000, Việt Nam",
+        "phone": "02838941138",
+        "description": "Cảnh sát dân sự",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipMsO4w62thYDw1_9nCG5yh7OzCWLAQPNbZWBVU=w86-h114-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -417,15 +482,17 @@
       "id": "node/23",
       "properties": {
         "@id": "node/23",
-        "amenity": "police",
+        "amenity": "Cảnh sát",
         "name": "Công an Phường 5 Quận Bình Thạnh",
-        "address": "75 Nguyễn Xí, Phường 5, Quận Bình Thạnh"
+        "address": "97 Nguyễn Văn Đậu, Phường 5, Bình Thạnh, Hồ Chí Minh, Việt Nam",
+        "phone": "02838445907",
+        "description": "Cảnh sát dân sự",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipO7K2-IAqd385yKWGEiyxEiQzw2HUANA68_GCr1=w114-h86-k-no"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.798,
-          106.709
+         10.809325277481074, 106.68862575582321
         ]
       }
     },
@@ -434,9 +501,11 @@
       "id": "node/24",
       "properties": {
         "@id": "node/24",
-        "amenity": "police",
-        "name": "Công an Phường 4 Quận Tân Phú",
-        "address": "40 Nguyễn Trãi, Phường 4, Quận Tân Phú"
+        "amenity": "Cảnh sát",
+        "name": "Công an Phường 4 Quận Tân Bình",
+        "address": "925 Tự Cường, Phường 4, Tân Bình, Hồ Chí Minh, Việt Nam",
+        "phone": "02838445981",
+        "description": "Cảnh sát dân sự"
       },
       "geometry": {
         "type": "Point",
@@ -445,40 +514,8 @@
           106.601
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "id": "node/25",
-      "properties": {
-        "@id": "node/25",
-        "amenity": "police",
-        "name": "Công an Phường 8 Quận Phú Nhuận",
-        "address": "60 Nguyễn Thượng Hiền, Phường 8, Quận Phú Nhuận"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          10.792,
-          106.690
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "node/26",
-      "properties": {
-        "@id": "node/26",
-        "amenity": "police",
-        "name": "Công an Phường 10 Quận Tân Bình",
-        "address": "22 Hoàng Văn Thụ, Phường 10, Quận Tân Bình"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          10.757,
-          106.630
-        ]
-      }
     }
+     
+    
   ]
 }

@@ -1,8 +1,6 @@
 {
   "type": "FeatureCollection",
-  "generator": "Grok 3 by xAI",
   "copyright": "Dữ liệu dựa trên thông tin công khai từ www.openstreetmap.org và các nguồn đáng tin cậy khác. Dữ liệu được cung cấp theo ODbL.",
-  "timestamp": "2025-04-01T01:50:00Z",
   "features": [
     {
       "type": "Feature",
@@ -10,8 +8,11 @@
       "properties": {
         "@id": "node/1",
         "amenity": "Phòng Cảnh sát PCCC & CNCH",
-        "name": "Phòng Cảnh sát Phòng cháy Chữa cháy và Cứu nạn Cứu hộ Quận 11",
-        "address": "258 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh, Việt Nam"
+        "name": "Phòng Cảnh sát Phòng cháy Chữa cháy và Cứu nạn Cứu hộ TP. Hồ Chí Minh",
+        "address": "258 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh, Việt Nam",
+        "phone": "02839200996",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-cLD5ypkGClgcOV5rvWLolCzJbQGaMnErw6wAYpDEMyOczLqSO6R7fUsM0io2Z80bcfRgbz5A13L8JAOq5hEPtgoMeUqJav6flCXE6TuaiN9cIGkzX3XwrZMMVIVf0RKiQ_h_1vQ=w408-h306-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -27,8 +28,11 @@
       "properties": {
         "@id": "node/2",
         "amenity": "PCCC",
-        "name": "Phòng Cảnh sát PCCC & CNCH Quận 2",
-        "address": "QPRW+G4 Thủ Đức, Hồ Chí Minh, Việt Nam"
+        "name": "Đội PCCC & CNCH Quận 2",
+        "address": "354 Lương Định Của, An Phú, Thủ Đức, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8V3DjGVKCzSivEZwcIEQAhQpbJFQBjIYUh-h1_0s-CBscLzNSxKqpi-_Y7R05oFmYbiBjxGpEBBI6i5oJJaN96lMBY3kzcXiLEzXXzCPNoelykHPT_EgEWvr-OkB7yc34SY8w=w203-h360-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -45,7 +49,10 @@
         "@id": "node/3",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận 3",
-        "address": "QMQP+R5 Quận 3, Hồ Chí Minh, Việt Nam"
+        "address": "106 Lý Chính Thắng, Phường 8, Quận 3, Hồ Chí Minh, Việt Nam",
+        "phone": "02835265427",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8y5_pzRDc3xduFMoJkt1b8JeQuU_jBqCfAgCLw3VYRR2K3ihUTNYnm1FL5kJhp14FNmzOWLPwVeQ1zjmS1p6pPHVt6UxQ5jcwwjo9_lNFL5juq0LPDhw_bX8jiCzspbgykOIk=w426-h240-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -61,8 +68,11 @@
       "properties": {
         "@id": "node/4",
         "amenity": "PCCC",
-        "name": "Phòng Cảnh sát PCCC & CNCH Quận 4",
-        "address": "QP33+88M, Phường 4, Quận 4, Hồ Chí Minh, Việt Nam"
+        "name": "PCCC quận 4",
+        "address": "QP33+88M, Phường 4, Quận 4, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://maps.gstatic.com/tactile/pane/default_geocode-2x.png"
       },
       "geometry": {
         "type": "Point",
@@ -78,8 +88,11 @@
       "properties": {
         "@id": "node/115",
         "amenity": "PCCC",
-        "name": "Phòng Cảnh sát PCCC & CNCH Quận 5",
-        "address": "1350 Võ Văn Kiệt, Phường 13, Quận 5, Hồ Chí Minh, Việt Nam"
+        "name": "Đội PCCC & CNCH Quận 5",
+        "address": "1350 Võ Văn Kiệt, Phường 13, Quận 5, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8lErB7Zl93u2tScOwlPKXg5riviNf4xGBh2MAzrwBLo_l6UsIwXeZTvRRBoMqteKlfCkhW33CfB9unbtYP440mQu8DQdom1ue2xZb6Rl9qrH09KC3zZJHWUr5Aq52HjISLfgw=w408-h408-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -95,8 +108,11 @@
       "properties": {
         "@id": "node/5",
         "amenity": "PCCC",
-        "name": "Phòng Cảnh sát PCCC & CNCH Quận 6",
-        "address": "149 Đ. Cao Văn Lầu, Phường 1, Quận 6, Hồ Chí Minh, Việt Nam"
+        "name": "Đội PCCC & CNCH Quận 6",
+        "address": "149 Đ. Cao Văn Lầu, Phường 1, Quận 6, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB_mu7bd9G1xGYtN3fjnDzXJvxWh_sLj4jVJ-RxJVh_-1Tupp_tyPwfZPf6x4l3so_jPhv4mh8hPq-TOqdh9tT0SiVjucHMNOdxAKEskaDQI6LsTnsbdshIMP3Q5GUTILzCgTm7e=w408-h544-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -113,7 +129,10 @@
         "@id": "node/6",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận 7",
-        "address": "1181 Đ. Nguyễn Văn Linh, Tân Phong, Quận 7, Hồ Chí Minh, Việt Nam"
+        "address": "1181 Đ. Nguyễn Văn Linh, Tân Phong, Quận 7, Hồ Chí Minh, Việt Nam",
+        "phone": "02837753781",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-AfzB3wt2QnQBUkgdoTNNtgwEv1sUFAgeeB2gSG9prUCg3hmFVtEsGf-Bu2zomWw82H11TIWXNg0RH5oAv2BrLhPOqRxquyRNEQyZwQbqphJ9VH7QW5Y72G0d8BcCd3vlYK0Ty=w408-h573-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -130,7 +149,10 @@
         "@id": "node/7",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận 8",
-        "address": "250 Đ.Tùng Thiện Vương, Phường Xóm Củi, Quận 8, Hồ Chí Minh, Việt Nam"
+        "address": "250 Đ.Tùng Thiện Vương, Phường Xóm Củi, Quận 8, Hồ Chí Minh, Việt Nam",
+        "phone": "02838575943",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-piMQ3lreC5f1qh2_SV9Z9GwC3P_r-fwl6_C2UGBD548BjXhkwMxHLZutfRzhTvZBVzUEkgCnvOxH8ajwvxGxJnlcq1aVjsA9_G7oI-icF52XhWMC-yCnqkqMO-_hlaoG0xYDY=w408-h272-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -146,14 +168,17 @@
       "properties": {
         "@id": "node/8",
         "amenity": "PCCC",
-        "name": "Đội PCCC & CNCH Quận 9, Trung Tâm Đào Tạo Và Huấn Luyện PCCC Và CNCH CATP Hồ Chí Minh",
-        "address": "22A Quang Trung, Hiệp Phú, Quận 9, Hồ Chí Minh, Việt Nam"
+        "name": "Đội PCCC & CNCH KV2 Quận 9",
+        "address": "2 Võ Nguyên Giáp, Khu Phố 6, Thủ Đức, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://maps.gstatic.com/tactile/pane/default_geocode-2x.png"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.844229162641472,
-          106.77297899849684
+          10.84521090068056, 
+          106.77212644868948
         ]
       }
     },
@@ -164,7 +189,10 @@
         "@id": "node/9",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận 11",
-        "address": "225 Đ. Lý Thường Kiệt, Phường 15, Quận 11, Hồ Chí Minh, Việt Nam"
+        "address": "225 Đ. Lý Thường Kiệt, Phường 15, Quận 11, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-Dv-mBkeSTINWmhvQTaPWV6hUAIagDDfwXkUerpkvF323HeoMrUECjdOLtlFuubozqelmHEJ16SVUg84xD7jyeinbh-sxEf5RdJ68VEhsWVqowyQr13RV3ocRFnwwdiee42d7z=w426-h240-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -181,7 +209,10 @@
         "@id": "node/10",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận 12",
-        "address": "2368 Quốc Lộ 1A, Khu phố 2, Phường Trung Mỹ Tây, Quận 12"
+        "address": "2368 Quốc Lộ 1A, Khu phố 2, Phường Trung Mỹ Tây, Quận 12",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9n7UyhecxOjn9jL9NkvTyvCYoIDaU6EW8ZxRCEfA5BePhZ6LL4eX3I1VOM3BHYttfYEaEkkLnzWKXw-9PoIM0DuHRDXEjFa3gaxCyBRS6Jx4rXlB9v1gM7ByAyHKXsil6XVkwv=w408-h306-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -198,7 +229,10 @@
         "@id": "node/11",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận Bình Thạnh",
-        "address": "18A Phan Đăng Lưu, Phường 7, Bình Thạnh, Hồ Chí Minh, Việt Nam"
+        "address": "18A Phan Đăng Lưu, Phường 7, Bình Thạnh, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8tqaPzq-R2Sdb-kh9r7tSBUMhln2NnBsceCjSWlqz9P5hDddktb4r2zlP749mlB8nUM0P-vwO0PAVXUU3_p_GvJmpBiKJWlVz84jLfQkD2fDYK1ACUeKTMuWWrMqMDsQhxSzwmeA=w426-h240-k-no"
       },
       "geometry": {
         "type": "Point",
@@ -215,13 +249,16 @@
         "@id": "node/12",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận Gò Vấp",
-        "address": "108 Phan Văn Trị, Phường 1, Gò Vấp, Hồ Chí Minh, Việt Nam"
+        "address": "108 Phan Văn Trị, Phường 1, Gò Vấp, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8V-NJym1ZG8tOb-gisw0z5ZlQ7oqX-2DVvGHFR1jW9DVNhNtgZYX81QDTZjrm_qWHIno6vVpQBk71qOWSSCnhKRksA0tr3r1s6Nj3Ju9g8wHlmLXE1vyZ03SnPkahRfEwlr56Q=w426-h240-k-no"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.828456781001783,
-          106.68504575343408
+            10.828456781001783,
+            106.68504575343408
         ]
       }
     },
@@ -232,13 +269,16 @@
         "@id": "node/13",
         "amenity": "PCCC",
         "name": "Đội Cảnh Sát PCCC&CNCH-Công An Quận Bình Tân",
-        "address": "1121 QL1A, Tân Tạo, Bình Tân, Hồ Chí Minh, Việt Nam"
+        "address": "1121 QL1A, Tân Tạo, Bình Tân, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8Nc9l_r18Xf6tCpu0G6FR3pzUBT68UqNSVTJv0cHiFpIYZYxUbQF5tmli3m3ISIyX1buHG1nxcJjTAxGh2xPh6D7ZI0MLz_WCf-0EXfgZE8IfjHAdNoHobXZB5GV5R9Fbe3tKL=w408-h306-k-no"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.767749672481669,
-          106.58960138032064
+          10.760852136448598, 
+          106.59131809020853
         ]
       }
     },
@@ -249,7 +289,10 @@
         "@id": "node/14",
         "amenity": "PCCC",
         "name": "Đội PCCC & CNCH Quận Tân Phú",
-        "address": "số 2 Đường T6, Tây Thạnh, Tân Phú, Hồ Chí Minh, Việt Nam"
+        "address": "số 2 Đường T6, Tây Thạnh, Tân Phú, Hồ Chí Minh, Việt Nam",
+        "phone": "114",
+        "description": "Trạm cứu hỏa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-gloLhEZnEDRKS5_fXE217DwW8Xzjrag3Yp2pDnYcCTrAdBOM_YGHC_I4Nv-Dm-6EFggrSbj5C6dgFvaqBPGjNPbs9fMSyNIuWOph77rwOFS2l-bXNdvkD_rKt2-EpFl83T2JZ=w533-h240-k-no"
       },
       "geometry": {
         "type": "Point",
