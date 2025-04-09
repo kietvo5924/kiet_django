@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /**
  * Routing with Nominatim Start and Client-Side Static JSON Search for End (Emergency Locations)
- * Adjusted Control Positions Based on Sidebar Visibility
+ * Super Cleaned and Fixed version.
  */
 
 // --- Configs ---
@@ -20,7 +20,6 @@ let currentStartLocation = { lat: defaultLat, lng: defaultLng };
 let currentEndLocation = null;
 let emergencyLocations = [];
 let emergencyDataLoaded = false;
-let selectedLocation = null;
 
 // --- Icons ---
 const startIcon = L.divIcon({ className: "start-marker", html: '<span>S</span>', iconSize: [30, 30], iconAnchor: [15, 15] });
@@ -64,145 +63,6 @@ async function loadEmergencyData() {
         if (endSearchInput) { endSearchInput.placeholder = "Lỗi tải dữ liệu"; endSearchInput.disabled = false; }
         emergencyDataLoaded = false;
     }
-}
-
-// --- Sidebar Control ---
-const mapContainer = document.getElementById('map');
-
-const sidebarPopup = document.createElement('div');
-sidebarPopup.id = 'sidebar-popup';
-sidebarPopup.className = 'sidebar sidebar-left hidden';
-mapContainer.appendChild(sidebarPopup);
-
-const sidebarRouting = document.createElement('div');
-sidebarRouting.id = 'sidebar-routing';
-sidebarRouting.className = 'sidebar sidebar-right hidden';
-mapContainer.appendChild(sidebarRouting);
-
-// Hàm điều chỉnh vị trí các nút điều khiển
-function adjustControlPositions() {
-    const isPopupVisible = !sidebarPopup.classList.contains('hidden');
-    const isRoutingVisible = !sidebarRouting.classList.contains('hidden');
-
-    // Điều chỉnh vị trí nút zoom và toàn màn hình
-    const zoomControl = document.querySelector('.leaflet-control-zoom');
-    const fullscreenControl = document.querySelector('.leaflet-control-fullscreen');
-    if (isPopupVisible) {
-        if (zoomControl) zoomControl.style.marginLeft = '310px';
-        if (fullscreenControl) fullscreenControl.style.marginLeft = '310px';
-    } else {
-        if (zoomControl) zoomControl.style.marginLeft = '10px';
-        if (fullscreenControl) fullscreenControl.style.marginLeft = '10px';
-    }
-
-    // Điều chỉnh vị trí nút "Trở về vị trí"
-    const currentLocationControl = document.querySelector('.leaflet-control-current-location');
-    if (isRoutingVisible) {
-        if (currentLocationControl) currentLocationControl.style.marginRight = '310px';
-    } else {
-        if (currentLocationControl) currentLocationControl.style.marginRight = '10px';
-    }
-}
-
-function showPopupSidebar(content, isStart) {
-    sidebarPopup.innerHTML = `
-        <div class="sidebar-content">
-            ${content}
-            <button class="route-button" id="route-btn">Dẫn đường</button>
-            <button class="close-button" id="close-popup">Đóng</button>
-        </div>
-    `;
-    sidebarPopup.classList.remove('hidden');
-    adjustControlPositions();
-
-    document.getElementById('route-btn').onclick = () => {
-        if (isStart) {
-            currentStartLocation = selectedLocation;
-            if (startMarker) map.removeLayer(startMarker);
-            startMarker = L.marker([selectedLocation.lat, selectedLocation.lng], { icon: startIcon, draggable: true })
-                .addTo(map).on('dragend', handleStartMarkerDragEnd);
-        } else {
-            currentEndLocation = selectedLocation;
-            if (endMarker) map.removeLayer(endMarker);
-            endMarker = L.marker([selectedLocation.lat, selectedLocation.lng], { icon: endIcon, draggable: true })
-                .addTo(map).on('dragend', handleEndMarkerDragEnd);
-        }
-        updateRoute();
-    };
-
-    document.getElementById('close-popup').onclick = () => {
-        sidebarPopup.classList.add('hidden');
-        adjustControlPositions();
-    };
-}
-
-function showRoutingSidebar(route) {
-    const distance = (route.summary.totalDistance / 1000).toFixed(1);
-    const time = Math.round(route.summary.totalTime / 60);
-    let instructionsHTML = '<ul class="instructions-list">';
-    
-    route.instructions.forEach((instruction, index) => {
-        const distance = instruction.distance > 0 ? `${Math.round(instruction.distance)} m` : '';
-        const direction = getDirectionText(instruction);
-        instructionsHTML += `
-            <li class="instruction-item">
-                <span class="instruction-icon">${getDirectionIcon(instruction)}</span>
-                <span class="instruction-text">${direction} ${instruction.road ? `onto ${instruction.road}` : ''}</span>
-                <span class="instruction-distance">${distance}</span>
-            </li>`;
-    });
-    instructionsHTML += '</ul>';
-
-    const content = `
-        <h3>Tuyến đường</h3>
-        <p>Khoảng cách: ${distance} km, Thời gian: ${time} phút</p>
-        ${instructionsHTML}
-        <button class="close-button" id="close-routing">Đóng</button>
-    `;
-
-    sidebarRouting.innerHTML = `<div class="sidebar-content">${content}</div>`;
-    sidebarRouting.classList.remove('hidden');
-    adjustControlPositions();
-
-    document.getElementById('close-routing').onclick = () => {
-        sidebarRouting.classList.add('hidden');
-        if (routingControl) {
-            map.removeControl(routingControl);
-            routingControl = null;
-        }
-        adjustControlPositions();
-    };
-}
-
-// Hàm chuyển đổi hướng dẫn thành văn bản tiếng Việt
-function getDirectionText(instruction) {
-    switch (instruction.text.toLowerCase()) {
-        case 'head':
-        case 'continue':
-            return 'Tiếp tục';
-        case 'turn left':
-            return 'Rẽ trái';
-        case 'turn right':
-            return 'Rẽ phải';
-        case 'enter roundabout':
-            return 'Vào vòng xuyến';
-        case 'take the 3rd exit':
-            return 'Đi theo lối ra thứ 3';
-        case 'exit the traffic circle':
-            return 'Thoát khỏi vòng xuyến';
-        default:
-            return instruction.text;
-    }
-}
-
-// Hàm lấy biểu tượng hướng dẫn
-function getDirectionIcon(instruction) {
-    const text = instruction.text.toLowerCase();
-    if (text.includes('left')) return '←';
-    if (text.includes('right')) return '→';
-    if (text.includes('continue') || text.includes('head')) return '↑';
-    if (text.includes('roundabout') || text.includes('traffic circle')) return '↻';
-    return '•';
 }
 
 // --- Autocomplete Setup ---
@@ -274,27 +134,34 @@ function setupAutocomplete(inputId, searchType) {
                     lng = coords[0]; lat = coords[1];
                     if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Invalid values (Nominatim)");
                     locationName = object.properties?.name || object.properties?.display_name || locationName;
-                    popupContent = `<h3>Điểm bắt đầu:</h3><p>${locationName}</p>`;
-                    selectedLocation = { lat, lng };
-                    showPopupSidebar(popupContent, true);
+                    popupContent = `<b>Điểm bắt đầu:</b><br>${locationName}`;
+                    currentStartLocation = { lat, lng };
+                    if (startMarker) map.removeLayer(startMarker);
+                    startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true }).addTo(map).bindPopup(popupContent).openPopup().on('dragend', handleStartMarkerDragEnd);
                 } else {
                     const coords = object.geometry?.coordinates;
                     if (!coords || coords.length !== 2) throw new Error("Invalid coords (JSON)");
-                    lng = coords[1]; lat = coords[0];
+                    lng = coords[1]; lat = coords[0]; // Sửa lại: JSON là [lat, lng], nhưng Leaflet cần [lat, lng]
                     if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Invalid values (JSON)");
                     locationName = object.properties?.name || locationName;
-                    popupContent = `<h3>Điểm đến:</h3><p>${locationName}</p>`;
+                    popupContent = `<b>Điểm đến:</b><br>${locationName}`;
                     const { address, amenity, phone, description, image_url } = object.properties || {};
-                    if (address) popupContent += `<p><small>Địa chỉ: ${address}</small></p>`;
-                    if (amenity) popupContent += `<p><small>(${amenity.toUpperCase()})</small></p>`;
-                    if (phone) popupContent += `<p><small>Điện thoại: ${phone}</small></p>`;
-                    if (description) popupContent += `<p><small>Mô tả: ${description}</small></p>`;
-                    if (image_url) popupContent += `<p><img src="${image_url}" alt="${locationName}" style="max-width: 100%; max-height: 150px; margin-top: 10px;"></p>`;
-                    selectedLocation = { lat, lng };
-                    showPopupSidebar(popupContent, false);
+                    if (address) popupContent += `<br><small>Địa chỉ: ${address}</small>`;
+                    if (amenity) popupContent += `<br><small>(${amenity.toUpperCase()})</small>`;
+                    if (phone) popupContent += `<br><small>Điện thoại: ${phone}</small>`;
+                    if (description) popupContent += `<br><small>Mô tả: ${description}</small>`;
+                    if (image_url) popupContent += `<br><img src="${image_url}" alt="${locationName}" style="max-width: 200px; max-height: 150px; margin-top: 10px;">`;
+                    currentEndLocation = { lat, lng };
+                    if (endMarker) map.removeLayer(endMarker);
+                    endMarker = L.marker([lat, lng], { icon: endIcon, draggable: true }).addTo(map).bindPopup(popupContent).openPopup().on('dragend', handleEndMarkerDragEnd);
                 }
                 if (input) input.value = locationName;
-                map.setView([lat, lng], clickMarkerZoom);
+                updateRoute(); // Gọi updateRoute ngay sau khi chọn điểm
+                if (currentStartLocation && currentEndLocation) {
+                    map.fitBounds([[currentStartLocation.lat, currentStartLocation.lng], [currentEndLocation.lat, currentEndLocation.lng]], { padding: [50, 50], maxZoom: 16 });
+                } else {
+                    map.setView([lat, lng], clickMarkerZoom);
+                }
             } catch (error) {
                 console.error("Error processing selection:", error, object);
                 alert("Lỗi khi chọn địa điểm.");
@@ -313,7 +180,6 @@ function updateRoute() {
     }
     if (!currentStartLocation || !currentEndLocation) {
         console.log("Route not drawn: Missing start or end location.");
-        alert("Vui lòng chọn cả điểm bắt đầu và điểm đến trước khi dẫn đường.");
         return;
     }
 
@@ -325,7 +191,7 @@ function updateRoute() {
     routingControl = L.Routing.control({
         waypoints,
         routeWhileDragging: false,
-        show: false,
+        show: true, // Hiển thị thông tin tuyến đường
         lineOptions: { styles: [{ color: "blue", opacity: 0.8, weight: 6 }] },
         addWaypoints: false,
         draggableWaypoints: false,
@@ -343,8 +209,7 @@ function updateRoute() {
 
     routingControl.on('routesfound', (e) => {
         if (e.routes?.length > 0) {
-            const route = e.routes[0];
-            showRoutingSidebar(route);
+            console.log(`Route found: ${(e.routes[0].summary.totalDistance / 1000).toFixed(1)} km`);
         }
     });
 }
@@ -372,8 +237,8 @@ function returnToCurrentLocation() {
         currentStartLocation = { lat, lng };
         if (startMarker) map.removeLayer(startMarker);
         startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true })
-            .addTo(map).on('dragend', handleStartMarkerDragEnd);
-        
+            .addTo(map).bindPopup("Vị trí của bạn (Điểm bắt đầu)").openPopup().on('dragend', handleStartMarkerDragEnd);
+        updateRoute();
         document.getElementById('start-search').value = '';
     },
         (error) => {
@@ -386,7 +251,7 @@ function returnToCurrentLocation() {
 
 // --- Custom Controls ---
 L.Control.CurrentLocation = L.Control.extend({
-    options: { position: 'topright' }, // Mặc định bên phải
+    options: { position: 'topright' },
     onAdd: function (map) {
         const container = L.DomUtil.create("div", "leaflet-control-current-location leaflet-bar leaflet-control");
         container.innerHTML = '<span title="Về vị trí của tôi" style="font-size: 1.4em; cursor: pointer;">🎯</span>';
@@ -408,12 +273,6 @@ L.Control.Legend = L.Control.extend({
 });
 L.control.legend = (opts) => new L.Control.Legend(opts);
 
-// --- Adjust Control Positions ---
-map.zoomControl.setPosition('topleft'); // Mặc định bên trái
-L.control.fullscreen({ position: 'topleft' }).addTo(map); // Mặc định bên trái
-L.control.currentLocation({ position: 'topright' }).addTo(map); // Mặc định bên phải
-L.control.legend().addTo(map);
-
 // --- Initialization ---
 function initializeMapAndData(initialLat, initialLng) {
     console.log(`Initializing map at: [${initialLat.toFixed(5)}, ${initialLng.toFixed(5)}]`);
@@ -431,10 +290,13 @@ function initializeMapAndData(initialLat, initialLng) {
     if (endInput) endInput.value = '';
 
     startMarker = L.marker([initialLat, initialLng], { icon: startIcon, draggable: true })
-        .addTo(map).on('dragend', handleStartMarkerDragEnd);
+        .addTo(map).bindPopup("Vị trí bắt đầu (kéo thả)").on('dragend', handleStartMarkerDragEnd);
 
     setupAutocomplete("start-search", 'nominatim');
     setupAutocomplete("end-search", 'clientSide');
+
+    L.control.currentLocation({ position: 'topright' }).addTo(map);
+    L.control.legend().addTo(map);
 
     loadEmergencyData();
 }

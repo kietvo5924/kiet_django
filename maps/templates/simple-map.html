@@ -7,7 +7,8 @@ Chỉ đường TP.HCM
 
 {% block map %}
 <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
-<link rel="stylesheet" href="{% static 'css/map/map.css' %}" /> {# File CSS chính của bạn #}
+<link rel="stylesheet" href="{% static 'css/map/map.css' %}" /> 
+<link rel="stylesheet" href="{% static 'css/map/sidebar.css' %}" />
 <script src="{% static 'leaflet/leaflet.js' %}"></script>
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
@@ -49,5 +50,6 @@ Chỉ đường TP.HCM
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'js/map/search-address.js' %}"></script> {# Tên file JS của bạn #}
+<script src="{% static 'js/map/search-address.js' %}"></script>
+<script src="{% static 'js/map/sidebar.js' %}"></script>
 {% endblock %}

@@ -2,7 +2,6 @@
 #map {
     height: 100%;
     width: 100%;
-    position: relative;
 }
 
 .description {
@@ -19,6 +18,7 @@
 
 .start-marker {
     background-color: #00cc00;
+    /* Màu xanh lá cho điểm bắt đầu */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -32,6 +32,7 @@
 
 .end-marker {
     background-color: #ff0000;
+    /* Màu đỏ cho điểm kết thúc */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -41,104 +42,6 @@
     font-size: 14px;
     box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
     border: 2px solid #fff;
-}
-
-/* Sidebar Styles */
-.sidebar {
-    position: absolute;
-    top: 110px;
-    width: 300px;
-    height: calc(100% - 20px);
-    background-color: white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    z-index: 1000;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-}
-
-.sidebar-left {
-    left: -300px;
-}
-
-.sidebar-left:not(.hidden) {
-    left: 0;
-}
-
-.sidebar-right {
-    right: -300px;
-}
-
-.sidebar-right:not(.hidden) {
-    right: 0;
-}
-
-.sidebar.hidden {
-    display: block;
-}
-
-.sidebar-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.route-button,
-.close-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.route-button {
-    background-color: #007bff;
-    color: white;
-}
-
-.route-button:hover {
-    background-color: #0056b3;
-}
-
-.close-button {
-    background-color: #dc3545;
-    color: white;
-}
-
-.close-button:hover {
-    background-color: #c82333;
-}
-
-/* Instruction List Styles */
-.instructions-list {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-
-.instruction-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.instruction-icon {
-    font-size: 18px;
-    color: #007bff;
-}
-
-.instruction-text {
-    flex: 1;
-    font-size: 14px;
-    color: #333;
-}
-
-.instruction-distance {
-    font-size: 12px;
-    color: #666;
 }
 
 /* Tùy chỉnh giao diện gợi ý */
@@ -164,18 +67,7 @@
     color: #333;
 }
 
-/* CSS cho các nút điều khiển của Leaflet */
-.leaflet-control-zoom,
-.leaflet-control-fullscreen {
-    z-index: 1001;
-    margin-left: 10px !important; /* Mặc định bên trái */
-}
-
-.leaflet-control-current-location {
-    z-index: 1001;
-    margin-right: 10px !important; /* Mặc định bên phải */
-}
-
+/* CSS cho nút "Trở về vị trí của tôi" */
 .leaflet-control-current-location {
     background-color: #fff;
     border: 2px solid rgba(0, 0, 0, 0.2);
