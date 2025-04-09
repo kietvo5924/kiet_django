@@ -92,7 +92,7 @@
       "properties": {
         "@id": "node/5",
         "amenity": "hospital",
-        "name": "Bệnh viện Nhân Dân gia định",
+        "name": "Bệnh viện Nhân DânDân gia định",
         "address": "1 Nơ Trang Long, Phường 7, Bình Thạnh, Hồ Chí Minh, Việt Nam",
         "phone": "02838412692",
         "description": "Bệnh viện",
@@ -795,6 +795,311 @@
           10.755420496669451,
           106.67099388157727
         ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/60",
+      "properties": {
+        "@id": "node/60",
+        "amenity": "hospital",
+        "name": "Bệnh viện Ung bướu TP. HCM",
+        "address": "47 Nguyễn Huy Lượng, Phường 14, Bình Thạnh, Hồ Chí Minh, Việt Nam",
+        "phone": "02838433022",
+        "description": "Bệnh viện chuyên khoa",
+        "website": "https://benhvienungbuou.vn/",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9j7sasSrQ9SH1QLOYZV620FeOnbbS5X3DKCzPd98eVJy__OsXJ9S1ZcUbcJKstVxVcWv1rrDWZsZUCdfxNegqq8MGdn1mCxGFZ2wJpzuSoE-JRexrSKuGEnRW2iioPSczvo9fayw=w203-h152-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.808857849569726, 106.69432665793873]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/61",
+      "properties": {
+        "@id": "node/61",
+        "amenity": "hospital",
+        "name": "Bệnh viện Trưng Vương",
+        "address": "266 Đ. Lý Thường Kiệt, Phường 14, Quận 10, Hồ Chí Minh, Việt Nam",
+        "phone": "02838656744",
+        "description": "Bệnh viện đa khoa",
+        "website": "http://bvtrungvuong.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipMcD8CvNFDwY6YwAjQUPAEswNxgHVIrTfuFHwJ3=w132-h86-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.770689961582804, 106.65943768981793]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/63",
+      "properties": {
+        "@id": "node/63",
+        "amenity": "hospital",
+        "name": "Bệnh viện Truyền máu Huyết học",
+        "address": "118 Đ. Hồng Bàng, Phường 12, Quận 5, Hồ Chí Minh, Việt Nam",
+        "phone": "02839571342",
+        "description": "Bệnh viện",
+        "website": "http://bthh.org.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipNC0eo3yKNkwb9G-U0M4IqA1qZFsFbmKnfH8k20=w203-h270-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.760986226446612, 106.66598350262835]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/64",
+      "properties": {
+        "@id": "node/64",
+        "amenity": "hospital",
+        "name": "Bệnh viện Tâm thần",
+        "address": "766 Võ Văn Kiệt, Phường 1, Quận 5, Hồ Chí Minh, Việt Nam",
+        "phone": "02839234675",
+        "description": "Bệnh viện tâm thần",
+        "website": "https://bvtt-tphcm.org.vn/",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB94z9cwXNrzHkRK2PO1N8cGWzitoBKFF4PENDB_buEJPnQHaXsvDwK6fyWdpkEAgwXoqycPhg49JfXaIuabDLaWFMo1HvRxEBbcFnlkd8Hrh5Hs95NrtiTExTB0HrpXC4_Je3oM=w203-h152-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.752676645935608, 106.6782872423287]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/65",
+      "properties": {
+        "@id": "node/65",
+        "amenity": "hospital",
+        "name": "Bệnh viện Y học cổ truyền",
+        "address": "179-187 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Hồ Chí Minh, Việt Nam",
+        "phone": "02839326579",
+        "description": "Bệnh viện",
+        "website": "http://yhct.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipMFkzhhxdKIWlOdDq1NYIa6WaXRag9rB9qHVpqx=w154-h86-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.786166057882095, 106.68846140917182]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/66",
+      "properties": {
+        "@id": "node/66",
+        "amenity": "hospital",
+        "name": "Bệnh viện Y dược học dân tộc",
+        "address": "273 Nguyễn Văn Trỗi, Phường 10, Phú Nhuận, Hồ Chí Minh 70000, Việt Nam",
+        "phone": "02838443047",
+        "description": "Bệnh viện",
+        "website": "http://vienydhdt.gov.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipNqt577FJIm9j6JKyrjyIqFNBTyrQiofTyGzlyH=w203-h117-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.797847358453335, 106.67138125376032]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/67",
+      "properties": {
+        "@id": "node/67",
+        "amenity": "hospital",
+        "name": "Viện Tim",
+        "address": "4 Đ. Dương Quang Trung, Phường 12, Quận 10, Hồ Chí Minh, Việt Nam",
+        "phone": "02838651586",
+        "description": "Bệnh viện tim",
+        "website": "https://vientimtphcm.vn/",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9DafjdG3-CaDWwTyDCmk-PnRR4wI3k-OD_4ysZTF864Yc_ZuRrZmRnHgyNXBKnXJuinyQR-6TnRYaZT9cWIMVNYjCCwLxsgNK96afCMnmSikFIRe9MSsEne3jppWqk3XcU-IXqgw=w203-h220-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.774370408762667, 106.66649736896149]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/68",
+      "properties": {
+        "@id": "node/68",
+        "amenity": "hospital",
+        "name": "Bệnh viện Đa khoa Khu vực Củ Chi",
+        "address": "9A Nguyễn Văn Hoài, Ấp Bàu Tre 2, Củ Chi, Hồ Chí Minh, Việt Nam",
+        "phone": "02838920583",
+        "description": "Bệnh viện đa khoa",
+        "website": "http://bvdkkvcuchi.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipNteICVOd3rCocvPQHUGVA3Je1uuanr5auYpqNd=w203-h133-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.975942820767646, 106.47704068460989]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/69",
+      "properties": {
+        "@id": "node/69",
+        "amenity": "hospital",
+        "name": "Bệnh viện Đa khoa Khu vực Hóc Môn",
+        "address": "65/2B Bà Triệu, TT. Hóc Môn, Hóc Môn, Hồ Chí Minh, Việt Nam",
+        "phone": "02838914208",
+        "description": "Bệnh viện đa khoa",
+        "website": "http://bvdkhocmon.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOuHo2-RW_pCsZE7FyI6PIkPE5uQNSMSqF6Eihs=w114-h86-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.88274971406328, 106.59334659247462]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/70",
+      "properties": {
+        "@id": "node/70",
+        "amenity": "hospital",
+        "name": "Bệnh viện Đa khoa Khu vực Thủ Đức",
+        "address": "64 Lê Văn Chí, Phường Linh Trung, Thủ Đức, Hồ Chí Minh, Việt Nam",
+        "phone": "02837223556",
+        "description": "Bệnh viện đa khoa",
+        "website": "http://www.benhvienkhuvucthuduc.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipN1ieh4yoYiSSqEz0sy5N1jOaTOqlqIwqvLl6uU=w203-h150-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.861542624626273, 106.77987873521646]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/71",
+      "properties": {
+        "@id": "node/71",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận Bình Thạnh",
+        "address": "132 Đ. Lê Văn Duyệt, Phường 1, Bình Thạnh, Hồ Chí Minh, Việt Nam",
+        "phone": "02835108966",
+        "description": "Bệnh viện đa khoa",
+        "website": "https://bvbinhthanh.org.vn/khoa",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8wQFk0D8lZagNo7z9C7JoQ2WHzEG0fqG3rhxP4xsN1BfRgnxTvH4ThIrLBtHrXeRWtSZVX_t4KmXypouL32VB0hAzAsiFdY8ZNhojansLArRHkMAO3_sVwWomHA-vT8AKtLYsm=w203-h114-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.79824584667327, 106.69666050062658]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/72",
+      "properties": {
+        "@id": "node/72",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận Tân Phú",
+        "address": "611 Đ. Âu Cơ, Phú Trung, Tân Phú, Hồ Chí Minh, Việt Nam",
+        "phone": "02854088924",
+        "description": "Bệnh viện đa khoa",
+        "website": "http://benhvientanphu.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipPqNUy4ypKieZizJt6NLgGRy4Sg_eC4JIC4sUNv=w129-h86-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.78642038143136, 106.6409987674199]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/73",
+      "properties": {
+        "@id": "node/73",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận Phú Nhuận",
+        "address": "274 Nguyễn Trọng Tuyển, Phường 8, Phú Nhuận, Hồ Chí Minh, Việt Nam",
+        "phone": "02838443910",
+        "description": "Bệnh viện",
+        "website": "https://bvquanphunhuan.medinet.gov.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipN09IeXg_cI1fVsI56Vdo48a5lw62m8Te6MrMLo=w203-h270-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.798277174245618, 106.6718370576713]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/74",
+      "properties": {
+        "@id": "node/74",
+        "amenity": "hospital",
+        "name": "Bệnh viện Quận Bình Tân",
+        "address": "QJ73+86P, 809 HL2, Bình Trị Đông A, Bình Tân, Hồ Chí Minh 100000, Việt Nam",
+        "phone": "1900633504",
+        "description": "Bệnh viện đa khoa",
+        "website": "http://www.bvbinhtan.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOotQ_SgGVgqU1qaQQKBQenvbb2myK2wQ83x8jf=w203-h114-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.764484468742477, 106.6032639687681]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/75",
+      "properties": {
+        "@id": "node/75",
+        "amenity": "hospital",
+        "name": "Bệnh viện Huyện Bình Chánh",
+        "address": "1 Đường Số 1, Khu trung tâm hành chính huyện, Bình Chánh, Hồ Chí Minh, Việt Nam",
+        "phone": "02837602895",
+        "description": "Bệnh viện",
+        "website": "http://binhchanhhospital.vn/",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipPXRcA5YxeXOxzHP2nnqioQtHka3PwdQOut_SKT=w203-h152-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.690970170073015, 106.58598271184606]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/76",
+      "properties": {
+        "@id": "node/76",
+        "amenity": "hospital",
+        "name": "Bệnh viện Huyện Nhà Bè",
+        "address": "281A Đ. Lê Văn Lương, Ấp 3, Nhà Bè, Hồ Chí Minh 70000, Việt Nam",
+        "phone": "02837815558",
+        "description": "Bệnh viện đa khoa",
+        "website": "http://www.benhviennhabe.vn/",
+        "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-KLTqjap-uto72uvzTIxG7_stVuBHr6V3RdR9rTMJRbU740Tw6ardS-b0q-QIx-jI47d01bgwfgzj1pXfcfwkTV682NFs295Zk8I8P0kl74ummHu1SuyxZ1L8kwdADF0EVtwgXuw=w203-h203-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.70463054449419, 106.70445903973936]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/77",
+      "properties": {
+        "@id": "node/77",
+        "amenity": "hospital",
+        "name": "Bệnh viện Huyện Cần Giờ",
+        "address": "CX63+GV9, Lương Văn Nho KP, Giồng Ao, TT. Cần Thạnh, Cần Giờ, Hồ Chí Minh, Việt Nam",
+        "phone": "02838740317",
+        "description": "Bệnh viện",
+        "image_url": "https://lh3.googleusercontent.com/p/AF1QipOQBQxR1h26X0gaOG2IrgFw4rTkozBcHHomKGcp=w133-h86-k-no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.411476976087854, 106.95474477291204]
       }
     },
     {
