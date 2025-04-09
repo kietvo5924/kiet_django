@@ -1,36 +1,68 @@
 /* Sidebar Styles */
 .sidebar {
     position: absolute;
-    top: 110px;
+    /* top: 110px; */
+    /* Xóa hoặc ghi đè dòng này */
+    top: 0;
+    /* Đặt sidebar sát lề trên */
     width: 300px;
-    height: calc(100% - 20px);
+    /* Giữ nguyên hoặc thay đổi chiều rộng nếu muốn */
+    /* height: calc(100% - 20px); */
+    /* Xóa hoặc ghi đè dòng này */
+    height: 100%;
+    /* Kéo dài hết chiều cao map container */
     background-color: white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    /* Tăng shadow một chút */
+    padding: 15px;
+    /* Giảm padding nếu cần */
     z-index: 1000;
+    /* Đảm bảo nằm trên map */
     overflow-y: auto;
-    transition: all 0.3s ease;
+    /* Cho phép cuộn nếu nội dung dài */
+    transition: transform 0.3s ease-in-out;
+    /* Đổi transition thành transform */
+    /* Sử dụng transform để ẩn/hiện thay vì left/right */
 }
 
 .sidebar-left {
-    left: -300px;
+    /* left: -300px; */
+    /* Xóa */
+    transform: translateX(-100%);
+    /* Ẩn bằng cách dịch chuyển sang trái */
+    left: 0;
+    /* Luôn đặt left là 0 */
 }
 
 .sidebar-left:not(.hidden) {
-    left: 0;
+    /* left: 0; */
+    /* Xóa */
+    transform: translateX(0);
+    /* Hiện bằng cách dịch chuyển về vị trí 0 */
 }
 
 .sidebar-right {
-    right: -300px;
+    /* right: -300px; */
+    /* Xóa */
+    transform: translateX(100%);
+    /* Ẩn bằng cách dịch chuyển sang phải */
+    right: 0;
+    /* Luôn đặt right là 0 */
 }
 
 .sidebar-right:not(.hidden) {
-    right: 0;
+    /* right: 0; */
+    /* Xóa */
+    transform: translateX(0);
+    /* Hiện bằng cách dịch chuyển về vị trí 0 */
 }
 
+/* Bỏ display: block khi hidden để transition hoạt động */
+/*
 .sidebar.hidden {
     display: block;
 }
+*/
 
 .sidebar-content {
     display: flex;
@@ -40,58 +72,87 @@
 
 .route-button,
 .close-button {
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    /* Bo góc nhỏ hơn */
     cursor: pointer;
     font-size: 14px;
+    margin-top: 10px;
+    /* Thêm khoảng cách trên cho nút */
 }
 
 .route-button {
-    background-color: #007bff;
+    background-color: #0d6efd;
+    /* Bootstrap primary */
     color: white;
 }
 
 .route-button:hover {
-    background-color: #0056b3;
+    background-color: #0b5ed7;
 }
 
 .close-button {
-    background-color: #dc3545;
+    background-color: #6c757d;
+    /* Bootstrap secondary */
     color: white;
 }
 
 .close-button:hover {
-    background-color: #c82333;
+    background-color: #5c636a;
 }
 
 /* Instruction List Styles */
 .instructions-list {
     list-style: none;
     padding: 0;
-    margin: 10px 0;
+    margin: 15px 0 0 0;
+    /* Tăng margin top */
+    font-size: 14px;
+    /* Đặt font-size chung */
 }
 
 .instruction-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    gap: 8px;
+    /* Giảm gap */
+    padding: 10px 5px;
+    /* Tăng padding */
+    border-bottom: 1px solid #e9ecef;
+    /* Màu border nhạt hơn */
+}
+
+.instruction-item:last-child {
+    border-bottom: none;
+    /* Bỏ border cho item cuối */
 }
 
 .instruction-icon {
-    font-size: 18px;
-    color: #007bff;
+    font-size: 1.2em;
+    /* Kích thước icon tương đối */
+    color: #0d6efd;
+    width: 20px;
+    /* Đặt chiều rộng cố định cho icon */
+    text-align: center;
 }
 
 .instruction-text {
     flex: 1;
-    font-size: 14px;
-    color: #333;
+    color: #212529;
+    /* Màu text đậm hơn */
+    line-height: 1.4;
 }
 
 .instruction-distance {
-    font-size: 12px;
-    color: #666;
+    font-size: 0.9em;
+    /* Kích thước tương đối */
+    color: #6c757d;
+    /* Màu secondary */
+    margin-left: auto;
+    /* Đẩy khoảng cách sang phải */
+    padding-left: 10px;
+    /* Thêm padding trái */
+    white-space: nowrap;
+    /* Không xuống dòng */
 }

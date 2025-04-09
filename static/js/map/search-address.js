@@ -140,7 +140,7 @@ function showRoutingSidebar(route) {
     const distance = (route.summary.totalDistance / 1000).toFixed(1);
     const time = Math.round(route.summary.totalTime / 60);
     let instructionsHTML = '<ul class="instructions-list">';
-    
+
     route.instructions.forEach((instruction, index) => {
         const distance = instruction.distance > 0 ? `${Math.round(instruction.distance)} m` : '';
         const direction = getDirectionText(instruction);
@@ -373,7 +373,7 @@ function returnToCurrentLocation() {
         if (startMarker) map.removeLayer(startMarker);
         startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true })
             .addTo(map).on('dragend', handleStartMarkerDragEnd);
-        
+
         document.getElementById('start-search').value = '';
     },
         (error) => {
