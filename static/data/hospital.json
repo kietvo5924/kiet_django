@@ -102,7 +102,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.803878831541956, 
+          10.803878831541956,
           106.69416247945698
         ]
       }
@@ -144,12 +144,11 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.76956249482056, 
+          10.76956249482056,
           106.68609076159166
         ]
-    }
+      }
     },
-  
     {
       "type": "Feature",
       "id": "node/8",
@@ -208,7 +207,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.790161703906767, 
+          10.790161703906767,
           106.68959551485875
         ]
       }
@@ -229,7 +228,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.772264147326958, 
+          10.772264147326958,
           106.69938136657244
         ]
       }
@@ -271,7 +270,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.763650168787633, 
+          10.763650168787633,
           106.69197467868723
         ]
       }
@@ -292,7 +291,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.778480434535343, 
+          10.778480434535343,
           106.68534617435606
         ]
       }
@@ -418,7 +417,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-        10.758448784082097, 106.66162154423066
+          10.758448784082097,
+          106.66162154423066
         ]
       }
     },
@@ -430,8 +430,8 @@
         "amenity": "hospital",
         "name": "Bệnh viện Bệnh Nhiệt Đới",
         "address": "764 Võ Văn Kiệt, Phường 1, Quận 5, Hồ Chí Minh 700000, Việt Nam",
-          "phone": "02839235804",
-         "website": "http://www.bvbnd.vn/",
+        "phone": "02839235804",
+        "website": "http://www.bvbnd.vn/",
         "description": "Bệnh viện chuyên khoa",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipO93qtYx3dcyhD8Op3zqt6VQTAkB66pMk728vvR=w149-h86-k-no"
       },
@@ -452,7 +452,7 @@
         "name": "Bệnh viện An Bình",
         "address": "146 Đ. An Bình, Phường 7, Quận 5, Hồ Chí Minh 70000, Việt Nam",
         "phone": "02839234359",
-           "website": "http://www.benhvienanbinh.vn/",
+        "website": "http://www.benhvienanbinh.vn/",
         "description": "Bệnh viện chuyên khoa",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipN9tN62UjkAotHxiJZxqC7iYsEZSpoTuUvmxsbb=w114-h86-k-no"
       },
@@ -473,7 +473,7 @@
         "name": "Bệnh viện Nguyễn Trãi",
         "address": "314 Đ. Nguyễn Trãi, Phường 7, Quận 5, Hồ Chí Minh, Việt Nam",
         "phone": "02839235020",
-         "website": "https://bvnguyentrai.org.vn/",
+        "website": "https://bvnguyentrai.org.vn/",
         "description": "Bệnh viện",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipNIss-AjA_7_WJdyp4aj40vUuXaqez_fKzCfRmc=w114-h86-k-no"
       },
@@ -494,7 +494,7 @@
         "name": "Bệnh viện Quân Y 7A",
         "address": "466 Đ. Nguyễn Trãi, Phường 7, Quận 5, Hồ Chí Minh, Việt Nam",
         "phone": "02838366789",
-         "website": "http://bvquany7a.vn/",
+        "website": "http://bvquany7a.vn/",
         "description": "Bệnh viện quân đội",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipN_Bs9IMY0KXtdQhaRcvd_2-7C9pS52f0FdmqV2=w86-h114-k-no"
       },
@@ -535,7 +535,7 @@
         "name": "Bệnh viện Chấn Thương Chỉnh Hình",
         "address": "929 Trần Hưng Đạo, Phường 1, Quận 5, Hồ Chí Minh, Việt Nam",
         "phone": "02839237007",
-          "website": "http://www.bvctch.vn/",
+        "website": "http://www.bvctch.vn/",
         "description": "Bệnh viện chuyên khoa",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipMysFoz9gnFIghhCzBp4-iKaPYoj5t9YB9iTMAc=w114-h86-k-no"
       },
@@ -556,7 +556,7 @@
         "name": "Bệnh viện Quận 6",
         "address": "2D Đ. Chợ Lớn, Phường 11, Quận 6, Hồ Chí Minh, Việt Nam",
         "phone": "02838750990",
-          "website": "http://bvquan6.medinet.gov.vn/",
+        "website": "http://bvquan6.medinet.gov.vn/",
         "description": "Bệnh viện đa khoa",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipNNHhSxuC50ywe43Hmw5hhVmthHajdXI8ChHTYI=w122-h86-k-no"
       },
@@ -577,7 +577,7 @@
         "name": "Bệnh viện Quận 7",
         "address": "101 Đ. Nguyễn Thị Thập, Tân Phú, Quận 7, Hồ Chí Minh, Việt Nam",
         "phone": "02838733420",
-         "website": "http://www.benhvienquan7.com.vn/",
+        "website": "http://www.benhvienquan7.com.vn/",
         "description": "Cảnh sát dân sự",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipMw5Q6AYfU5uZXi5gyAE8vV3NqTLr2nMmtzy3hp=w135-h86-k-no"
       },
@@ -618,7 +618,7 @@
         "name": "Bệnh viện Điều Dưỡng - Phục Hồi Chức Năng - Điều Trị Bệnh Nghề Nghiệp",
         "address": "313 Âu Dương Lân, Phường 2, Quận 8, Hồ Chí Minh, Việt Nam",
         "phone": "02838569147",
-          "website": "http://bvphuchoichucnanghcm.vn/",
+        "website": "http://bvphuchoichucnanghcm.vn/",
         "description": "Bệnh viện",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipNEP6fJSKOB07DUJmxZMkEuWs2oJepN_AjIJIdg=w114-h86-k-no"
       },
@@ -639,7 +639,7 @@
         "name": "Bệnh viện Lê Văn Việt",
         "address": "387 Lê Văn Việt, Tăng Nhơn Phú A, Thủ Đức, Hồ Chí Minh 715143, Việt Nam",
         "phone": "02838973628",
-         "website": "http://bvquan9.medinet.gov.vn/",
+        "website": "http://bvquan9.medinet.gov.vn/",
         "description": "Bệnh viện đa khoa",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipPv0Qwis3YNJDr6Oy4fvg3ndQniVc4BQ98VUR0u=w114-h86-k-no"
       },
@@ -660,7 +660,7 @@
         "name": "Bệnh viện Nhân Dân 115",
         "address": "527 Đ. Sư Vạn Hạnh, Phường 12, Quận 10, Hồ Chí Minh, Việt Nam",
         "phone": "1900099983",
-         "website": "https://benhvien115.com.vn/",
+        "website": "https://benhvien115.com.vn/",
         "description": "Bệnh viện đa khoa",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipMMsZTI82_FGJtubV5LtTRVVQMrRAexjMLAtx6D=w203-h129-k-no"
       },
@@ -681,7 +681,7 @@
         "name": "Bệnh viện Bình Dân",
         "address": "371 Điện Biên Phủ, Phường 4, Quận 3, Hồ Chí Minh 700000, Việt Nam",
         "phone": "02838445907",
-         "website": "http://bvquan9.medinet.gov.vn/",
+        "website": "http://bvquan9.medinet.gov.vn/",
         "description": "Cảnh sát dân sự",
         "image_url": "https://lh3.googleusercontent.com/p/AF1QipO7K2-IAqd385yKWGEiyxEiQzw2HUANA68_GCr1=w114-h86-k-no"
       },
@@ -812,7 +812,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.808857849569726, 106.69432665793873]
+        "coordinates": [
+          10.808857849569726,
+          106.69432665793873
+        ]
       }
     },
     {
@@ -830,7 +833,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.770689961582804, 106.65943768981793]
+        "coordinates": [
+          10.770689961582804,
+          106.65943768981793
+        ]
       }
     },
     {
@@ -848,7 +854,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.760986226446612, 106.66598350262835]
+        "coordinates": [
+          10.760986226446612,
+          106.66598350262835
+        ]
       }
     },
     {
@@ -866,7 +875,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.752676645935608, 106.6782872423287]
+        "coordinates": [
+          10.752676645935608,
+          106.6782872423287
+        ]
       }
     },
     {
@@ -884,7 +896,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.786166057882095, 106.68846140917182]
+        "coordinates": [
+          10.786166057882095,
+          106.68846140917182
+        ]
       }
     },
     {
@@ -902,7 +917,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.797847358453335, 106.67138125376032]
+        "coordinates": [
+          10.797847358453335,
+          106.67138125376032
+        ]
       }
     },
     {
@@ -920,7 +938,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.774370408762667, 106.66649736896149]
+        "coordinates": [
+          10.774370408762667,
+          106.66649736896149
+        ]
       }
     },
     {
@@ -938,7 +959,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.975942820767646, 106.47704068460989]
+        "coordinates": [
+          10.975942820767646,
+          106.47704068460989
+        ]
       }
     },
     {
@@ -956,7 +980,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.88274971406328, 106.59334659247462]
+        "coordinates": [
+          10.88274971406328,
+          106.59334659247462
+        ]
       }
     },
     {
@@ -974,7 +1001,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.861542624626273, 106.77987873521646]
+        "coordinates": [
+          10.861542624626273,
+          106.77987873521646
+        ]
       }
     },
     {
@@ -992,7 +1022,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.79824584667327, 106.69666050062658]
+        "coordinates": [
+          10.79824584667327,
+          106.69666050062658
+        ]
       }
     },
     {
@@ -1010,7 +1043,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.78642038143136, 106.6409987674199]
+        "coordinates": [
+          10.78642038143136,
+          106.6409987674199
+        ]
       }
     },
     {
@@ -1028,7 +1064,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.798277174245618, 106.6718370576713]
+        "coordinates": [
+          10.798277174245618,
+          106.6718370576713
+        ]
       }
     },
     {
@@ -1046,7 +1085,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.764484468742477, 106.6032639687681]
+        "coordinates": [
+          10.764484468742477,
+          106.6032639687681
+        ]
       }
     },
     {
@@ -1064,7 +1106,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.690970170073015, 106.58598271184606]
+        "coordinates": [
+          10.690970170073015,
+          106.58598271184606
+        ]
       }
     },
     {
@@ -1082,7 +1127,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.70463054449419, 106.70445903973936]
+        "coordinates": [
+          10.70463054449419,
+          106.70445903973936
+        ]
       }
     },
     {
@@ -1099,7 +1147,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [10.411476976087854, 106.95474477291204]
+        "coordinates": [
+          10.411476976087854,
+          106.95474477291204
+        ]
       }
     },
     {

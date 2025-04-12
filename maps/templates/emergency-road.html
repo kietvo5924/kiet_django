@@ -22,11 +22,11 @@
 
 {% block content %}
 <div class="container">
-    <button id="getLocationBtn">Lấy vị trí của tôi</button>
-    <div id="map"> <ul class="layers"></ul></div>
+    <div id="map"><ul class="layers"></ul></div>
 </div>
 {% endblock %}
 
 {% block script %}
+<script src="{% static 'js/map/vietnamese-directions.js' %}"></script> 
 <script src="{% static 'js/map/emergency-road.js' %}"></script>
 {% endblock %}

@@ -17,6 +17,30 @@
     border: 1px solid grey;
 }
 
+.emergency-marker {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+    border: 1px solid #fff;
+}
+
+.police-marker {
+    background-color: #007bff;
+}
+
+.pccc-marker {
+    background-color: #dc3545;
+}
+
+.hospital-marker {
+    background-color: #28a745;
+}
+
 .start-marker {
     background-color: #00cc00;
     border-radius: 50%;
@@ -31,16 +55,14 @@
 }
 
 .end-marker {
-    background-color: #ff0000;
+    display: none;
+    opacity: 0;
+    pointer-events: none;
     border-radius: 50%;
-    display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
-    border: 2px solid #fff;
+    font-size: 12px;
+    z-index: 100;
 }
 
 /* Sidebar Styles */
@@ -168,12 +190,14 @@
 .leaflet-control-zoom,
 .leaflet-control-fullscreen {
     z-index: 1001;
-    margin-left: 10px !important; /* Mặc định bên trái */
+    margin-left: 10px !important;
+    /* Mặc định bên trái */
 }
 
 .leaflet-control-current-location {
     z-index: 1001;
-    margin-right: 10px !important; /* Mặc định bên phải */
+    margin-right: 10px !important;
+    /* Mặc định bên phải */
 }
 
 .leaflet-control-current-location {

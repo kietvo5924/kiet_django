@@ -7,7 +7,7 @@
       "id": "node/1",
       "properties": {
         "@id": "node/1",
-        "amenity": "Phòng Cảnh sát PCCC & CNCH",
+        "amenity": "PCCC",
         "name": "Phòng Cảnh sát Phòng cháy Chữa cháy và Cứu nạn Cứu hộ TP. Hồ Chí Minh",
         "address": "258 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh, Việt Nam",
         "phone": "02839200996",
@@ -177,7 +177,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.84521090068056, 
+          10.84521090068056,
           106.77212644868948
         ]
       }
@@ -257,8 +257,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-            10.828456781001783,
-            106.68504575343408
+          10.828456781001783,
+          106.68504575343408
         ]
       }
     },
@@ -277,7 +277,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.760852136448598, 
+          10.760852136448598,
           106.59131809020853
         ]
       }

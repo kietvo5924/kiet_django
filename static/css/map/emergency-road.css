@@ -1,3 +1,4 @@
+/* --- Các style cơ bản và không đổi --- */
 *,
 :after,
 :before {
@@ -41,22 +42,39 @@ label {
 }
 
 .container {
+  width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #map {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 40px;
 }
 
+.layers {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* --- Các style còn lại giữ nguyên --- */
 .leaflet-marker-icon {
   display: flex;
   justify-content: center;
@@ -81,6 +99,7 @@ label {
 .PCCC.search-tip b,
 .PCCC.leaflet-marker-icon {
   background: #eeff00;
+  /* Lưu ý: Màu vàng này có thể khó đọc chữ trắng */
 }
 
 .hospital,
@@ -107,7 +126,8 @@ input[type="radio"]:checked {
 
 
 .layer-element>span {
-  border: 1px soslid red;
+  border: 1px solid red;
+  /* Bạn có thể bỏ dòng này nếu không cần viền đỏ */
 }
 
 .description {
@@ -123,27 +143,8 @@ input[type="radio"]:checked {
   z-index: 1000;
 }
 
-/* Adjust layers positioning to avoid overlap with routing controls */
-.layers {
-  position: absolute;
-  bottom: 60px;
-  /* Increased from 20px to avoid overlap with routing controls */
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
 .start-marker {
   background-color: #00cc00;
-  /* Màu xanh lá cho điểm bắt đầu */
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -153,23 +154,23 @@ input[type="radio"]:checked {
   font-size: 14px;
   box-shadow: 0px 0px 10px rgba(0, 204, 0, 0.8);
   border: 2px solid #fff;
+  /* Kích thước marker có thể cần điều chỉnh */
+  width: 30px;
+  height: 30px;
 }
 
 .end-marker {
-  background-color: #ff0000;
-  /* Màu đỏ cho điểm kết thúc */
+  display: none;
+  opacity: 0;
+  pointer-events: none;
   border-radius: 50%;
-  display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
-  border: 2px solid #fff;
+  font-size: 12px;
+  z-index: 100;
 }
 
-/* CSS cho nút "Trở về vị trí của tôi" */
+/* CSS cho nút "Trở về vị trí của tôi" (Leaflet control) */
 .leaflet-control-current-location {
   background-color: #fff;
   border: 2px solid rgba(0, 0, 0, 0.2);
