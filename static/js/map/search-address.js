@@ -286,26 +286,28 @@ function setupAutocomplete(inputId, searchType) {
 
         onResults: ({ currentValue, matches, template }) => {
             if (!matches || matches.length === 0) return template ? template(`<li>Không tìm thấy '${currentValue}'</li>`) : '';
+        
             const regex = new RegExp(currentValue.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "i");
-            return matches.map((element) => {
+        
+            return `<ul class="autocomplete-list">` + matches.map((element) => {
                 let mainDisplay = "N/A", detailsDisplay = "";
                 if (!element?.properties) return '';
                 const { name, address, amenity, display_name } = element.properties;
                 mainDisplay = (name || display_name || "Không rõ").replace(regex, str => `<b>${str}</b>`);
-                if (searchType === 'nominatim') {
-                    const details = [element.properties.address?.road, element.properties.address?.suburb, element.properties.address?.city].filter(Boolean).join(", ");
-                    if (details) detailsDisplay = `<div class="address-details">${details}</div>`;
-                } else {
-                    if (address && address.toLowerCase() !== (name || '').toLowerCase()) detailsDisplay += `<div class="address-details">${address}</div>`;
-                    const amenityDisplay = amenity ? amenity.replace(regex, str => `<b>${str}</b>`) : '';
-                    if (amenityDisplay) detailsDisplay += `<div class="place-item ${amenity.toLowerCase()}">(${amenityDisplay.toUpperCase()})</div>`;
+                if (address && address.toLowerCase() !== (name || '').toLowerCase()) {
+                    detailsDisplay += `<div class="address-details">${address}</div>`;
                 }
+                const amenityDisplay = amenity ? amenity.replace(regex, str => `<b>${str}</b>`) : '';
+                if (amenityDisplay) detailsDisplay += `<div class="place-item ${amenity.toLowerCase()}">(${amenityDisplay.toUpperCase()})</div>`;
+        
                 try {
-                    // Sử dụng JSON.stringify trong thuộc tính data cần escape/encoding cẩn thận
-                    const resultString = JSON.stringify(element).replace(/'/g, "&apos;"); // Escape cơ bản dấu nháy đơn
+                    const resultString = JSON.stringify(element).replace(/'/g, "&apos;");
                     return `<li role="option" data-result='${resultString}'><div class="address-main">${mainDisplay}</div>${detailsDisplay}</li>`;
-                } catch (e) { console.error("Lỗi stringify:", e, element); return ''; }
-            }).join("");
+                } catch (e) {
+                    console.error("Lỗi stringify:", e, element);
+                    return '';
+                }
+            }).join("") + `</ul>`;
         },
 
         onSubmit: ({ input, object }) => {

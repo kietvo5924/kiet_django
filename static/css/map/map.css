@@ -215,3 +215,11 @@
 .leaflet-control-current-location:hover {
     background-color: #f4f4f4;
 }
+.autocomplete-list {
+    max-height: 700px; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal overflow */
+    border: 1px solid grey; /* Optional: add a border */
+    background-color: white; /* Optional: set background color */
+    z-index: 1000; /* Ensure it appears above other elements */
+}
