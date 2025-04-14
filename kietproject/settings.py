@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'posts',
     'maps'
 ]
 
@@ -78,11 +77,11 @@ WSGI_APPLICATION = 'kietproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'QLGIS',
+        'NAME': 'gis_db',
         'USER': 'postgres',
-        'PASSWORD': '123abc',
+        'PASSWORD': '123',
         'HOST': 'localhost',
-        'PORT': '5433',
+        'PORT': '5432',
     }
 }
 

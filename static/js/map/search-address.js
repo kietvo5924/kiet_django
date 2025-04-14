@@ -2,7 +2,7 @@
 const config = { minZoom: 7, maxZoom: 18, fullscreenControl: true };
 const initialZoom = 15;
 const clickMarkerZoom = 18;
-const defaultLat = 10.7769; // Trung tâm TP.HCM
+const defaultLat = 10.7769;
 const defaultLng = 106.7009;
 
 // --- Biến toàn cục ---
@@ -12,7 +12,7 @@ let startMarker = null;
 let endMarker = null;
 let currentStartLocation = { lat: defaultLat, lng: defaultLng };
 let currentEndLocation = null;
-let allEmergencyFeatures = []; // Đổi tên cho rõ ràng
+let allEmergencyFeatures = [];
 let emergencyDataLoaded = false;
 let selectedLocation = null;
 let policeLayer = null;
@@ -31,39 +31,46 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-// --- Hàm tiện ích ---
-async function fetchStaticData(url) {
+// --- Hàm tiện ích API ---
+async function fetchApiData(amenityType) {
+    const apiUrl = `/maps/api/locations/?amenity=${encodeURIComponent(amenityType)}`;
     try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP ${response.status} for ${apiUrl}: ${errorText}`);
+        }
         const data = await response.json();
-        return data?.features || [];
+        if (data.type !== "FeatureCollection" || !Array.isArray(data.features)) {
+            throw new Error(`Dữ liệu API không hợp lệ cho ${amenityType}`);
+        }
+        return data.features;
     } catch (err) {
-        console.error(`Lỗi khi lấy dữ liệu tĩnh (${url}):`, err);
-        throw err; // Ném lại lỗi để được bắt bởi loadEmergencyData
+        console.error(`Lỗi khi lấy dữ liệu API (${amenityType}):`, err);
+        throw err;
     }
 }
 
 // --- Tải dữ liệu và hiển thị Lớp ---
 async function loadEmergencyData() {
-    const filesToLoad = ['/static/data/hospital.json', '/static/data/PCCC.json', '/static/data/police.json'];
+    const amenitiesToLoad = ['hospital', 'PCCC', 'police'];
     const endSearchInput = document.getElementById('end-search');
     if (endSearchInput) { endSearchInput.placeholder = "Đang tải..."; endSearchInput.disabled = true; }
 
     try {
-        const results = await Promise.all(filesToLoad.map(fetchStaticData));
+        const results = await Promise.all(amenitiesToLoad.map(fetchApiData));
         allEmergencyFeatures = results.flat().filter(f =>
             f?.geometry?.type === 'Point' &&
             Array.isArray(f.geometry.coordinates) && f.geometry.coordinates.length === 2 &&
             typeof f.geometry.coordinates[0] === 'number' && typeof f.geometry.coordinates[1] === 'number'
         );
         emergencyDataLoaded = true;
-        console.log(`Đã tải và lọc ${allEmergencyFeatures.length} địa điểm khẩn cấp hợp lệ.`);
+        console.log(`Đã tải và lọc ${allEmergencyFeatures.length} địa điểm khẩn cấp hợp lệ từ API.`);
         if (endSearchInput) { endSearchInput.disabled = false; endSearchInput.placeholder = "Tìm BV, PCCC, CA..."; }
         displayEmergencyLayers();
     } catch (error) {
-        console.error("Không thể tải dữ liệu khẩn cấp:", error);
-        alert("Lỗi tải dữ liệu điểm đến khẩn cấp.");
+        console.error("Không thể tải dữ liệu khẩn cấp từ API:", error);
+        alert("Lỗi tải dữ liệu điểm đến khẩn cấp từ máy chủ.");
         if (endSearchInput) { endSearchInput.placeholder = "Lỗi tải dữ liệu"; endSearchInput.disabled = false; }
         emergencyDataLoaded = false;
     }
@@ -74,11 +81,10 @@ function createEmergencyLayer(features, icon, mapInstance, clickHandler) {
     if (!features || features.length === 0) return null;
     return L.geoJSON({ type: "FeatureCollection", features: features }, {
         pointToLayer: (feature, latlng) => {
-            // **KIỂM TRA THỨ TỰ TỌA ĐỘ TRONG JSON!** Giả sử là [Lat, Lng]
             const coords = feature.geometry.coordinates;
             if (typeof coords[0] !== 'number' || typeof coords[1] !== 'number') {
                 console.warn("Tọa độ không hợp lệ trong feature:", feature);
-                return null; // Bỏ qua điểm không hợp lệ
+                return null;
             }
             const correctLatLng = L.latLng(coords[0], coords[1]);
             return L.marker(correctLatLng, { icon: icon });
@@ -91,7 +97,6 @@ function createEmergencyLayer(features, icon, mapInstance, clickHandler) {
 
 // Hiển thị tất cả các lớp khẩn cấp
 function displayEmergencyLayers() {
-    // Xóa các lớp hiện có
     [policeLayer, pcccLayer, hospitalLayer].forEach(layer => {
         if (layer && map.hasLayer(layer)) map.removeLayer(layer);
     });
@@ -102,12 +107,10 @@ function displayEmergencyLayers() {
         return;
     }
 
-    // Lọc dữ liệu - Khớp giá trị `amenity` trong JSON mới nhất (không phân biệt hoa thường)
     const policeData = allEmergencyFeatures.filter(f => f.properties?.amenity?.toLowerCase() === 'police');
-    const pcccData = allEmergencyFeatures.filter(f => f.properties?.amenity?.toLowerCase() === 'pccc'); // ĐÃ SỬA
+    const pcccData = allEmergencyFeatures.filter(f => f.properties?.amenity?.toLowerCase() === 'pccc');
     const hospitalData = allEmergencyFeatures.filter(f => f.properties?.amenity?.toLowerCase() === 'hospital');
 
-    // Tạo lớp bằng hàm hỗ trợ
     policeLayer = createEmergencyLayer(policeData, policeIcon, map, handleEmergencyMarkerClick);
     pcccLayer = createEmergencyLayer(pcccData, pcccIcon, map, handleEmergencyMarkerClick);
     hospitalLayer = createEmergencyLayer(hospitalData, hospitalIcon, map, handleEmergencyMarkerClick);
@@ -128,7 +131,6 @@ function handleEmergencyMarkerClick(event, feature) {
         console.warn("Dữ liệu marker không hợp lệ:", feature); return;
     }
 
-    // **KIỂM TRA THỨ TỰ TỌA ĐỘ TRONG JSON!** Giả sử là [Lat, Lng]
     const lat = geometry.coordinates[0];
     const lng = geometry.coordinates[1];
 
@@ -148,7 +150,7 @@ function handleEmergencyMarkerClick(event, feature) {
     }
 
     selectedLocation = { lat, lng };
-    showPopupSidebar(popupContent, false); // Hiển thị sidebar cho điểm Đến
+    showPopupSidebar(popupContent, false);
     map.flyTo([lat, lng], clickMarkerZoom);
 }
 
@@ -207,12 +209,12 @@ function showPopupSidebar(content, isStart) {
         }
         updateRoute();
         sidebarPopup.classList.add('hidden'); adjustControlPositions();
-        selectedLocation = null; // Đặt lại lựa chọn tạm thời
+        selectedLocation = null;
     };
 
     document.getElementById('close-popup').onclick = () => {
         sidebarPopup.classList.add('hidden'); adjustControlPositions();
-        selectedLocation = null; // Đặt lại nếu đóng mà không dẫn đường
+        selectedLocation = null;
     };
 }
 
@@ -222,10 +224,8 @@ function showRoutingSidebar(route) {
     let instructionsHTML = '<ul class="instructions-list">';
     route.instructions.forEach((instruction) => {
         const stepDistance = instruction.distance > 0 ? `${Math.round(instruction.distance)} m` : '';
-        // --- SỬ DỤNG MODULE ĐÃ TÁCH ---
         const directionText = VietnameseDirections.getText(instruction);
         const directionIcon = VietnameseDirections.getIcon(instruction);
-        // --- KẾT THÚC SỬ DỤNG MODULE ---
         instructionsHTML += `
             <li class="instruction-item">
                 <span class="instruction-icon">${directionIcon}</span>
@@ -286,9 +286,9 @@ function setupAutocomplete(inputId, searchType) {
 
         onResults: ({ currentValue, matches, template }) => {
             if (!matches || matches.length === 0) return template ? template(`<li>Không tìm thấy '${currentValue}'</li>`) : '';
-        
+
             const regex = new RegExp(currentValue.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "i");
-        
+
             return `<ul class="autocomplete-list">` + matches.map((element) => {
                 let mainDisplay = "N/A", detailsDisplay = "";
                 if (!element?.properties) return '';
@@ -299,7 +299,7 @@ function setupAutocomplete(inputId, searchType) {
                 }
                 const amenityDisplay = amenity ? amenity.replace(regex, str => `<b>${str}</b>`) : '';
                 if (amenityDisplay) detailsDisplay += `<div class="place-item ${amenity.toLowerCase()}">(${amenityDisplay.toUpperCase()})</div>`;
-        
+
                 try {
                     const resultString = JSON.stringify(element).replace(/'/g, "&apos;");
                     return `<li role="option" data-result='${resultString}'><div class="address-main">${mainDisplay}</div>${detailsDisplay}</li>`;
@@ -324,13 +324,12 @@ function setupAutocomplete(inputId, searchType) {
                     const details = [object.properties.address?.road, object.properties.address?.suburb, object.properties.address?.city].filter(Boolean).join(", ");
                     if (details) popupContent += `<p><small>${details}</small></p>`;
                     selectedLocation = { lat, lng };
-                    showPopupSidebar(popupContent, true); // isStart = true
-                } else { // clientSide (Địa điểm khẩn cấp)
+                    showPopupSidebar(popupContent, true);
+                } else {
                     const coords = object.geometry?.coordinates;
-                    if (!coords || coords.length !== 2) throw new Error("Tọa độ JSON không hợp lệ");
-                    // **GIẢ SỬ TỌA ĐỘ JSON LÀ [Lat, Lng]** - KIỂM TRA LẠI FILE JSON!
+                    if (!coords || coords.length !== 2) throw new Error("Tọa độ API không hợp lệ");
                     lat = coords[0]; lng = coords[1];
-                    if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Giá trị tọa độ JSON không hợp lệ");
+                    if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Giá trị tọa độ API không hợp lệ");
                     locationName = object.properties?.name || locationName;
                     popupContent = `<h3>Điểm đến:</h3><p><b>${locationName}</b></p>`;
                     const { address, amenity, phone, description, image_url } = object.properties || {};
@@ -342,7 +341,7 @@ function setupAutocomplete(inputId, searchType) {
                         popupContent += `<p><img src="${image_url}" alt="${locationName}" style="max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 4px;"></p>`;
                     }
                     selectedLocation = { lat, lng };
-                    showPopupSidebar(popupContent, false); // isStart = false
+                    showPopupSidebar(popupContent, false);
                 }
                 if (input) input.value = locationName;
                 map.flyTo([lat, lng], clickMarkerZoom);
@@ -357,12 +356,10 @@ function setupAutocomplete(inputId, searchType) {
     });
 }
 
-
 // --- Cập nhật/Vẽ lộ trình ---
 function updateRoute() {
     if (routingControl) { map.removeControl(routingControl); routingControl = null; }
     if (!currentStartLocation || !currentEndLocation) {
-        // Không vẽ nếu thiếu điểm (ví dụ: khi khởi tạo hoặc sau khi xóa)
         return;
     }
     const waypoints = [
@@ -370,16 +367,16 @@ function updateRoute() {
         L.latLng(currentEndLocation.lat, currentEndLocation.lng)
     ];
     routingControl = L.Routing.control({
-        waypoints, routeWhileDragging: false, show: false, // Ẩn hướng dẫn mặc định
+        waypoints, routeWhileDragging: false, show: false,
         lineOptions: { styles: [{ color: "blue", opacity: 0.8, weight: 6 }] },
-        addWaypoints: false, draggableWaypoints: false, createMarker: () => null, // Sử dụng marker của chúng ta
+        addWaypoints: false, draggableWaypoints: false, createMarker: () => null,
     }).addTo(map);
 
     routingControl.on('routingerror', (e) => {
         console.error("Lỗi định tuyến:", e.error?.message || e.error);
         alert(`Không tìm thấy đường đi.\nLỗi: ${e.error?.message || 'Không rõ'}`);
         if (routingControl) { map.removeControl(routingControl); routingControl = null; }
-        sidebarRouting.classList.add('hidden'); adjustControlPositions(); // Ẩn sidebar hướng dẫn khi có lỗi
+        sidebarRouting.classList.add('hidden'); adjustControlPositions();
     });
     routingControl.on('routesfound', (e) => {
         if (e.routes?.length > 0) { showRoutingSidebar(e.routes[0]); }
@@ -414,7 +411,7 @@ function returnToCurrentLocation() {
         if (startMarker) map.removeLayer(startMarker);
         startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true })
             .addTo(map).on('dragend', handleStartMarkerDragEnd);
-        updateRoute(); // Cập nhật lộ trình nếu có điểm đến
+        updateRoute();
         document.getElementById('start-search').value = 'Vị trí hiện tại';
     },
         (error) => {
@@ -463,7 +460,6 @@ function initializeMapAndData(initialLat, initialLng) {
     selectedLocation = null;
     map.setView([initialLat, initialLng], initialZoom);
 
-    // Xóa trạng thái trước đó
     if (startMarker) map.removeLayer(startMarker);
     if (endMarker) map.removeLayer(endMarker);
     if (routingControl) map.removeControl(routingControl);
@@ -472,7 +468,6 @@ function initializeMapAndData(initialLat, initialLng) {
     });
     startMarker = endMarker = routingControl = policeLayer = pcccLayer = hospitalLayer = null;
 
-    // Đặt lại UI
     const startInput = document.getElementById('start-search');
     const endInput = document.getElementById('end-search');
     if (startInput) startInput.value = 'Vị trí hiện tại';
@@ -481,16 +476,13 @@ function initializeMapAndData(initialLat, initialLng) {
     sidebarRouting.classList.add('hidden');
     adjustControlPositions();
 
-    // Đặt marker bắt đầu ban đầu
     startMarker = L.marker([initialLat, initialLng], { icon: startIcon, draggable: true })
         .addTo(map).on('dragend', handleStartMarkerDragEnd);
 
-    // Thiết lập tương tác
     setupAutocomplete("start-search", 'nominatim');
-    setupAutocomplete("end-search", 'clientSide'); // Sẽ được bật khi dữ liệu tải xong
+    setupAutocomplete("end-search", 'clientSide');
 
-    // Tải dữ liệu và hiển thị các lớp khẩn cấp
-    loadEmergencyData(); // Hàm này giờ xử lý việc hiển thị các lớp khi thành công
+    loadEmergencyData();
     console.log("Khởi tạo bản đồ hoàn tất.");
 }
 

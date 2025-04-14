@@ -23,7 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.homepage),
     path('gioi-thieu/', view.aboutpage),
-
-    path('posts/', include('posts.urls')),
     path('maps/', include('maps.urls'))
 ]

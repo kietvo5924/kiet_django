@@ -1,3 +1,7 @@
-from django.contrib import admin
+# maps/admin.py (hoặc tên app của bạn/admin.py)
 
-# Register your models here.
+from django.contrib import admin
+from .models import Location  # Import model Location từ file models.py cùng cấp
+
+# Đăng ký model Location với trang admin
+admin.site.register(Location)
