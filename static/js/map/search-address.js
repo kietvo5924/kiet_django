@@ -1,11 +1,9 @@
-// --- Cấu hình ---
 const config = { minZoom: 7, maxZoom: 18, fullscreenControl: true };
 const initialZoom = 15;
 const clickMarkerZoom = 18;
 const defaultLat = 10.7769;
 const defaultLng = 106.7009;
 
-// --- Biến toàn cục ---
 const map = L.map("map", config);
 let routingControl = null;
 let startMarker = null;
@@ -19,19 +17,16 @@ let policeLayer = null;
 let pcccLayer = null;
 let hospitalLayer = null;
 
-// --- Biểu tượng (Icons) ---
 const startIcon = L.divIcon({ className: "start-marker", html: '<span>S</span>', iconSize: [30, 30], iconAnchor: [15, 15] });
 const endIcon = L.divIcon({ className: "end-marker", html: '<span>Đ</span>', iconSize: [30, 30], iconAnchor: [15, 15] });
 const policeIcon = L.divIcon({ className: 'emergency-marker police-marker', html: '<b>P</b>', iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -12] });
 const pcccIcon = L.divIcon({ className: 'emergency-marker pccc-marker', html: '<b>F</b>', iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -12] });
 const hospitalIcon = L.divIcon({ className: 'emergency-marker hospital-marker', html: '<b>H</b>', iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -12] });
 
-// --- Lớp bản đồ ---
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-// --- Hàm tiện ích API ---
 async function fetchApiData(amenityType) {
     const apiUrl = `/maps/api/locations/?amenity=${encodeURIComponent(amenityType)}`;
     try {
@@ -51,7 +46,6 @@ async function fetchApiData(amenityType) {
     }
 }
 
-// --- Tải dữ liệu và hiển thị Lớp ---
 async function loadEmergencyData() {
     const amenitiesToLoad = ['hospital', 'PCCC', 'police'];
     const endSearchInput = document.getElementById('end-search');
@@ -65,7 +59,6 @@ async function loadEmergencyData() {
             typeof f.geometry.coordinates[0] === 'number' && typeof f.geometry.coordinates[1] === 'number'
         );
         emergencyDataLoaded = true;
-        console.log(`Đã tải và lọc ${allEmergencyFeatures.length} địa điểm khẩn cấp hợp lệ từ API.`);
         if (endSearchInput) { endSearchInput.disabled = false; endSearchInput.placeholder = "Tìm BV, PCCC, CA..."; }
         displayEmergencyLayers();
     } catch (error) {
@@ -73,17 +66,17 @@ async function loadEmergencyData() {
         alert("Lỗi tải dữ liệu điểm đến khẩn cấp từ máy chủ.");
         if (endSearchInput) { endSearchInput.placeholder = "Lỗi tải dữ liệu"; endSearchInput.disabled = false; }
         emergencyDataLoaded = false;
+    } finally {
+        setupAutocomplete("end-search", 'backendSearch');
     }
 }
 
-// Hàm hỗ trợ tạo từng lớp khẩn cấp
 function createEmergencyLayer(features, icon, mapInstance, clickHandler) {
     if (!features || features.length === 0) return null;
     return L.geoJSON({ type: "FeatureCollection", features: features }, {
         pointToLayer: (feature, latlng) => {
             const coords = feature.geometry.coordinates;
             if (typeof coords[0] !== 'number' || typeof coords[1] !== 'number') {
-                console.warn("Tọa độ không hợp lệ trong feature:", feature);
                 return null;
             }
             const correctLatLng = L.latLng(coords[0], coords[1]);
@@ -95,7 +88,6 @@ function createEmergencyLayer(features, icon, mapInstance, clickHandler) {
     }).addTo(mapInstance);
 }
 
-// Hiển thị tất cả các lớp khẩn cấp
 function displayEmergencyLayers() {
     [policeLayer, pcccLayer, hospitalLayer].forEach(layer => {
         if (layer && map.hasLayer(layer)) map.removeLayer(layer);
@@ -103,7 +95,6 @@ function displayEmergencyLayers() {
     policeLayer = pcccLayer = hospitalLayer = null;
 
     if (!emergencyDataLoaded || allEmergencyFeatures.length === 0) {
-        console.warn("Không có dữ liệu khẩn cấp để hiển thị.");
         return;
     }
 
@@ -114,13 +105,8 @@ function displayEmergencyLayers() {
     policeLayer = createEmergencyLayer(policeData, policeIcon, map, handleEmergencyMarkerClick);
     pcccLayer = createEmergencyLayer(pcccData, pcccIcon, map, handleEmergencyMarkerClick);
     hospitalLayer = createEmergencyLayer(hospitalData, hospitalIcon, map, handleEmergencyMarkerClick);
-
-    if (policeLayer) console.log(`Đã thêm ${policeData.length} điểm Công an.`); else console.warn("Không tìm thấy dữ liệu 'police' hợp lệ.");
-    if (pcccLayer) console.log(`Đã thêm ${pcccData.length} điểm PCCC.`); else console.warn("Không tìm thấy dữ liệu 'PCCC' hợp lệ.");
-    if (hospitalLayer) console.log(`Đã thêm ${hospitalData.length} điểm Bệnh viện.`); else console.warn("Không tìm thấy dữ liệu 'hospital' hợp lệ.");
 }
 
-// --- Xử lý sự kiện click marker ---
 function handleEmergencyMarkerClick(event, feature) {
     L.DomEvent.stopPropagation(event);
 
@@ -128,25 +114,25 @@ function handleEmergencyMarkerClick(event, feature) {
     const geometry = feature.geometry;
 
     if (!properties || !geometry || geometry.type !== 'Point' || !Array.isArray(geometry.coordinates) || geometry.coordinates.length !== 2) {
-        console.warn("Dữ liệu marker không hợp lệ:", feature); return;
+        return;
     }
 
     const lat = geometry.coordinates[0];
     const lng = geometry.coordinates[1];
 
     if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
-        console.warn("Giá trị tọa độ không hợp lệ từ marker:", feature); return;
+        return;
     }
 
     const locationName = properties.name || "Địa điểm khẩn cấp";
-    let popupContent = `<h3>Điểm đến:</h3><p><b>${locationName}</b></p>`;
+    let popupContent = `<h3>Điểm đến:</h3><p><b>${escapeHtml(locationName)}</b></p>`;
     const { address, amenity, phone, description, image_url } = properties;
-    if (address) popupContent += `<p><small>Địa chỉ: ${address}</small></p>`;
-    if (amenity) popupContent += `<p><small>(${amenity.toUpperCase()})</small></p>`;
-    if (phone) popupContent += `<p><small>Điện thoại: <a href="tel:${phone}">${phone}</a></small></p>`;
-    if (description) popupContent += `<p><small>Mô tả: ${description}</small></p>`;
-    if (image_url && image_url.startsWith('http')) {
-        popupContent += `<p><img src="${image_url}" alt="${locationName}" style="max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 4px;"></p>`;
+    if (address) popupContent += `<p><small>Địa chỉ: ${escapeHtml(address)}</small></p>`;
+    if (amenity) popupContent += `<p><small>(${escapeHtml(amenity.toUpperCase())})</small></p>`;
+    if (phone) popupContent += `<p><small>Điện thoại: <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></small></p>`;
+    if (description) popupContent += `<p><small>Mô tả: ${escapeHtml(description)}</small></p>`;
+    if (image_url && typeof image_url === 'string' && (image_url.startsWith('http://') || image_url.startsWith('https://'))) {
+        popupContent += `<p><img src="${escapeHtml(image_url)}" alt="${escapeHtml(locationName)}" style="max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 4px;"></p>`;
     }
 
     selectedLocation = { lat, lng };
@@ -154,7 +140,6 @@ function handleEmergencyMarkerClick(event, feature) {
     map.flyTo([lat, lng], clickMarkerZoom);
 }
 
-// --- Điều khiển Sidebar ---
 const mapContainer = document.getElementById('map');
 const sidebarPopup = document.createElement('div');
 sidebarPopup.id = 'sidebar-popup';
@@ -191,7 +176,6 @@ function showPopupSidebar(content, isStart) {
 
     document.getElementById('route-btn').onclick = () => {
         if (!selectedLocation) {
-            console.warn("Nhấn nút Dẫn đường nhưng không có selectedLocation.");
             alert("Vui lòng chọn lại địa điểm.");
             sidebarPopup.classList.add('hidden'); adjustControlPositions(); return;
         }
@@ -229,7 +213,7 @@ function showRoutingSidebar(route) {
         instructionsHTML += `
             <li class="instruction-item">
                 <span class="instruction-icon">${directionIcon}</span>
-                <span class="instruction-text">${directionText} ${instruction.road ? `vào ${instruction.road}` : ''}</span>
+                <span class="instruction-text">${directionText} ${instruction.road ? `vào ${escapeHtml(instruction.road)}` : ''}</span>
                 <span class="instruction-distance">${stepDistance}</span>
             </li>`;
     });
@@ -248,60 +232,96 @@ function showRoutingSidebar(route) {
     };
 }
 
-// --- Thiết lập Autocomplete ---
+function escapeHtml(unsafe) {
+    if (typeof unsafe !== 'string') {
+        return '';
+    }
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 function setupAutocomplete(inputId, searchType) {
     const inputElement = document.getElementById(inputId);
     if (!inputElement) { console.error(`Không tìm thấy Input #${inputId}!`); return; }
 
-    if (searchType === 'clientSide') {
-        inputElement.disabled = !emergencyDataLoaded;
-        inputElement.placeholder = emergencyDataLoaded ? "Tìm BV, PCCC, CA..." : "Đang tải...";
+    if (searchType === 'backendSearch' && !emergencyDataLoaded) {
+        inputElement.placeholder = "Đang tải...";
+        inputElement.disabled = true;
+    } else if (searchType === 'backendSearch') {
+        inputElement.placeholder = "Tìm BV, PCCC, CA...";
+        inputElement.disabled = false;
     }
 
     new Autocomplete(inputId, {
-        delay: 400, selectFirst: true, howManyCharacters: 1,
+        delay: 400,
+        selectFirst: true,
+        howManyCharacters: 1,
 
         onSearch: ({ currentValue }) => {
-            const query = currentValue.trim();
-            if (!query) return [];
+            const query = currentValue.trim().toLowerCase();
+            if (!query) return Promise.resolve([]);
 
             if (searchType === 'nominatim') {
-                const nominatimQuery = query.toLowerCase().includes("hồ chí minh") ? query : `${query}, Ho Chi Minh City`;
+                const nominatimQuery = query.includes("hồ chí minh") ? query : `${query}, Ho Chi Minh City`;
                 const api = `https://nominatim.openstreetmap.org/search?format=geojson&limit=5&q=${encodeURI(nominatimQuery)}&countrycodes=vn&addressdetails=1&accept-language=vi`;
                 return fetch(api, { headers: { "User-Agent": "SOSMapApp/1.0 (non-commercial use)" } })
                     .then(response => response.ok ? response.json() : Promise.reject(`Nominatim ${response.statusText}`))
                     .then(data => data?.features || [])
                     .catch(error => { console.error("Lỗi Nominatim:", error); return []; });
-            } else if (searchType === 'clientSide') {
-                if (!emergencyDataLoaded) return [];
-                try {
-                    const regex = new RegExp(query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "i");
-                    return allEmergencyFeatures
-                        .filter(el => el.properties?.name?.match(regex) || el.properties?.amenity?.match(regex))
-                        .sort((a, b) => (a.properties?.name || '').localeCompare(b.properties?.name || ''));
-                } catch (e) { console.error("Lỗi Regex:", e); return []; }
+            } else if (searchType === 'backendSearch') {
+                const apiUrl = `/maps/api/search-locations/?query=${encodeURIComponent(query)}`;
+                return fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Lỗi API Backend ${response.status}: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!Array.isArray(data)) {
+                            console.error("API backend không trả về một mảng:", data);
+                            return [];
+                        }
+                        return data;
+                    })
+                    .catch(error => {
+                        console.error("Lỗi khi gọi API tìm kiếm backend:", error);
+                        return [];
+                    });
             }
-            return [];
         },
 
         onResults: ({ currentValue, matches, template }) => {
-            if (!matches || matches.length === 0) return template ? template(`<li>Không tìm thấy '${currentValue}'</li>`) : '';
+            if (!matches || matches.length === 0) return template ? template(`<li>Không tìm thấy kết quả nào cho '${escapeHtml(currentValue)}'</li>`) : '';
 
             const regex = new RegExp(currentValue.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "i");
 
             return `<ul class="autocomplete-list">` + matches.map((element) => {
                 let mainDisplay = "N/A", detailsDisplay = "";
-                if (!element?.properties) return '';
-                const { name, address, amenity, display_name } = element.properties;
-                mainDisplay = (name || display_name || "Không rõ").replace(regex, str => `<b>${str}</b>`);
-                if (address && address.toLowerCase() !== (name || '').toLowerCase()) {
-                    detailsDisplay += `<div class="address-details">${address}</div>`;
+                if (!element || typeof element !== 'object') return '';
+
+                if (searchType === 'nominatim') {
+                    const { name, display_name } = element.properties || {};
+                    mainDisplay = (name || display_name || "Không rõ").replace(regex, str => `<b>${str}</b>`);
+                    const details = [element.properties?.address?.road, element.properties?.address?.suburb, element.properties?.address?.city].filter(Boolean).join(", ");
+                    if (details) detailsDisplay = `<div class="address-details">${escapeHtml(details)}</div>`;
+                } else {
+                    const { name, address, amenity } = element;
+                    if (!name) return '';
+                    mainDisplay = escapeHtml(name).replace(regex, str => `<b>${str}</b>`);
+                    if (address && address.toLowerCase() !== name.toLowerCase()) {
+                        detailsDisplay += `<div class="address-details">${escapeHtml(address)}</div>`;
+                    }
+                    const amenityDisplay = amenity ? escapeHtml(amenity).replace(regex, str => `<b>${str}</b>`) : '';
+                    if (amenityDisplay) detailsDisplay += `<div class="place-item ${escapeHtml(amenity.toLowerCase())}">(${amenityDisplay.toUpperCase()})</div>`;
                 }
-                const amenityDisplay = amenity ? amenity.replace(regex, str => `<b>${str}</b>`) : '';
-                if (amenityDisplay) detailsDisplay += `<div class="place-item ${amenity.toLowerCase()}">(${amenityDisplay.toUpperCase()})</div>`;
 
                 try {
-                    const resultString = JSON.stringify(element).replace(/'/g, "&apos;");
+                    const resultString = JSON.stringify(element).replace(/'/g, "\\'");
                     return `<li role="option" data-result='${resultString}'><div class="address-main">${mainDisplay}</div>${detailsDisplay}</li>`;
                 } catch (e) {
                     console.error("Lỗi stringify:", e, element);
@@ -311,7 +331,10 @@ function setupAutocomplete(inputId, searchType) {
         },
 
         onSubmit: ({ input, object }) => {
-            if (!object) { console.warn("onSubmit thiếu object."); return; }
+            if (!object) {
+                return;
+            }
+
             let lat, lng, locationName = "Địa điểm", popupContent = "";
             try {
                 if (searchType === 'nominatim') {
@@ -320,43 +343,52 @@ function setupAutocomplete(inputId, searchType) {
                     lng = coords[0]; lat = coords[1];
                     if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Giá trị tọa độ Nominatim không hợp lệ");
                     locationName = object.properties?.name || object.properties?.display_name || locationName;
-                    popupContent = `<h3>Điểm bắt đầu:</h3><p><b>${locationName}</b></p>`;
+                    popupContent = `<h3>Điểm bắt đầu:</h3><p><b>${escapeHtml(locationName)}</b></p>`;
                     const details = [object.properties.address?.road, object.properties.address?.suburb, object.properties.address?.city].filter(Boolean).join(", ");
-                    if (details) popupContent += `<p><small>${details}</small></p>`;
+                    if (details) popupContent += `<p><small>${escapeHtml(details)}</small></p>`;
                     selectedLocation = { lat, lng };
                     showPopupSidebar(popupContent, true);
                 } else {
-                    const coords = object.geometry?.coordinates;
-                    if (!coords || coords.length !== 2) throw new Error("Tọa độ API không hợp lệ");
-                    lat = coords[0]; lng = coords[1];
-                    if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Giá trị tọa độ API không hợp lệ");
-                    locationName = object.properties?.name || locationName;
-                    popupContent = `<h3>Điểm đến:</h3><p><b>${locationName}</b></p>`;
-                    const { address, amenity, phone, description, image_url } = object.properties || {};
-                    if (address) popupContent += `<p><small>Địa chỉ: ${address}</small></p>`;
-                    if (amenity) popupContent += `<p><small>(${amenity.toUpperCase()})</small></p>`;
-                    if (phone) popupContent += `<p><small>Điện thoại: <a href="tel:${phone}">${phone}</a></small></p>`;
-                    if (description) popupContent += `<p><small>Mô tả: ${description}</small></p>`;
-                    if (image_url && image_url.startsWith('http')) {
-                        popupContent += `<p><img src="${image_url}" alt="${locationName}" style="max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 4px;"></p>`;
+                    lat = object.latitude;
+                    lng = object.longitude;
+                    locationName = object.name || locationName;
+
+                    if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                        throw new Error(`Giá trị tọa độ API không hợp lệ: lat=${lat}, lng=${lng}`);
+                    }
+
+                    popupContent = `<h3>Điểm đến:</h3><p><b>${escapeHtml(locationName)}</b></p>`;
+                    const { address, amenity, phone, description, image_url } = object;
+                    if (address) popupContent += `<p><small>Địa chỉ: ${escapeHtml(address)}</small></p>`;
+                    if (amenity) popupContent += `<p><small>(${escapeHtml(amenity.toUpperCase())})</small></p>`;
+                    if (phone) popupContent += `<p><small>Điện thoại: <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></small></p>`;
+                    if (description) popupContent += `<p><small>Mô tả: ${escapeHtml(description)}</small></p>`;
+                    if (image_url && typeof image_url === 'string' && (image_url.startsWith('http://') || image_url.startsWith('https://'))) {
+                        popupContent += `<p><img src="${escapeHtml(image_url)}" alt="${escapeHtml(locationName)}" style="max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 4px;"></p>`;
                     }
                     selectedLocation = { lat, lng };
                     showPopupSidebar(popupContent, false);
                 }
+
                 if (input) input.value = locationName;
+
+                console.log(`Chuẩn bị flyTo: Lat=${lat}, Lng=${lng}, Zoom=${clickMarkerZoom}`);
+                console.log("Đối tượng map:", map);
+
                 map.flyTo([lat, lng], clickMarkerZoom);
+
             } catch (error) {
-                console.error("Lỗi xử lý lựa chọn autocomplete:", error, object);
-                alert("Lỗi khi chọn địa điểm.");
+                console.error("Lỗi xử lý lựa chọn autocomplete (onSubmit):", error, object);
+                alert("Lỗi khi chọn địa điểm. Vui lòng thử lại.");
                 if (input) input.value = '';
                 selectedLocation = null;
             }
         },
-        noResults: ({ currentValue, template }) => template(`<li>Không tìm thấy '${currentValue}'</li>`),
+
+        noResults: ({ currentValue, template }) => template(`<li>Không tìm thấy '${escapeHtml(currentValue)}'</li>`),
     });
 }
 
-// --- Cập nhật/Vẽ lộ trình ---
 function updateRoute() {
     if (routingControl) { map.removeControl(routingControl); routingControl = null; }
     if (!currentStartLocation || !currentEndLocation) {
@@ -387,18 +419,19 @@ function updateRoute() {
     });
 }
 
-// --- Xử lý sự kiện ---
 function handleStartMarkerDragEnd(e) {
     const newLatLng = e.target.getLatLng().wrap();
     currentStartLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
     updateRoute();
-    document.getElementById('start-search').value = `[${newLatLng.lat.toFixed(5)}, ${newLatLng.lng.toFixed(5)}]`;
+    const startInput = document.getElementById('start-search');
+    if (startInput) startInput.value = `[${newLatLng.lat.toFixed(5)}, ${newLatLng.lng.toFixed(5)}]`;
 }
 function handleEndMarkerDragEnd(e) {
     const newLatLng = e.target.getLatLng().wrap();
     currentEndLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
     updateRoute();
-    document.getElementById('end-search').value = `[${newLatLng.lat.toFixed(5)}, ${newLatLng.lng.toFixed(5)}]`;
+    const endInput = document.getElementById('end-search');
+    if (endInput) endInput.value = `[${newLatLng.lat.toFixed(5)}, ${newLatLng.lng.toFixed(5)}]`;
 }
 function returnToCurrentLocation() {
     if (!navigator.geolocation) return alert("Trình duyệt không hỗ trợ định vị.");
@@ -412,7 +445,8 @@ function returnToCurrentLocation() {
         startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true })
             .addTo(map).on('dragend', handleStartMarkerDragEnd);
         updateRoute();
-        document.getElementById('start-search').value = 'Vị trí hiện tại';
+        const startInput = document.getElementById('start-search');
+        if (startInput) startInput.value = 'Vị trí hiện tại';
     },
         (error) => {
             document.body.style.cursor = 'default';
@@ -423,7 +457,6 @@ function returnToCurrentLocation() {
     );
 }
 
-// --- Điều khiển tùy chỉnh ---
 L.Control.CurrentLocation = L.Control.extend({
     options: { position: 'topright' },
     onAdd: function (map) {
@@ -447,13 +480,11 @@ L.Control.Legend = L.Control.extend({
 });
 L.control.legend = (opts) => new L.Control.Legend(opts);
 
-// --- Điều chỉnh vị trí điều khiển ---
 map.zoomControl.setPosition('topleft');
 L.control.fullscreen({ position: 'topleft' }).addTo(map);
 L.control.currentLocation({ position: 'topright' }).addTo(map);
 L.control.legend().addTo(map);
 
-// --- Khởi tạo ---
 function initializeMapAndData(initialLat, initialLng) {
     currentStartLocation = { lat: initialLat, lng: initialLng };
     currentEndLocation = null;
@@ -480,13 +511,9 @@ function initializeMapAndData(initialLat, initialLng) {
         .addTo(map).on('dragend', handleStartMarkerDragEnd);
 
     setupAutocomplete("start-search", 'nominatim');
-    setupAutocomplete("end-search", 'clientSide');
-
     loadEmergencyData();
-    console.log("Khởi tạo bản đồ hoàn tất.");
 }
 
-// --- Thực thi chính ---
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
         (pos) => { initializeMapAndData(pos.coords.latitude, pos.coords.longitude); },

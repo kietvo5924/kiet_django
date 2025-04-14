@@ -5,14 +5,14 @@ from . import views  # Import views từ app maps
 app_name = 'maps'
 
 urlpatterns = [
-    path('', views.simplemap, name="home"),  # maps/
-    path('co-ban/', views.simplemap, name="co-ban"),  # maps/co-ban/
-    path('emergency-road/', views.simplemap2, name="emergency-road"),  # maps/emergency-road/
+    # URL cho các trang HTML (giữ nguyên)
+    path('', views.simplemap, name="home"), # Trang chủ (có thể trùng với emergency-road)
+    path('co-ban/', views.simplemap, name="co-ban"), # Trang bản đồ cơ bản
+    path('emergency-road/', views.simplemap2, name="emergency-road"), # Trang bản đồ tìm đường
 
-    # === Thêm dòng này vào ===
-    # Định nghĩa URL cho API endpoint lấy dữ liệu địa điểm
-    # Khi truy cập /maps/api/locations/?amenity=... (giả sử URL gốc của app là /maps/)
-    # nó sẽ gọi hàm views.get_locations_api
+    # URL cho API lấy locations ban đầu (GeoJSON)
     path('api/locations/', views.get_locations_api, name='api_get_locations'),
-    # ========================
+
+    # URL cho API tìm kiếm autocomplete (JSON list)
+    path('api/search-locations/', views.search_locations_api, name='api_search_locations'),
 ]
