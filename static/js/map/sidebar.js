@@ -50,7 +50,6 @@ function showPopupSidebar(content, isStart) {
     };
 }
 
-
 function showRoutingSidebar(route) {
     const distance = (route.summary.totalDistance / 1000).toFixed(1);
     const time = Math.round(route.summary.totalTime / 60);

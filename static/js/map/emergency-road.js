@@ -1,367 +1,412 @@
 /* eslint-disable no-undef */
-/**
- * control layers outside the map with routing - Updated for API Data (Cleaned)
- */
 
-// --- Configs ---
 const config = { minZoom: 7, maxZoom: 18, fullscreenControl: true };
 const initialZoom = 15;
 const clickMarkerZoom = 18;
 const defaultLat = 10.7769;
 const defaultLng = 106.7009;
 
-// --- Global Variables ---
+const mapContainer = document.getElementById('map');
 const map = L.map("map", config);
 let routingControl = null;
 let startMarker = null;
 let endMarker = null;
 let currentStartLocation = { lat: defaultLat, lng: defaultLng };
-let allFeaturesData = {}; // Cache for API data { amenityType: [features...] }
-let layers = {}; // Cache for L.geoJSON layers { layer_amenityType: layer }
+let currentEndLocation = null;
+let allFeaturesData = {};
+let layers = {};
 const layersContainer = document.querySelector(".layers");
 const layersButton = "không chọn";
 const arrayLayers = ["police", "PCCC", "hospital"];
+let selectedLocationForRouting = null;
 
-// --- Icons ---
 const startIcon = L.divIcon({ className: "start-marker", html: '<span>S</span>', iconSize: [30, 30], iconAnchor: [15, 15] });
 const endIcon = L.divIcon({ className: "end-marker", html: '<span>Đ</span>', iconSize: [30, 30], iconAnchor: [15, 15] });
 
-// --- Map Layer ---
+const VietnameseDirections = (function () {
+  const getModifierText = (mod) => {
+    if (!mod) return ''; mod = mod.toLowerCase();
+    if (mod.includes('sharp left')) return 'gắt sang trái'; if (mod.includes('sharp right')) return 'gắt sang phải';
+    if (mod.includes('slight left')) return 'chếch sang trái'; if (mod.includes('slight right')) return 'chếch sang phải';
+    if (mod.includes('left')) return 'trái'; if (mod.includes('right')) return 'phải';
+    if (mod.includes('uturn')) return 'quay đầu'; if (mod.includes('straight')) return 'thẳng';
+    return mod;
+  };
+  const getText = function (instruction) {
+    if (!instruction) return ''; const { type, modifier } = instruction; const direction = getModifierText(modifier);
+    switch (type) {
+      case 'Depart': return `Khởi hành ${direction ? `về hướng ${direction}` : ''}`;
+      case 'Head': case 'Continue': return `Tiếp tục đi thẳng ${direction ? `về hướng ${direction}` : ''}`;
+      case 'Turn': if (direction === 'quay đầu') return 'Quay đầu'; return `Rẽ ${direction || 'theo hướng không xác định'}`;
+      case 'Right': return `Rẽ ${direction || 'phải'}`; case 'Left': return `Rẽ ${direction || 'trái'}`;
+      case 'Fork': return `Đi theo nhánh ${direction || 'phải'}`; case 'Merge': return `Nhập làn ${direction || ''}`;
+      case 'Roundabout': case 'Rotary': const exitText = instruction.exit ? ` đi theo lối ra thứ ${instruction.exit}` : ''; return `Vào ${type === 'Rotary' ? 'bùng binh' : 'vòng xuyến'}${exitText}`;
+      case 'RoundaboutTurn': const turnExitText = instruction.exit ? `lối ra thứ ${instruction.exit}` : 'lối ra'; const locationName = instruction.name ? `tại ${instruction.name}` : `tại ${type === 'Rotary' ? 'bùng binh' : 'vòng xuyến'}`; return `${locationName}, đi theo ${turnExitText} ${direction ? `về hướng ${direction}` : ''}`;
+      case 'EndOfRoad': return `Cuối đường, rẽ ${direction || 'theo hướng không xác định'}`;
+      case 'NewName': return `Tiếp tục đi vào ${instruction.road || instruction.name || 'đường mới'}`;
+      case 'Arrive': return `Đã đến nơi ${direction ? `ở phía ${direction}` : ''}`;
+      default: if (type?.toLowerCase() === 'right') return 'Rẽ phải'; if (type?.toLowerCase() === 'left') return 'Rẽ trái'; if (type?.toLowerCase() === 'straight') return 'Đi thẳng'; return `${type || ''} ${modifier || ''}`.trim();
+    }
+  };
+  const getIcon = function (instruction) {
+    if (!instruction) return '•'; const { type, modifier } = instruction; const modLower = modifier?.toLowerCase();
+    switch (type) {
+      case 'Depart': case 'Head': case 'Continue': if (modLower?.includes('left')) return '↖'; if (modLower?.includes('right')) return '↗'; return '↑';
+      case 'Turn': case 'Right': case 'Left': case 'Fork': case 'EndOfRoad': if (modLower?.includes('sharp left')) return '↩'; if (modLower?.includes('sharp right')) return '↪'; if (modLower?.includes('slight left') || modLower?.includes('left')) return '←'; if (modLower?.includes('slight right') || modLower?.includes('right')) return '→'; if (modLower?.includes('uturn')) return '⤸'; if (modLower?.includes('straight')) return '↑'; if (type === 'Left') return '←'; if (type === 'Right') return '→'; return '↔';
+      case 'Merge': return '⤭'; case 'Roundabout': case 'Rotary': case 'RoundaboutTurn': return '↻';
+      case 'NewName': return '→'; case 'Arrive': return '📍'; default: return '•';
+    }
+  };
+  return { getText: getText, getIcon: getIcon };
+})();
+
+function escapeHtml(unsafe) {
+  if (typeof unsafe !== 'string') { return ''; }
+  return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371e3; const φ1 = lat1 * Math.PI / 180, φ2 = lat2 * Math.PI / 180; const Δφ = (lat2 - lat1) * Math.PI / 180; const Δλ = (lon2 - lon1) * Math.PI / 180; const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2); return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+const sidebarPopup = document.createElement('div');
+sidebarPopup.id = 'sidebar-popup';
+sidebarPopup.className = 'sidebar sidebar-left hidden';
+if (mapContainer) mapContainer.appendChild(sidebarPopup);
+
+const sidebarRouting = document.createElement('div');
+sidebarRouting.id = 'sidebar-routing';
+sidebarRouting.className = 'sidebar sidebar-right hidden';
+if (mapContainer) mapContainer.appendChild(sidebarRouting);
+
+function adjustControlPositions() {
+  if (!document.body.contains(sidebarPopup) || !document.body.contains(sidebarRouting)) return;
+  const isPopupVisible = !sidebarPopup.classList.contains('hidden');
+  const isRoutingVisible = !sidebarRouting.classList.contains('hidden');
+  const zoomControl = document.querySelector('.leaflet-control-zoom');
+  const fullscreenControl = document.querySelector('.leaflet-control-fullscreen');
+  const leftMargin = isPopupVisible ? '310px' : '10px';
+  if (zoomControl) zoomControl.style.marginLeft = leftMargin;
+  if (fullscreenControl) fullscreenControl.style.marginLeft = leftMargin;
+  const currentLocationControl = document.querySelector('.leaflet-control-current-location');
+  const rightMargin = isRoutingVisible ? '310px' : '10px';
+  if (currentLocationControl) currentLocationControl.style.marginRight = rightMargin;
+}
+
+function showPopupSidebar(properties, coords) {
+  if (!properties || !coords) {
+    console.error("Invalid data for popup sidebar.");
+    return;
+  }
+
+  selectedLocationForRouting = { lat: coords.lat, lng: coords.lng, name: properties.name || "N/A", type: properties.amenity || "N/A" };
+
+  let popupContentHTML = `<h3>Điểm đến:</h3><p><b>${escapeHtml(properties.name || 'Không có tên')}</b></p>`;
+  if (properties.address) popupContentHTML += `<p>Địa chỉ: ${escapeHtml(properties.address)}</p>`;
+  if (properties.amenity) popupContentHTML += `<p>(${escapeHtml(properties.amenity.toUpperCase())})</p>`;
+  if (properties.phone) popupContentHTML += `<p>Điện thoại: <a href="tel:${escapeHtml(properties.phone)}">${escapeHtml(properties.phone)}</a></p>`;
+  if (properties.description) popupContentHTML += `<p>Mô tả: ${escapeHtml(properties.description)}</p>`;
+  if (properties.image_url && typeof properties.image_url === 'string' && (properties.image_url.startsWith('http://') || properties.image_url.startsWith('https://'))) {
+    popupContentHTML += `<p><img src="${escapeHtml(properties.image_url)}" alt="${escapeHtml(properties.name || 'Hình ảnh')}" style="max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 4px;"></p>`;
+  }
+
+  sidebarPopup.innerHTML = `
+        <div class="sidebar-content">
+            ${popupContentHTML}
+            <button class="route-button" id="route-btn-popup">Dẫn đường</button>
+            <button class="close-button" id="close-popup">Đóng</button>
+        </div>`;
+  sidebarPopup.classList.remove('hidden');
+  adjustControlPositions();
+
+  document.getElementById('route-btn-popup').onclick = () => {
+    if (selectedLocationForRouting) {
+      currentEndLocation = { lat: selectedLocationForRouting.lat, lng: selectedLocationForRouting.lng };
+      updateRoute(currentStartLocation.lat, currentStartLocation.lng);
+      sidebarPopup.classList.add('hidden');
+      adjustControlPositions();
+      const radioToCheck = document.getElementById(selectedLocationForRouting.type.toLowerCase());
+      if (radioToCheck) radioToCheck.checked = true;
+    } else {
+      console.error("Routing failed: No location selected.");
+      alert("Vui lòng chọn lại địa điểm.");
+      sidebarPopup.classList.add('hidden'); adjustControlPositions();
+    }
+    selectedLocationForRouting = null;
+  };
+
+  document.getElementById('close-popup').onclick = () => {
+    sidebarPopup.classList.add('hidden');
+    adjustControlPositions();
+    selectedLocationForRouting = null;
+  };
+
+  map.flyTo([coords.lat, coords.lng], clickMarkerZoom);
+}
+
+function showRoutingSidebar(route) {
+  if (!route || !route.summary || !Array.isArray(route.instructions)) {
+    console.error("Invalid route data for routing sidebar.");
+    sidebarRouting.classList.add('hidden'); adjustControlPositions(); return;
+  }
+
+  const distance = (route.summary.totalDistance / 1000).toFixed(1);
+  const time = Math.round(route.summary.totalTime / 60);
+  let instructionsHTML = '<ul class="instructions-list">';
+
+  route.instructions.forEach((instruction) => {
+    const stepDistance = instruction.distance > 0 ? `${Math.round(instruction.distance)} m` : '';
+    const directionText = VietnameseDirections.getText(instruction);
+    const directionIcon = VietnameseDirections.getIcon(instruction);
+    // Bỏ data-lat/lng và sự kiện click cho instruction item vì không dùng
+    instructionsHTML += `
+            <li class="instruction-item">
+                <span class="instruction-icon">${directionIcon}</span>
+                <span class="instruction-text">${directionText} ${instruction.road ? `vào <b>${escapeHtml(instruction.road)}</b>` : ''}</span>
+                <span class="instruction-distance">${stepDistance}</span>
+            </li>`;
+  });
+  instructionsHTML += '</ul>';
+
+  const content = `
+        <h3>Tuyến đường</h3>
+        <p>Khoảng cách: <b>${distance} km</b> <br> Thời gian: ~<b>${time} phút</b></p>
+        ${instructionsHTML}
+        <button class="close-button" id="close-routing">Đóng</button>`;
+
+  sidebarRouting.innerHTML = `<div class="sidebar-content">${content}</div>`;
+  sidebarRouting.classList.remove('hidden');
+  adjustControlPositions();
+
+  document.getElementById('close-routing').onclick = () => {
+    sidebarRouting.classList.add('hidden');
+    adjustControlPositions();
+  };
+}
+
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-// --- Utility Functions ---
-function getDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371e3;
-  const φ1 = lat1 * Math.PI / 180, φ2 = lat2 * Math.PI / 180;
-  const Δφ = (lat2 - lat1) * Math.PI / 180;
-  const Δλ = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function clickZoom(e) {
-  map.setView(e.target.getLatLng(), clickMarkerZoom);
-}
-
-// --- API Data Fetching ---
 async function fetchDataFromAPI(amenityType) {
-  // *** IMPORTANT: Adjust this URL to match your Django URL setup ***
+  // Lưu ý: Đảm bảo URL này đúng với Django backend của bạn
   const apiUrl = `/maps/api/locations/?amenity=${encodeURIComponent(amenityType)}`;
-  console.log(`Workspaceing: ${apiUrl}`);
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
-      let errorData = null;
-      try { errorData = await response.json(); } catch (e) { /* Ignore if body not JSON */ }
+      let errorData = null; try { errorData = await response.json(); } catch (e) { /* Ignore */ }
       throw new Error(errorData?.error || response.statusText || `HTTP ${response.status}`);
     }
     const data = await response.json();
     if (data.error) throw new Error(`API Error: ${data.error}`);
-    console.log(`Received ${data?.features?.length || 0} features for ${amenityType}.`);
     return data;
   } catch (err) {
     console.error(`API Fetch Error (${amenityType}):`, err);
     alert(`Không thể tải dữ liệu ${amenityType}.\nLỗi: ${err.message}`);
-    return { type: "FeatureCollection", features: [] }; // Return empty structure on error
+    return { type: "FeatureCollection", features: [] };
   }
 }
 
-// --- GeoJSON Marker Creation ---
+function handleMarkerClick(e, feature) {
+  L.DomEvent.stopPropagation(e);
+  const properties = feature.properties;
+  const geometry = feature.geometry;
+  if (!properties || !geometry || geometry.type !== 'Point' || !Array.isArray(geometry.coordinates) || geometry.coordinates.length !== 2) return;
+  const [lat, lng] = geometry.coordinates; // API returns [lat, lng]
+  if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
+  showPopupSidebar(properties, { lat, lng });
+}
+
 const geojsonOpts = {
   pointToLayer: function (feature, latlng_placeholder) {
-    const coords = feature.geometry?.coordinates; // API returns [latitude, longitude]
-    if (!coords || typeof coords[0] !== 'number' || typeof coords[1] !== 'number' || coords[0] < -90 || coords[0] > 90 || coords[1] < -180 || coords[1] > 180) {
-      console.warn("Invalid coordinates in feature:", feature.properties?.name, coords);
-      return null;
-    }
+    const coords = feature.geometry?.coordinates;
+    if (!coords || typeof coords[0] !== 'number' || typeof coords[1] !== 'number' || coords[0] < -90 || coords[0] > 90 || coords[1] < -180 || coords[1] > 180) return null;
     const [sourceLat, sourceLng] = coords;
     const correctLatLng = L.latLng(sourceLat, sourceLng);
-    const { amenity, name = "Không có tên", address = "" } = feature.properties || {};
+    const { amenity } = feature.properties || {};
     const className = typeof amenity === 'string' && arrayLayers.includes(amenity.toLowerCase()) ? amenity.toLowerCase() : 'default-marker';
     const htmlContent = typeof amenity === 'string' && amenity ? amenity[0].toUpperCase() : '?';
-
     return L.marker(correctLatLng, {
-      icon: L.divIcon({ className: className, iconSize: L.point(16, 16), html: htmlContent, popupAnchor: [0, -10] }),
-    })
-      .bindPopup(`<b>${name}</b><br>${amenity || 'Địa điểm'}<br><small>${address}</small>`)
-      .on("click", clickZoom);
+      icon: L.divIcon({ className: `leaflet-marker-icon ${className}`, iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -12], html: `<b>${htmlContent}</b>` }),
+    });
   },
+  onEachFeature: function (feature, layer) {
+    layer.on('click', (e) => handleMarkerClick(e, feature));
+  }
 };
 
-// --- Find Nearest Point ---
 function findNearest(featureType, currentLat, currentLng) {
-  let nearestFeature = null;
-  let minDistance = Infinity;
+  let nearestFeature = null; minDistance = Infinity;
   const featuresToSearch = allFeaturesData[featureType];
-
-  if (!featuresToSearch || featuresToSearch.length === 0) {
-    // console.warn(`No features data available for ${featureType} to find nearest.`);
-    return null;
-  }
-
+  if (!featuresToSearch || featuresToSearch.length === 0) return null;
   featuresToSearch.forEach((feature) => {
-    const coords = feature.geometry?.coordinates; // API returns [latitude, longitude]
-    if (!coords || feature.geometry?.type !== 'Point' || typeof coords[0] !== 'number' || typeof coords[1] !== 'number' || coords[0] < -90 || coords[0] > 90 || coords[1] < -180 || coords[1] > 180) {
-      return; // Skip invalid features silently or add minimal log: console.warn('Skipping invalid feature in findNearest:', feature?.properties?.name);
-    }
-    try {
-      const distance = getDistance(currentLat, currentLng, coords[0], coords[1]);
-      if (distance < minDistance) {
-        minDistance = distance;
-        nearestFeature = feature;
-      }
-    } catch (e) {
-      console.error(`Distance calculation error for ${feature?.properties?.name}:`, e);
-    }
+    const coords = feature.geometry?.coordinates;
+    if (!coords || feature.geometry?.type !== 'Point' || typeof coords[0] !== 'number' || typeof coords[1] !== 'number' || coords[0] < -90 || coords[0] > 90 || coords[1] < -180 || coords[1] > 180) return;
+    try { const distance = getDistance(currentLat, currentLng, coords[0], coords[1]); if (distance < minDistance) { minDistance = distance; nearestFeature = feature; } } catch (e) { console.error(`Distance calc error: ${feature?.properties?.name}`, e); }
   });
-
   if (nearestFeature) {
-    const finalCoords = nearestFeature.geometry.coordinates; // [lat, lon]
-    const [finalLat, finalLng] = finalCoords;
+    const [finalLat, finalLng] = nearestFeature.geometry.coordinates;
     if (typeof finalLng === 'number' && typeof finalLat === 'number' && finalLat >= -90 && finalLat <= 90 && finalLng >= -180 && finalLng <= 180) {
-      console.log(`${featureType} nearest: "${nearestFeature.properties?.name || 'N/A'}" (${minDistance.toFixed(0)}m)`);
-      return { lat: finalLat, lng: finalLng, name: nearestFeature.properties?.name || "Không có tên" };
+      return { lat: finalLat, lng: finalLng, name: nearestFeature.properties?.name || "N/A" };
     }
   }
-  console.log(`No nearby ${featureType} found.`);
   return null;
 }
 
-// --- Radio Button Generation ---
 function generateButton(name) {
   if (document.getElementById(name)) return;
-  const templateLayer = `
-    <li class="layer-element">
-      <label for="${name}">
-        <input type="radio" id="${name}" name="layer-group" class="item" value="${name}">
-        <span>${name === layersButton ? 'Bỏ chọn' : name.toUpperCase()}</span>
-      </label>
-    </li>`;
+  const templateLayer = `<li class="layer-element"><label for="${name}"><input type="radio" id="${name}" name="layer-group" class="item" value="${name}"><span class="layer-icon ${name === layersButton ? 'deselect-icon' : name.toLowerCase()}"></span><span>${name === layersButton ? 'Bỏ chọn' : name.toUpperCase()}</span></label></li>`;
   layersContainer.insertAdjacentHTML("beforeend", templateLayer);
 }
 
-// --- Show/Hide/Fetch Layers ---
 async function showOnlyLayer(selectedId) {
   document.body.style.cursor = 'wait';
+  sidebarRouting.classList.add('hidden'); adjustControlPositions();
+  sidebarPopup.classList.add('hidden'); adjustControlPositions();
+  selectedLocationForRouting = null;
 
-  // Hide all layers first
-  arrayLayers.forEach((id) => {
-    if (layers["layer_" + id] && map.hasLayer(layers["layer_" + id])) {
-      map.removeLayer(layers["layer_" + id]);
-    }
-  });
+  arrayLayers.forEach((id) => { if (layers["layer_" + id] && map.hasLayer(layers["layer_" + id])) map.removeLayer(layers["layer_" + id]); });
 
   if (selectedId === layersButton || !arrayLayers.includes(selectedId)) {
-    console.log("Layer deselected or invalid.");
     document.body.style.cursor = 'default';
+    if (routingControl) map.removeControl(routingControl); if (endMarker) map.removeLayer(endMarker);
+    routingControl = null; endMarker = null; currentEndLocation = null;
     return;
   }
 
-  // Show selected layer (fetch if needed)
   try {
-    if (layers["layer_" + selectedId]) { // Check cache first
-      if (!map.hasLayer(layers["layer_" + selectedId])) {
-        map.addLayer(layers["layer_" + selectedId]);
-        console.log(`Showing layer ${selectedId} from cache.`);
-      }
+    let needsRoutingUpdate = false;
+    if (layers["layer_" + selectedId] && allFeaturesData[selectedId]) {
+      if (!map.hasLayer(layers["layer_" + selectedId])) map.addLayer(layers["layer_" + selectedId]);
+      needsRoutingUpdate = true;
     } else {
-      console.log(`Workspaceing data for layer ${selectedId}...`);
-      const apiData = await fetchDataFromAPI(selectedId); // Fetch from API
-
+      const apiData = await fetchDataFromAPI(selectedId);
       if (apiData?.features?.length > 0) {
-        allFeaturesData[selectedId] = apiData.features; // Cache features data
+        allFeaturesData[selectedId] = apiData.features;
         const newLayer = L.geoJSON(apiData, geojsonOpts);
-        layers["layer_" + selectedId] = newLayer; // Cache layer object
-        map.addLayer(newLayer);
-        console.log(`Workspaceed and displayed layer ${selectedId} (${apiData.features.length} features).`);
+        layers["layer_" + selectedId] = newLayer; map.addLayer(newLayer);
+        needsRoutingUpdate = true;
       } else if (apiData?.features?.length === 0) {
-        console.log(`No features found for ${selectedId}.`);
-        allFeaturesData[selectedId] = []; // Cache empty result
-        layers["layer_" + selectedId] = L.geoJSON({ type: "FeatureCollection", features: [] }); // Cache empty layer
+        allFeaturesData[selectedId] = []; layers["layer_" + selectedId] = L.geoJSON({ type: "FeatureCollection", features: [] });
         alert(`Không tìm thấy địa điểm ${selectedId.toUpperCase()} nào.`);
+        if (routingControl) map.removeControl(routingControl); if (endMarker) map.removeLayer(endMarker);
+        routingControl = null; endMarker = null; currentEndLocation = null;
       }
-      // API error case handled within fetchDataFromAPI with an alert
     }
+    if (needsRoutingUpdate && currentEndLocation) updateRoute(currentStartLocation.lat, currentStartLocation.lng);
+    else if (!currentEndLocation && routingControl) { map.removeControl(routingControl); routingControl = null; if (endMarker) map.removeLayer(endMarker); endMarker = null; }
   } catch (error) {
-    console.error(`Error in showOnlyLayer (${selectedId}):`, error);
-    alert(`Lỗi hiển thị lớp ${selectedId.toUpperCase()}.`);
+    console.error(`Error showing layer ${selectedId}:`, error); alert(`Lỗi hiển thị lớp ${selectedId.toUpperCase()}.`);
   } finally {
     document.body.style.cursor = 'default';
   }
 }
 
-// --- Update/Draw Route ---
 function updateRoute(startLat, startLng) {
-  const selectedRadio = document.querySelector('input[name="layer-group"]:checked');
+  if (routingControl) map.removeControl(routingControl); routingControl = null;
+  if (endMarker) map.removeLayer(endMarker); endMarker = null;
+  sidebarRouting.classList.add('hidden'); adjustControlPositions();
 
-  // Clear previous route/marker if any
-  if (routingControl) map.removeControl(routingControl);
-  if (endMarker) map.removeLayer(endMarker);
-  routingControl = null;
-  endMarker = null;
-
-  if (!selectedRadio || selectedRadio.value === layersButton || !arrayLayers.includes(selectedRadio.value)) {
-    console.log("No valid layer selected for routing.");
+  if (!currentStartLocation || typeof startLat !== 'number' || typeof startLng !== 'number' ||
+    !currentEndLocation || typeof currentEndLocation.lat !== 'number' || typeof currentEndLocation.lng !== 'number') {
     return;
   }
-  const selectedType = selectedRadio.value;
 
-  console.log(`Finding nearest ${selectedType.toUpperCase()} for routing...`);
-  const nearestTarget = findNearest(selectedType, startLat, startLng);
+  const waypoints = [L.latLng(startLat, startLng), L.latLng(currentEndLocation.lat, currentEndLocation.lng)];
+  routingControl = L.Routing.control({
+    waypoints: waypoints, routeWhileDragging: false,
+    lineOptions: { styles: [{ color: "blue", opacity: 0.8, weight: 6 }] },
+    show: false, addWaypoints: false, draggableWaypoints: false, createMarker: () => null
+  }).addTo(map);
 
-  if (nearestTarget) {
-    const waypoints = [L.latLng(startLat, startLng), L.latLng(nearestTarget.lat, nearestTarget.lng)];
+  routingControl.on('routingerror', (e) => {
+    console.error("Routing Error:", e.error); alert(`Không tìm thấy đường đi.\nLỗi: ${e.error?.message || 'Lỗi không xác định'}.`);
+    if (routingControl) map.removeControl(routingControl); routingControl = null;
+    sidebarRouting.classList.add('hidden'); adjustControlPositions();
+  });
 
-    routingControl = L.Routing.control({
-      waypoints: waypoints,
-      routeWhileDragging: false,
-      lineOptions: { styles: [{ color: "blue", opacity: 0.8, weight: 6 }] },
-      show: true,
-      addWaypoints: false,
-      draggableWaypoints: false,
-      createMarker: () => null // Use our custom markers (S, Đ)
-    }).addTo(map);
-
-    routingControl.on('routingerror', (e) => {
-      console.error("Routing Error:", e.error);
-      alert(`Không tìm thấy đường đi.\nLỗi: ${e.error?.message || 'Lỗi không xác định'}.`);
-      if (routingControl) map.removeControl(routingControl);
-      routingControl = null;
-    });
-
-    routingControl.on('routesfound', (e) => {
-      if (e.routes?.length > 0) {
-        const summary = e.routes[0].summary;
-        console.log(`Route found: ${(summary.totalDistance / 1000).toFixed(2)} km, ${Math.round(summary.totalTime / 60)} min.`);
-      }
-    });
-
-    endMarker = L.marker([nearestTarget.lat, nearestTarget.lng], { icon: endIcon, draggable: false })
-      .addTo(map)
-      .bindPopup(`Điểm đến:<br><b>${nearestTarget.name}</b><br>(${selectedType.toUpperCase()})`);
-  } else {
-    console.error(`Cannot update route: No nearby ${selectedType.toUpperCase()} found or data unavailable.`);
-    // Alert if data was fetched but still no target found
-    if (allFeaturesData[selectedType] && allFeaturesData[selectedType].length > 0) {
-      alert(`Không tìm thấy ${selectedType.toUpperCase()} nào gần vị trí của bạn.`);
+  routingControl.on('routesfound', (e) => {
+    if (e.routes?.length > 0) {
+      showRoutingSidebar(e.routes[0]);
+      if (endMarker) map.removeLayer(endMarker);
+      endMarker = L.marker([currentEndLocation.lat, currentEndLocation.lng], { icon: endIcon, draggable: false }).addTo(map);
+    } else {
+      console.error("No routes found."); alert("Không tìm thấy lộ trình hợp lệ.");
+      sidebarRouting.classList.add('hidden'); adjustControlPositions();
     }
-  }
+  });
 }
 
-// --- Event Handlers ---
 function handleStartMarkerDragEnd(e) {
-  const newLatLng = e.target.getLatLng();
-  console.log("Start marker dragged to:", newLatLng);
+  const newLatLng = e.target.getLatLng().wrap();
   currentStartLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
-  updateRoute(newLatLng.lat, newLatLng.lng); // Update route from new start position
+  if (currentEndLocation) updateRoute(newLatLng.lat, newLatLng.lng);
 }
 
 function returnToCurrentLocation() {
-  if (!navigator.geolocation) {
-    return alert("Trình duyệt không hỗ trợ định vị.");
-  }
+  if (!navigator.geolocation) return alert("Trình duyệt không hỗ trợ định vị.");
   document.body.style.cursor = 'wait';
   navigator.geolocation.getCurrentPosition(
     (position) => {
       document.body.style.cursor = 'default';
       const { latitude: lat, longitude: lng } = position.coords;
-      console.log("Got current location:", lat, lng);
       map.setView([lat, lng], initialZoom);
       currentStartLocation = { lat, lng };
       if (startMarker) map.removeLayer(startMarker);
-      startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true })
-        .addTo(map)
-        .bindPopup("Vị trí của bạn (kéo thả)")
-        .openPopup()
-        .on('dragend', handleStartMarkerDragEnd);
-      updateRoute(lat, lng); // Update route from current location
+      startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true }).addTo(map).bindPopup("Vị trí của bạn (kéo thả)").openPopup().on('dragend', handleStartMarkerDragEnd);
+      if (currentEndLocation) updateRoute(lat, lng);
     },
     (error) => {
-      document.body.style.cursor = 'default';
-      console.error("Geolocation Error:", error);
-      alert(`Không thể lấy vị trí.\nLỗi: ${error.message}`);
+      document.body.style.cursor = 'default'; console.error("Geolocation Error:", error);
+      alert(`Không thể lấy vị trí.\nLỗi ${error.code}: ${error.message}`);
     },
     { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
   );
 }
 
-// --- Custom Controls ---
 L.Control.CurrentLocation = L.Control.extend({
   options: { position: 'topright' },
-  onAdd: function (map) {
-    const container = L.DomUtil.create("div", "leaflet-control-current-location leaflet-bar leaflet-control");
-    container.innerHTML = '<span title="Về vị trí của tôi" style="font-size: 1.4em; cursor: pointer;">🎯</span>';
-    container.onclick = (e) => { L.DomEvent.stopPropagation(e); returnToCurrentLocation(); };
-    L.DomEvent.disableClickPropagation(container);
-    return container;
-  },
+  onAdd: function (map) { const container = L.DomUtil.create("div", "leaflet-control-current-location leaflet-bar leaflet-control"); container.innerHTML = '<span title="Về vị trí của tôi" style="font-size: 1.4em; cursor: pointer;">🎯</span>'; container.onclick = (e) => { L.DomEvent.stopPropagation(e); returnToCurrentLocation(); }; L.DomEvent.disableClickPropagation(container); return container; },
 });
 L.control.currentLocation = (opts) => new L.Control.CurrentLocation(opts);
 
 const legend = L.control({ position: "bottomleft" });
-legend.onAdd = function () {
-  const div = L.DomUtil.create("div", "description");
-  L.DomEvent.disableClickPropagation(div);
-  div.innerHTML = "Chọn loại địa điểm (POLICE, PCCC, HOSPITAL) để tìm đường gần nhất từ (S). Kéo thả (S) để đổi điểm bắt đầu.";
-  return div;
-};
+legend.onAdd = function () { const div = L.DomUtil.create("div", "description"); L.DomEvent.disableClickPropagation(div); div.innerHTML = "Click P/F/H để xem chi tiết và dẫn đường. Chọn loại ở dưới để lọc và tìm đường tới điểm gần nhất."; return div; };
 
-// --- Initialization ---
 function initializeMapAndData(initialLat, initialLng) {
-  console.log(`Initializing map at: [${initialLat}, ${initialLng}]`);
   currentStartLocation = { lat: initialLat, lng: initialLng };
   map.setView([initialLat, initialLng], initialZoom);
-
   if (startMarker) map.removeLayer(startMarker);
-  startMarker = L.marker([initialLat, initialLng], { icon: startIcon, draggable: true })
-    .addTo(map)
-    .bindPopup("Vị trí của bạn (kéo thả)")
-    .on('dragend', handleStartMarkerDragEnd);
-
-  const defaultRadio = document.getElementById(layersButton);
-  if (defaultRadio) defaultRadio.checked = true;
-
-  console.log("Map initialized.");
-  L.control.currentLocation().addTo(map);
+  startMarker = L.marker([initialLat, initialLng], { icon: startIcon, draggable: true }).addTo(map).bindPopup("Vị trí của bạn (kéo thả)").on('dragend', handleStartMarkerDragEnd);
+  const defaultRadio = document.getElementById(layersButton); if (defaultRadio) defaultRadio.checked = true;
+  L.control.currentLocation({ position: 'topright' }).addTo(map);
   legend.addTo(map);
+  adjustControlPositions();
 }
 
-// --- Main Execution ---
-// 1. Generate radio buttons
-generateButton(layersButton);
-arrayLayers.forEach(generateButton);
+generateButton(layersButton); arrayLayers.forEach(generateButton);
 
-// 2. Get initial location and initialize map
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
     (pos) => initializeMapAndData(pos.coords.latitude, pos.coords.longitude),
-    (err) => {
-      console.warn("Geolocation failed, using default.", err.message);
-      initializeMapAndData(defaultLat, defaultLng);
-    },
+    (err) => { console.warn("Geolocation failed, using default.", err.message); initializeMapAndData(defaultLat, defaultLng); },
     { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
   );
 } else {
-  console.error("Geolocation not supported.");
-  initializeMapAndData(defaultLat, defaultLng);
+  console.error("Geolocation not supported."); initializeMapAndData(defaultLat, defaultLng);
 }
 
-// 3. Add event listener for radio button changes
-document.addEventListener('change', async (e) => {
+document.addEventListener('change', (e) => {
   if (e.target.matches('input[type="radio"].item[name="layer-group"]')) {
     const selectedValue = e.target.value;
-    console.log(`Radio selection changed: ${selectedValue}`);
-    document.body.style.cursor = 'wait'; // Use loading state from CSS ideally
-    try {
-      await showOnlyLayer(selectedValue); // Fetch/show layer
-      updateRoute(currentStartLocation.lat, currentStartLocation.lng); // Update route based on current start location
-    } catch (error) {
-      console.error("Error processing radio change:", error);
-      alert("Đã xảy ra lỗi khi xử lý lựa chọn.");
-    } finally {
-      document.body.style.cursor = 'default';
+    if (selectedValue !== layersButton) {
+      showOnlyLayer(selectedValue).then(() => {
+        const nearest = findNearest(selectedValue, currentStartLocation.lat, currentStartLocation.lng);
+        if (nearest) { currentEndLocation = { lat: nearest.lat, lng: nearest.lng }; updateRoute(currentStartLocation.lat, currentStartLocation.lng); }
+        else { if (routingControl) map.removeControl(routingControl); routingControl = null; if (endMarker) map.removeLayer(endMarker); endMarker = null; currentEndLocation = null; }
+      });
+    } else {
+      showOnlyLayer(selectedValue);
     }
   }
 });
