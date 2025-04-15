@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <script src="{% static 'js/script.js' %}"></script>
 
     {% block map %}
 
@@ -64,14 +63,20 @@
                         <input type="text" name="search" />
                         <img src="{% static 'assets/img/logo/search.svg' %}" alt="search logo" />
                     </form>
-                    <ul class="main-menu">
+                    <ul class="main-menu"> 
                         <li>
-                            <a class="active" href="index.html">Home</a>
+                            <a class="{% if request.path == '/' %}active{% endif %}" href="/">Home</a>
                         </li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="project.html">Portfolio</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li>
+                            <a class="javascript:void(0)">Bản đồ</a>
+                            <ul class="sub-menu">
+                                <li><a href="{% url 'maps:co-ban' %}">Cơ bản</a></li>
+                                <li><a href="{% url 'maps:emergency-road' %}">Đường Khẩn cấp</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="{% if request.path == '/gioi-thieu/' %}active{% endif %}" href="/gioi-thieu">About</a>
+                        </li>
                     </ul>
                     <a class="primary__button primary__button-bgBlack contacprimary__button" href="tel:+987 45478 547">
                         <img src="{% static 'assets/img/logo/phone-alt.svg' %}" alt="phone alt" />

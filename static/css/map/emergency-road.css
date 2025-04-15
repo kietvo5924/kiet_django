@@ -56,6 +56,7 @@ label {
   left: 0px;
   right: 0px;
   bottom: 40px;
+  z-index: 1;
 }
 
 .layers {
@@ -80,13 +81,14 @@ label {
   justify-content: center;
   align-items: center;
   line-height: 1;
-  color: #fff;
+  color: #ffffff;
   font-size: 11px;
   line-height: 16px;
   box-shadow: 0px 0px 10px rgba(0, 132, 255, 1);
   border-radius: 100%;
   border: 1px solid #fff;
   padding: 10px;
+  background-color: #f20000;
 }
 
 .police,
@@ -105,7 +107,7 @@ label {
 .hospital,
 .hospital.search-tip b,
 .hospital.leaflet-marker-icon {
-  background: #ff3939;
+  background: #28a745;
 }
 
 /* radio */

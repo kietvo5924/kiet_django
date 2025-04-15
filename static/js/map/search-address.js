@@ -246,7 +246,10 @@ function escapeHtml(unsafe) {
 
 function setupAutocomplete(inputId, searchType) {
     const inputElement = document.getElementById(inputId);
-    if (!inputElement) { console.error(`Không tìm thấy Input #${inputId}!`); return; }
+    if (!inputElement) {
+        console.error(`Không tìm thấy Input #${inputId}!`);
+        return;
+    }
 
     if (searchType === 'backendSearch' && !emergencyDataLoaded) {
         inputElement.placeholder = "Đang tải...";
@@ -256,9 +259,11 @@ function setupAutocomplete(inputId, searchType) {
         inputElement.disabled = false;
     }
 
+    let lastMatches = []; // Lưu trữ danh sách kết quả tìm kiếm cuối cùng
+
     new Autocomplete(inputId, {
         delay: 400,
-        selectFirst: true,
+        selectFirst: false, // Đảm bảo không tự động chọn mục đầu tiên
         howManyCharacters: 1,
 
         onSearch: ({ currentValue }) => {
@@ -271,7 +276,10 @@ function setupAutocomplete(inputId, searchType) {
                 return fetch(api, { headers: { "User-Agent": "SOSMapApp/1.0 (non-commercial use)" } })
                     .then(response => response.ok ? response.json() : Promise.reject(`Nominatim ${response.statusText}`))
                     .then(data => data?.features || [])
-                    .catch(error => { console.error("Lỗi Nominatim:", error); return []; });
+                    .catch(error => {
+                        console.error("Lỗi Nominatim:", error);
+                        return [];
+                    });
             } else if (searchType === 'backendSearch') {
                 const apiUrl = `/maps/api/search-locations/?query=${encodeURIComponent(query)}`;
                 return fetch(apiUrl)
@@ -296,11 +304,15 @@ function setupAutocomplete(inputId, searchType) {
         },
 
         onResults: ({ currentValue, matches, template }) => {
-            if (!matches || matches.length === 0) return template ? template(`<li>Không tìm thấy kết quả nào cho '${escapeHtml(currentValue)}'</li>`) : '';
+            if (!matches || matches.length === 0) {
+                return template ? template(`<li>Không tìm thấy kết quả nào cho '${escapeHtml(currentValue)}'</li>`) : '';
+            }
+
+            lastMatches = matches; // Lưu trữ danh sách matches để sử dụng trong onSubmit
 
             const regex = new RegExp(currentValue.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "i");
 
-            return `<ul class="autocomplete-list">` + matches.map((element) => {
+            return `<ul class="autocomplete-list">` + matches.map((element, index) => {
                 let mainDisplay = "N/A", detailsDisplay = "";
                 if (!element || typeof element !== 'object') return '';
 
@@ -322,7 +334,7 @@ function setupAutocomplete(inputId, searchType) {
 
                 try {
                     const resultString = JSON.stringify(element).replace(/'/g, "\\'");
-                    return `<li role="option" data-result='${resultString}'><div class="address-main">${mainDisplay}</div>${detailsDisplay}</li>`;
+                    return `<li role="option" id="autocomplete-item-${index}" data-result='${resultString}'><div class="address-main">${mainDisplay}</div>${detailsDisplay}</li>`;
                 } catch (e) {
                     console.error("Lỗi stringify:", e, element);
                     return '';
@@ -330,35 +342,75 @@ function setupAutocomplete(inputId, searchType) {
             }).join("") + `</ul>`;
         },
 
-        onSubmit: ({ input, object }) => {
-            if (!object) {
+        onSubmit: ({ element, object }) => {
+            console.log("onSubmit triggered:", { element, object }); // Ghi log để kiểm tra
+
+            const inputElement = document.getElementById(inputId);
+            if (!inputElement) {
+                console.error(`Không tìm thấy input #${inputId} trong onSubmit`);
+                alert("Lỗi hệ thống. Vui lòng thử lại.");
                 return;
             }
+
+            let selectedObject = null;
+
+            // Nếu thư viện cung cấp object trực tiếp
+            if (object) {
+                selectedObject = object;
+            } else {
+                // Nếu không, tìm trong lastMatches dựa trên giá trị input
+                const inputValue = inputElement.value.trim();
+                if (!inputValue) {
+                    console.error("Giá trị input rỗng");
+                    alert("Vui lòng chọn một địa điểm hợp lệ.");
+                    return;
+                }
+
+                selectedObject = lastMatches.find(match => {
+                    if (searchType === 'nominatim') {
+                        const { name, display_name } = match.properties || {};
+                        return (name || display_name || "Không rõ") === inputValue;
+                    } else {
+                        return match.name === inputValue;
+                    }
+                });
+
+                if (!selectedObject) {
+                    console.error("Không tìm thấy mục tương ứng trong lastMatches:", inputValue, lastMatches);
+                    alert("Vui lòng chọn một địa điểm hợp lệ.");
+                    return;
+                }
+            }
+
+            console.log("Địa điểm được chọn:", selectedObject);
 
             let lat, lng, locationName = "Địa điểm", popupContent = "";
             try {
                 if (searchType === 'nominatim') {
-                    const coords = object.geometry?.coordinates;
+                    const coords = selectedObject.geometry?.coordinates;
                     if (!coords || coords.length !== 2) throw new Error("Tọa độ Nominatim không hợp lệ");
-                    lng = coords[0]; lat = coords[1];
-                    if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) throw new Error("Giá trị tọa độ Nominatim không hợp lệ");
-                    locationName = object.properties?.name || object.properties?.display_name || locationName;
+                    lng = coords[0];
+                    lat = coords[1];
+                    if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                        throw new Error("Giá trị tọa độ Nominatim không hợp lệ");
+                    }
+                    locationName = selectedObject.properties?.name || selectedObject.properties?.display_name || locationName;
                     popupContent = `<h3>Điểm bắt đầu:</h3><p><b>${escapeHtml(locationName)}</b></p>`;
-                    const details = [object.properties.address?.road, object.properties.address?.suburb, object.properties.address?.city].filter(Boolean).join(", ");
+                    const details = [selectedObject.properties.address?.road, selectedObject.properties.address?.suburb, selectedObject.properties.address?.city].filter(Boolean).join(", ");
                     if (details) popupContent += `<p><small>${escapeHtml(details)}</small></p>`;
                     selectedLocation = { lat, lng };
                     showPopupSidebar(popupContent, true);
                 } else {
-                    lat = object.latitude;
-                    lng = object.longitude;
-                    locationName = object.name || locationName;
+                    lat = selectedObject.latitude;
+                    lng = selectedObject.longitude;
+                    locationName = selectedObject.name || locationName;
 
                     if (typeof lat !== 'number' || typeof lng !== 'number' || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
                         throw new Error(`Giá trị tọa độ API không hợp lệ: lat=${lat}, lng=${lng}`);
                     }
 
                     popupContent = `<h3>Điểm đến:</h3><p><b>${escapeHtml(locationName)}</b></p>`;
-                    const { address, amenity, phone, description, image_url } = object;
+                    const { address, amenity, phone, description, image_url } = selectedObject;
                     if (address) popupContent += `<p><small>Địa chỉ: ${escapeHtml(address)}</small></p>`;
                     if (amenity) popupContent += `<p><small>(${escapeHtml(amenity.toUpperCase())})</small></p>`;
                     if (phone) popupContent += `<p><small>Điện thoại: <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></small></p>`;
@@ -370,17 +422,15 @@ function setupAutocomplete(inputId, searchType) {
                     showPopupSidebar(popupContent, false);
                 }
 
-                if (input) input.value = locationName;
+                inputElement.value = locationName;
 
                 console.log(`Chuẩn bị flyTo: Lat=${lat}, Lng=${lng}, Zoom=${clickMarkerZoom}`);
-                console.log("Đối tượng map:", map);
-
                 map.flyTo([lat, lng], clickMarkerZoom);
 
             } catch (error) {
-                console.error("Lỗi xử lý lựa chọn autocomplete (onSubmit):", error, object);
+                console.error("Lỗi xử lý lựa chọn autocomplete (onSubmit):", error, selectedObject);
                 alert("Lỗi khi chọn địa điểm. Vui lòng thử lại.");
-                if (input) input.value = '';
+                inputElement.value = '';
                 selectedLocation = null;
             }
         },

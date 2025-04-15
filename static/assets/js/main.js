@@ -37,17 +37,13 @@
   /*UI VARS*/
   let logo = document.querySelector('.logo-04');
 
-  /*  Sticky Header*/
+  /* Sticky Header */
   window.addEventListener('scroll', function () {
     let header = document.querySelectorAll('header');
 
     header.forEach((headItem) => {
       headItem.classList.toggle('sticky', window.scrollY > 0);
     });
-    // it's only for homepage-3
-    // window.scrollY > 0
-    //   ? logo.setAttribute('src', 'assets/img/logo/logo.png')
-    //   : logo.setAttribute('src', 'assets/img/logo/logo04.png');
   });
 
   /* back to top button */
@@ -90,16 +86,19 @@
     toggleSidebar();
   });
 
-  // aso js init
-
+  // aos js init
   AOS.init({
     duration: 1000,
     once: true,
   });
-  
-  
+
 })(jQuery);
 
+// Add the missing functions
+function disableScrolling() {
+  document.body.style.overflow = 'hidden';
+}
+
 function enableScrolling() {
-  throw new Error('Function not implemented.');
+  document.body.style.overflow = 'auto';
 }
