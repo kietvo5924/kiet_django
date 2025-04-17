@@ -206,29 +206,68 @@ function showRoutingSidebar(route) {
     const distance = (route.summary.totalDistance / 1000).toFixed(1);
     const time = Math.round(route.summary.totalTime / 60);
     let instructionsHTML = '<ul class="instructions-list">';
-    route.instructions.forEach((instruction) => {
+    
+    // Lấy tọa độ từ route.coordinates (mảng các đối tượng LatLng)
+    const routeCoordinates = route.coordinates || [];
+    
+    route.instructions.forEach((instruction, idx) => {
         const stepDistance = instruction.distance > 0 ? `${Math.round(instruction.distance)} m` : '';
         const directionText = VietnameseDirections.getText(instruction);
         const directionIcon = VietnameseDirections.getIcon(instruction);
+        
+        // Lấy tọa độ cho instruction này bằng instruction.index
+        const coordIndex = instruction.index;
+        let lat = null;
+        let lng = null;
+        if (typeof coordIndex === 'number' && routeCoordinates[coordIndex]) {
+            const coord = routeCoordinates[coordIndex]; // Đối tượng LatLng
+            lat = coord.lat;
+            lng = coord.lng;
+        }
+        
+        // Chỉ thêm thuộc tính tọa độ nếu chúng hợp lệ
+        const coordAttr = (typeof lat === 'number' && typeof lng === 'number' && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180)
+            ? `data-lat="${lat}" data-lng="${lng}"`
+            : '';
+        
         instructionsHTML += `
-            <li class="instruction-item">
+            <li class="instruction-item" ${coordAttr}>
                 <span class="instruction-icon">${directionIcon}</span>
                 <span class="instruction-text">${directionText} ${instruction.road ? `vào ${escapeHtml(instruction.road)}` : ''}</span>
                 <span class="instruction-distance">${stepDistance}</span>
             </li>`;
     });
     instructionsHTML += '</ul>';
+    
     const content = `
         <h3>Tuyến đường</h3>
         <p>Khoảng cách: ${distance} km, Thời gian: ~${time} phút</p>
         ${instructionsHTML}
         <button class="close-button" id="close-routing">Đóng</button>
     `;
+    
     sidebarRouting.innerHTML = `<div class="sidebar-content">${content}</div>`;
     sidebarRouting.classList.remove('hidden');
     adjustControlPositions();
+    
+    // Thêm sự kiện click cho các instruction-item
+    const instructionItems = sidebarRouting.querySelectorAll('.instruction-item');
+    instructionItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const lat = parseFloat(item.getAttribute('data-lat'));
+            const lng = parseFloat(item.getAttribute('data-lng'));
+            if (typeof lat === 'number' && typeof lng === 'number' && !isNaN(lat) && !isNaN(lng)) {
+                console.log(`Jumping to instruction location: [${lat}, ${lng}]`);
+                map.setView([lat, lng], 18); // Tăng mức zoom lên 18 để phóng to hơn
+            } else {
+                console.warn('Invalid coordinates for instruction:', item);
+            }
+        });
+    });
+    
     document.getElementById('close-routing').onclick = () => {
-        sidebarRouting.classList.add('hidden'); adjustControlPositions();
+        sidebarRouting.classList.add('hidden');
+        adjustControlPositions();
     };
 }
 
