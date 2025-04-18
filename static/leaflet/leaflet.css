@@ -650,6 +650,14 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	border-right-color: #fff;
 	}
 
+.leaflet-routing-container {
+	display: none !important; /* Sử dụng !important để đảm bảo ghi đè style từ CDN */
+}
+	
+/* Nếu cần ẩn cả trạng thái khi có class -hide, bạn có thể thêm cả quy tắc này */
+.leaflet-routing-container.leaflet-routing-container-hide {
+	 display: none !important;
+}
 /* Printing */
 
 @media print {
@@ -659,3 +667,5 @@ svg.leaflet-image-layer.leaflet-interactive path {
 		print-color-adjust: exact;
 		}
 	}
+
+	

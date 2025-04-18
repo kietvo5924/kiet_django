@@ -151,16 +151,68 @@ sidebarRouting.className = 'sidebar sidebar-right hidden';
 mapContainer.appendChild(sidebarRouting);
 
 function adjustControlPositions() {
+    // Đảm bảo các sidebars đã được thêm vào DOM và map container tồn tại
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) return;
+
+    const sidebarPopup = mapContainer.querySelector('#sidebar-popup');
+    const sidebarRouting = mapContainer.querySelector('#sidebar-routing');
+
+    if (!sidebarPopup || !sidebarRouting) {
+        // Sidebars chưa sẵn sàng, không thể điều chỉnh vị trí control
+        return;
+    }
+
     const isPopupVisible = !sidebarPopup.classList.contains('hidden');
     const isRoutingVisible = !sidebarRouting.classList.contains('hidden');
-    const zoomControl = document.querySelector('.leaflet-control-zoom');
-    const fullscreenControl = document.querySelector('.leaflet-control-fullscreen');
-    const leftMargin = isPopupVisible ? '310px' : '10px';
-    if (zoomControl) zoomControl.style.marginLeft = leftMargin;
-    if (fullscreenControl) fullscreenControl.style.marginLeft = leftMargin;
-    const currentLocationControl = document.querySelector('.leaflet-control-current-location');
-    const rightMargin = isRoutingVisible ? '310px' : '10px';
-    if (currentLocationControl) currentLocationControl.style.marginRight = rightMargin;
+
+    // Khoảng cách dịch chuyển khi sidebar mở (bằng chiều rộng sidebar)
+    const offset = '310px'; // Dựa trên chiều rộng sidebar (~300px) cộng thêm padding nếu cần
+
+    // Điều chỉnh container control bên trái (.leaflet-top.leaflet-left)
+    const leftContainer = document.querySelector('.leaflet-top.leaflet-left');
+    if (leftContainer) {
+        // Di chuyển toàn bộ container bằng thuộc tính 'left'
+        const targetLeft = isPopupVisible ? offset : '0px';
+        // Chỉ áp dụng style nếu giá trị đích khác với hiện tại để tránh lặp không cần thiết
+        if (leftContainer.style.left !== targetLeft) {
+            leftContainer.style.transition = 'left 0.3s ease-in-out';
+            leftContainer.style.left = targetLeft;
+        }
+
+        // Đặt lại các style inline trên các control riêng lẻ để đảm bảo tính thống nhất
+        ['.leaflet-control-zoom', '.leaflet-control-fullscreen'].forEach(selector => {
+            const control = document.querySelector(selector);
+            if (control) {
+                control.style.marginLeft = '';
+                control.style.position = '';
+                control.style.zIndex = '';
+                control.style.transition = '';
+            }
+        });
+    }
+
+    // Điều chỉnh container control bên phải (.leaflet-top.leaflet-right)
+    const rightContainer = document.querySelector('.leaflet-top.leaflet-right');
+    if (rightContainer) {
+        // Di chuyển toàn bộ container bằng thuộc tính 'right'
+        const targetRight = isRoutingVisible ? offset : '0px';
+        if (rightContainer.style.right !== targetRight) {
+            rightContainer.style.transition = 'right 0.3s ease-in-out';
+            rightContainer.style.right = targetRight;
+        }
+
+        // Đặt lại các style inline trên control riêng lẻ
+        ['.leaflet-control-current-location'].forEach(selector => {
+            const control = document.querySelector(selector);
+            if (control) {
+                control.style.marginRight = '';
+                control.style.position = '';
+                control.style.zIndex = '';
+                control.style.transition = '';
+            }
+        });
+    }
 }
 
 function showPopupSidebar(content, isStart) {
