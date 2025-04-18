@@ -1,14 +1,17 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 
-{% block title %} 
-    Trang chủ 
+{% block title %}
+    Trang chủ
 {% endblock %}
 
-{%block content %}
-    <h1>Trang chủ</h1>
-    <p data-aos="fade-up">Để xem thêm chi tiết 
-        <a href="/gioi-thieu" style="color: red; font-weight: bold; text-decoration: underline;">
-        tại đây
+{% block content %}
+    <section class="bg-white shadow-lg rounded-lg p-8 text-center">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4" data-aos="fade-up">Chào mừng đến với Trang chủ</h1>
+        <p class="text-gray-600 mb-6" data-aos="fade-up" data-aos-delay="200">
+            Khám phá thêm về chúng tôi và các tính năng tuyệt vời của ứng dụng.
+        </p>
+        <a href="/gioi-thieu" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition" data-aos="fade-up" data-aos-delay="400">
+            Xem chi tiết
         </a>
-    </p>
+    </section>
 {% endblock %}
