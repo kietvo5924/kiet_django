@@ -156,3 +156,48 @@
     white-space: nowrap;
     /* Không xuống dòng */
 }
+
+/* === START: Responsive Styles for Sidebar on Mobile === */
+@media (max-width: 768px) { /* Hoặc breakpoint bạn muốn dùng */
+
+    #map { position: relative; }
+  
+    .sidebar {
+      width: 100%; height: 50vh; max-height: 60%;
+      top: auto; bottom: 0; left: 0; right: auto;
+      transform: translateY(100%); transition: transform 0.3s ease-in-out;
+      box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2); border-top: 1px solid #ccc;
+      z-index: 1001; background-color: white; /* Quan trọng: Ngăn chạm xuyên qua */
+      display: flex; flex-direction: column;
+      overflow: hidden; padding: 0;
+    }
+  
+    .sidebar-left, .sidebar-right { transform: translateY(100%); }
+    .sidebar:not(.hidden) { transform: translateY(0); }
+  
+    /* Định dạng vùng cuộn */
+    .sidebar-scrollable-content {
+      flex: 1; /* Chiếm hết không gian còn lại */
+      overflow-y: auto; /* BẬT CUỘN DỌC CHO PHẦN NÀY */
+      padding: 15px;
+      -webkit-overflow-scrolling: touch; /* Cuộn mượt iOS */
+      touch-action: pan-y; /* Quan trọng: Ưu tiên cuộn dọc, giảm xung đột map */
+    }
+  
+    /* Định dạng vùng nút bấm cố định */
+    .sidebar-actions {
+      padding: 10px 15px; border-top: 1px solid #e0e0e0;
+      background-color: white; flex-shrink: 0; /* Không bị co lại */
+    }
+  
+    /* Style cho nút bên trong vùng actions */
+    .sidebar-actions .route-button,
+    .sidebar-actions .close-button {
+      margin-top: 0; /* Reset margin nếu cần */
+      /* Thêm style khác nếu muốn */
+    }
+  
+    /* Reset style của .sidebar-content cũ nếu còn sót lại */
+    .sidebar-content { display: block; gap: 0; padding: 0; }
+  }
+  /* === END: Responsive Styles for Sidebar on Mobile === */
