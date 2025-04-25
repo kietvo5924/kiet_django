@@ -1,3 +1,17 @@
+/* File: static/css/style.css */
+
+:root {
+    --sidebar-width: 300px;
+    --sidebar-bg-color: #ffffff;
+    --sidebar-text-color: #495057;
+    --sidebar-link-hover-bg: #e9ecef;
+    --sidebar-link-hover-text: #0056b3;
+    --sidebar-active-bg: #007bff;
+    --sidebar-active-text: #ffffff;
+    --hamburger-color: #ffffff;
+    --close-btn-color: #333333;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,203 +26,12 @@ body {
     line-height: 1.6;
 }
 
-.header-area {
-    background: linear-gradient(90deg, #2c3e50, #3498db);
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 1002;
-}
-
 .custom-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 15px;
 }
 
-.menu-area {
-    display: flex;
-    justify-content: flex-start; /* Align items to the left */
-    align-items: center;
-    gap: 30px; /* Add spacing between logo and menu */
-}
-
-.logo img {
-    height: 50px;
-}
-
-.main-menu {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.main-menu li {
-    position: relative;
-}
-
-.main-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 10px;
-    transition: color 0.3s;
-}
-
-.main-menu a:hover,
-.main-menu a.active {
-    color: #00cc00;
-}
-
-.dropdown .sub-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    list-style: none;
-    min-width: 150px;
-    z-index: 1000;
-    transition: opacity 0.2s ease;
-    opacity: 0;
-}
-
-.dropdown:hover .sub-menu {
-    display: block;
-    opacity: 1;
-}
-
-.sub-menu li a {
-    color: #333;
-    padding: 10px 15px;
-    display: block;
-    transition: all 0.3s;
-}
-
-.sub-menu li a:hover,
-.sub-menu li a.active {
-    background-color: transparent !important; /* Bỏ màu nền */
-    color: #00cc00; /* Giữ màu chữ xanh */
-    border-left: none !important; /* Bỏ viền trái nếu không muốn */
-}
-
-.hamburger-menu {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.hamburger-menu span {
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-    transition: all 0.3s;
-}
-
-.hamburger-menu.open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger-menu.open span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-menu.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-aside {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100%;
-    z-index: 1002;
-    transition: right 0.3s ease;
-}
-
-aside.active {
-    right: 0;
-}
-
-.sidebar-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-aside.active .sidebar-menu {
-    right: 0;
-}
-
-.close-sidebar {
-    cursor: pointer;
-    margin-bottom: 20px;
-    width: 24px;
-    height: 24px;
-    position: relative;
-}
-
-.close-sidebar span {
-    width: 20px;
-    height: 2px;
-    background-color: #333;
-    position: absolute;
-    top: 50%;
-}
-
-.close-sidebar span:first-child {
-    transform: rotate(45deg);
-}
-
-.close-sidebar span:last-child {
-    transform: rotate(-45deg);
-}
-
-.sidebar-menu .main-menu a {
-    color: #333;
-    display: block;
-    padding: 10px 0;
-}
-
-.sidebar-menu .main-menu a:hover,
-.sidebar-menu .main-menu a.active {
-    color: #00cc00;
-}
-
-.sidebar-menu .sub-menu {
-    padding-left: 15px;
-}
-
-.sidebar-menu .sub-menu li a:hover,
-.sidebar-menu .sub-menu li a.active {
-    background-color: #e6f3e6;
-    color: #00cc00;
-    font-weight: bold;
-    border-left: 3px solid #00cc00;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-}
-
-aside.active .overlay {
-    display: block;
-}
 
 main {
     max-width: 1200px;
@@ -244,49 +67,13 @@ a:hover {
     color: #00cc00;
 }
 
-.footer-area {
-    background: linear-gradient(90deg, #2c3e50, #3498db);
-    padding: 20px 0;
-    color: #e0e0e0;
-    position: relative;
-    z-index: 100;
-}
-
-.footer-area .container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.copyright-area-text p {
-    font-size: 14px;
-    margin: 0;
-    color: #e0e0e0;
-}
-
-.copyright-area-logo img {
-    height: 40px;
-}
-
-.copyright-area-top a {
-    color: #00cc00;
-    font-size: 14px;
-    text-decoration: none;
-}
-
-.copyright-area-top a:hover {
-    color: #33ff33;
-}
-
-.copyright-area-top i {
-    margin-left: 5px;
-}
-
-/* CSS cho bản đồ và các thành phần liên quan */
+/* --- Map Styles --- */
 #map {
-    height: 100%;
+    height: 500px;
     width: 100%;
     position: relative;
     z-index: 1;
+    margin-bottom: 20px;
 }
 
 .description {
@@ -294,14 +81,15 @@ a:hover {
     font-size: 16px;
     color: #333;
     padding: 10px 14px;
-    background-color: hsla(0, 0%, 100%, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background-color: hsla(0, 0%, 100%, 0.9);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    line-height: 120%;
-    border: 1px solid grey;
+    line-height: 1.4;
+    border: 1px solid #ccc;
     z-index: 500;
 }
 
+/* Map Markers */
 .emergency-marker,
 .police-marker,
 .pccc-marker,
@@ -334,30 +122,37 @@ a:hover {
     font-size: 14px;
     box-shadow: 0px 0px 10px rgba(0, 204, 0, 0.8);
     border: 2px solid #fff;
+    width: 28px;
+    height: 28px;
 }
 
 .end-marker {
-    display: none;
-    opacity: 0;
-    pointer-events: none;
+    background-color: #dc3545;
     border-radius: 50%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0px 0px 10px rgba(220, 53, 69, 0.8);
+    border: 2px solid #fff;
+    width: 28px;
+    height: 28px;
 }
 
-/* Thanh tìm kiếm bản đồ dạng dọc */
+/* --- Auto Search Styles (Map) --- */
 .auto-search-wrapper {
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 250px; /* Chiều rộng nhỏ hơn để gọn gàng */
+    width: 280px;
     z-index: 1001;
     display: flex;
-    flex-direction: column; /* Xếp dọc */
+    flex-direction: column;
     background-color: #fff;
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     padding: 10px;
 }
 
@@ -367,7 +162,7 @@ a:hover {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
-    margin-bottom: 10px; /* Khoảng cách với gợi ý */
+    margin-bottom: 5px;
 }
 
 .auto-search-wrapper .loupe {
@@ -376,6 +171,10 @@ a:hover {
     cursor: pointer;
     font-size: 14px;
     line-height: 1.4;
+}
+
+.auto-search-wrapper .loupe:last-child {
+    border-bottom: none;
 }
 
 .auto-search-wrapper .loupe:hover {
@@ -393,91 +192,94 @@ a:hover {
 }
 
 .autocomplete-list {
-    max-height: 400px; /* Giảm chiều cao để gọn */
+    max-height: 350px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #ddd;
     background-color: #fff;
     z-index: 1001;
-    width: 100%; /* Đầy đủ chiều rộng của wrapper */
-    border-radius: 4px;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+    margin-top: -6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* CSS cho các nút điều khiển của Leaflet */
+/* --- Leaflet Control Styles --- */
 .leaflet-control-zoom,
 .leaflet-control-fullscreen,
 .leaflet-control-current-location {
-    z-index: 600;
+    z-index: 600 !important;
     margin-left: 10px !important;
-    position: relative; /* Đảm bảo z-index hoạt động */
+    margin-top: 10px !important;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) !important;
 }
 
 .leaflet-control-current-location {
     background-color: #fff;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    padding: 5px;
+    padding: 0;
     cursor: pointer;
     text-align: center;
-    font-size: 14px;
-    line-height: 20px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.leaflet-control-current-location a {
+    font-size: 1.2em;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .leaflet-control-current-location:hover {
     background-color: #f4f4f4;
 }
 
-/* Responsive */
+/* --- Responsive Styles --- */
 @media (max-width: 768px) {
-    .main-menu {
-        display: none;
-    }
-
-    .hamburger-menu {
-        display: flex;
-    }
-
-    .sidebar-menu {
-        width: 80%;
-        max-width: 300px;
-    }
-
     .auto-search-wrapper {
-        width: 90%; /* Thu nhỏ trên mobile */
-        left: 5px;
-        top: 5px;
-        padding: 8px;
-    }
-
-    .auto-search-wrapper input {
-        font-size: 13px;
-        padding: 8px;
+        width: calc(100% - 20px);
+        left: 10px;
+        top: 10px;
+        max-width: none;
+        margin: 0;
+        z-index: 1001;
     }
 
     .autocomplete-list {
-        max-height: 300px; /* Giảm chiều cao trên mobile */
+        max-height: 250px;
     }
 
     main {
-        margin: 20px;
+        margin: 20px 10px;
         padding: 15px;
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
-    .footer-area .row {
-        flex-direction: column;
-        text-align: center;
+    /* Footer responsive styles đã chuyển qua footer.css */
+
+    /* Leaflet controls responsive margins */
+    .leaflet-right .leaflet-control {
+        margin-right: 10px !important;
     }
 
-    .copyright-area-logo {
-        margin: 15px 0;
+    .leaflet-left .leaflet-control {
+        margin-left: 10px !important;
     }
 
-    .copyright-area-top {
-        text-align: center !important;
+    .leaflet-top .leaflet-control {
+        margin-top: 10px !important;
+    }
+
+    .leaflet-bottom .leaflet-control {
+        margin-bottom: 10px !important;
     }
 }

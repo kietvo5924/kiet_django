@@ -1,0 +1,82 @@
+/* File: static/css/footer.css */
+
+.footer-area {
+    background: linear-gradient(90deg, #2c3e50, #3498db);
+    padding: 25px 0;
+    color: #e0e0e0;
+    margin-top: auto;
+    position: relative;
+    z-index: 100;
+}
+
+.footer-area .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-area .row {
+    align-items: center;
+}
+
+.footer-area .copyright-area-text p {
+    font-size: 14px;
+    margin: 0;
+    color: #e0e0e0;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.footer-area .copyright-area-logo {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.footer-area .copyright-area-logo a {
+    display: inline-block;
+    height: 40px;
+    width: auto;
+}
+
+.footer-area .copyright-area-logo a img {
+    height: 100%;
+    width: auto;
+    opacity: 0.9;
+}
+
+.footer-area .copyright-area-top {
+    text-align: center;
+}
+
+.footer-area .copyright-area-top a {
+    color: #00cc00;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-area .copyright-area-top a:hover {
+    color: #33ff33;
+}
+
+.footer-area .copyright-area-top a i {
+    margin-left: 5px;
+}
+
+/* --- Responsive cho Footer --- */
+
+@media (min-width: 768px) {
+    .footer-area .copyright-area-text p {
+        text-align: left;
+    }
+
+    .footer-area .copyright-area-logo {
+        margin: 0;
+    }
+
+    .footer-area .copyright-area-top {
+        text-align: right;
+    }
+}

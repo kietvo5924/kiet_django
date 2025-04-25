@@ -5,13 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    <section class="bg-white shadow-lg rounded-lg p-8 text-center">
-        <h1 class="text-3xl font-bold text-gray-800 mb-4" data-aos="fade-up">Chào mừng đến với Trang chủ</h1>
-        <p class="text-gray-600 mb-6" data-aos="fade-up" data-aos-delay="200">
-            Khám phá thêm về chúng tôi và các tính năng tuyệt vời của ứng dụng.
-        </p>
-        <a href="/gioi-thieu" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition" data-aos="fade-up" data-aos-delay="400">
-            Xem chi tiết
-        </a>
-    </section>
+    <div class="container"> {# Thêm container nếu muốn căn giữa section #}
+        {# Sử dụng section với style CSS thay vì class Tailwind trực tiếp #}
+        <section class="content-section text-center" data-aos="fade-up">
+            <h1>Chào mừng đến với Trang chủ</h1>
+            <p data-aos="fade-up" data-aos-delay="200">
+                Khám phá thêm về chúng tôi và các tính năng tuyệt vời của ứng dụng.
+            </p>
+            {# Sử dụng class btn-custom #}
+            <a href="/gioi-thieu" class="btn-custom" data-aos="fade-up" data-aos-delay="400">
+                Xem chi tiết
+            </a>
+        </section>
+    </div>
 {% endblock %}

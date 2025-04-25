@@ -88,8 +88,8 @@ function adjustControlPositions() {
   const sidebarRouting = mapContainer.querySelector('#sidebar-routing');
 
   if (!sidebarPopup || !sidebarRouting) {
-      // Sidebars chưa sẵn sàng, không thể điều chỉnh vị trí control
-      return;
+    // Sidebars chưa sẵn sàng, không thể điều chỉnh vị trí control
+    return;
   }
 
   const isPopupVisible = !sidebarPopup.classList.contains('hidden');
@@ -101,48 +101,48 @@ function adjustControlPositions() {
   // Điều chỉnh container control bên trái (.leaflet-top.leaflet-left)
   const leftContainer = document.querySelector('.leaflet-top.leaflet-left');
   if (leftContainer) {
-      // Di chuyển toàn bộ container bằng thuộc tính 'left'
-      const targetLeft = isPopupVisible ? offset : '0px';
-      // Chỉ áp dụng style nếu giá trị đích khác với hiện tại để tránh lặp không cần thiết
-      if (leftContainer.style.left !== targetLeft) {
-           // Thêm transition cho hiệu ứng di chuyển mượt trước khi thay đổi thuộc tính
-           leftContainer.style.transition = 'left 0.3s ease-in-out';
-           leftContainer.style.left = targetLeft;
-      }
+    // Di chuyển toàn bộ container bằng thuộc tính 'left'
+    const targetLeft = isPopupVisible ? offset : '0px';
+    // Chỉ áp dụng style nếu giá trị đích khác với hiện tại để tránh lặp không cần thiết
+    if (leftContainer.style.left !== targetLeft) {
+      // Thêm transition cho hiệu ứng di chuyển mượt trước khi thay đổi thuộc tính
+      leftContainer.style.transition = 'left 0.3s ease-in-out';
+      leftContainer.style.left = targetLeft;
+    }
 
-       // Tùy chọn: Đặt lại các style inline (margin, position, zIndex, transition)
-       // trên các control riêng lẻ nếu chúng còn sót lại từ các lần thử trước,
-       // vì giờ đây việc định vị do container đảm nhiệm.
-       ['.leaflet-control-zoom', '.leaflet-control-fullscreen', '.leaflet-control-search-recenter', '.leaflet-control-search-zoomfull'].forEach(selector => {
-            const control = document.querySelector(selector);
-            if (control) {
-                 control.style.marginLeft = ''; // Đặt lại margin
-                 control.style.position = ''; // Đặt lại position
-                 control.style.zIndex = ''; // Đặt lại zIndex
-                 control.style.transition = ''; // Đặt lại transition
-            }
-       });
+    // Tùy chọn: Đặt lại các style inline (margin, position, zIndex, transition)
+    // trên các control riêng lẻ nếu chúng còn sót lại từ các lần thử trước,
+    // vì giờ đây việc định vị do container đảm nhiệm.
+    ['.leaflet-control-zoom', '.leaflet-control-fullscreen', '.leaflet-control-search-recenter', '.leaflet-control-search-zoomfull'].forEach(selector => {
+      const control = document.querySelector(selector);
+      if (control) {
+        control.style.marginLeft = ''; // Đặt lại margin
+        control.style.position = ''; // Đặt lại position
+        control.style.zIndex = ''; // Đặt lại zIndex
+        control.style.transition = ''; // Đặt lại transition
+      }
+    });
   }
 
   // Điều chỉnh container control bên phải (.leaflet-top.leaflet-right)
   const rightContainer = document.querySelector('.leaflet-top.leaflet-right');
   if (rightContainer) {
-      // Di chuyển toàn bộ container bằng thuộc tính 'right'
-      const targetRight = isRoutingVisible ? offset : '0px';
-       if (rightContainer.style.right !== targetRight) {
-          rightContainer.style.transition = 'right 0.3s ease-in-out';
-          rightContainer.style.right = targetRight;
-       }
-      // Tùy chọn: Đặt lại các style inline trên các control riêng lẻ bên phải
-       ['.leaflet-control-current-location', '.leaflet-control-emergency-recenter', '.leaflet-control-emergency-zoomfull'].forEach(selector => {
-            const control = document.querySelector(selector);
-             if (control) {
-                 control.style.marginRight = ''; // Đặt lại margin
-                 control.style.position = ''; // Đặt lại position
-                 control.style.zIndex = ''; // Đặt lại zIndex
-                  control.style.transition = ''; // Đặt lại transition
-             }
-       });
+    // Di chuyển toàn bộ container bằng thuộc tính 'right'
+    const targetRight = isRoutingVisible ? offset : '0px';
+    if (rightContainer.style.right !== targetRight) {
+      rightContainer.style.transition = 'right 0.3s ease-in-out';
+      rightContainer.style.right = targetRight;
+    }
+    // Tùy chọn: Đặt lại các style inline trên các control riêng lẻ bên phải
+    ['.leaflet-control-current-location', '.leaflet-control-emergency-recenter', '.leaflet-control-emergency-zoomfull'].forEach(selector => {
+      const control = document.querySelector(selector);
+      if (control) {
+        control.style.marginRight = ''; // Đặt lại margin
+        control.style.position = ''; // Đặt lại position
+        control.style.zIndex = ''; // Đặt lại zIndex
+        control.style.transition = ''; // Đặt lại transition
+      }
+    });
   }
 }
 
