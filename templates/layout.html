@@ -10,6 +10,8 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
@@ -33,8 +35,8 @@
                         <a class="{% if request.path == '/' %}active{% endif %}" href="/">Home</a>
                     </li>
                     <li class="dropdown">
-                        <a class="{% if request.path == '/maps/co-ban/' %}active{% endif %}" href="{% url 'maps:co-ban' %}">Tìm kiếm</a>
-                    </li>   
+                        <a class="{% if request.path == '/maps/tim-kiem/' %}active{% endif %}" href="{% url 'maps:tim-kiem' %}">Tìm kiếm</a>
+                         </li>
                     <li>
                         <a class="{% if request.path == '/maps/emergency-road/' %}active{% endif %}" href="{% url 'maps:emergency-road' %}">Khẩn cấp</a>
                     </li>
@@ -52,16 +54,14 @@
                             <img src="{% static 'assets/img/logo/logo.png' %}" alt="logo" />
                         </a>
                     </div>
-                    <ul class="main-menu">
-                        <li>
+                    <ul> <li>
                             <a class="{% if request.path == '/' %}active{% endif %}" href="/">Home</a>
                         </li>
-                        <li class="dropdown">
-                            <a class="{% if request.path == '/maps/co-ban/' or request.path == '/maps/emergency-road/' %}active{% endif %}" href="javascript:void(0)">Bản đồ</a>
-                            <ul class="sub-menu">
-                                <li><a class="{% if request.path == '/maps/co-ban/' %}active{% endif %}" href="{% url 'maps:co-ban' %}">Cơ bản</a></li>
-                                <li><a class="{% if request.path == '/maps/emergency-road/' %}active{% endif %}" href="{% url 'maps:emergency-road' %}">Đường Khẩn cấp</a></li>
-                            </ul>
+                        <li>
+                            <a class="{% if request.path == '/maps/tim-kiem/' %}active{% endif %}" href="{% url 'maps:tim-kiem' %}">Tìm kiếm</a>
+                        </li>
+                        <li>
+                            <a class="{% if request.path == '/maps/emergency-road/' %}active{% endif %}" href="{% url 'maps:emergency-road' %}">Khẩn cấp</a>
                         </li>
                         <li>
                             <a class="{% if request.path == '/gioi-thieu/' %}active{% endif %}" href="/gioi-thieu">About</a>
@@ -102,7 +102,10 @@
                 </div>
                 <div class="col-lg-5 col-md-4 col-sm-12">
                     <div class="copyright-area-top text-lg-right">
-                        <a href="#header" id="to-top">Back to Top <i class="fas fa-angle-up"></i></a>
+                        {# Thêm class text-white hoặc text-light vào đây #}
+                        <a href="#header" id="to-top" class="text-white"> 
+                            Back to Top <i class="fas fa-angle-up"></i>
+                        </a>
                     </div>
                 </div>
             </div>

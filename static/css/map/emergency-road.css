@@ -44,24 +44,24 @@ label {
 .container {
   width: 100%;
   height: 100%;
+  /* This makes the container fill the body/html height */
   margin-right: auto;
   margin-left: auto;
+  position: relative;
+  /* Added relative positioning for the map */
 }
 
+/* --- Modified #map rule --- */
 #map {
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 40px;
+  width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
+
 .layers {
   position: absolute;
-  bottom: 50px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.8);
@@ -75,7 +75,7 @@ label {
   justify-content: center;
 }
 
-/* --- Các style còn lại giữ nguyên --- */
+/* --- Marker and Layer Icon Styles --- */
 .leaflet-marker-icon {
   display: flex;
   justify-content: center;
@@ -83,34 +83,45 @@ label {
   line-height: 1;
   color: #ffffff;
   font-size: 11px;
-  line-height: 16px;
+  font-weight: bold;
+  /* Make text inside marker bold */
   box-shadow: 0px 0px 10px rgba(0, 132, 255, 1);
   border-radius: 100%;
   border: 1px solid #fff;
-  padding: 10px;
   background-color: #f20000;
+  /* Default marker color */
+  width: 24px;
+  height: 24px;
 }
 
 .police,
 .police.search-tip b,
+/* Style for search suggestions if used */
 .police.leaflet-marker-icon {
   background: #2b66fb;
 }
 
 .PCCC,
 .PCCC.search-tip b,
+/* Style for search suggestions if used */
 .PCCC.leaflet-marker-icon {
-  background: #eeff00;
-  /* Lưu ý: Màu vàng này có thể khó đọc chữ trắng */
+  background: #dc3545;
+  /* Changed PCCC color to red */
+}
+
+/* Ensure text inside red PCCC marker is white */
+.PCCC b {
+  color: #ffffff !important;
 }
 
 .hospital,
 .hospital.search-tip b,
+/* Style for search suggestions if used */
 .hospital.leaflet-marker-icon {
   background: #28a745;
 }
 
-/* radio */
+/* Radio button styles */
 input[type="radio"] {
   appearance: none;
   width: 20px;
@@ -120,18 +131,47 @@ input[type="radio"] {
   padding: 3px;
   cursor: pointer;
   border-radius: 50%;
+  vertical-align: middle;
 }
 
 input[type="radio"]:checked {
   background-color: #525252;
 }
 
-
+/* Layer selection UI styles */
 .layer-element>span {
-  border: 1px solid red;
-  /* Bạn có thể bỏ dòng này nếu không cần viền đỏ */
+  vertical-align: middle;
 }
 
+.layer-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 4px;
+  border: 1px solid #ccc;
+}
+
+.layer-icon.police {
+  background-color: #2b66fb;
+}
+
+.layer-icon.pccc {
+  background-color: #dc3545;
+  /* Changed PCCC color to red */
+}
+
+.layer-icon.hospital {
+  background-color: #28a745;
+}
+
+.layer-icon.deselect-icon {
+  background-color: #eee;
+  border: 1px dashed #999;
+}
+
+/* Description box style */
 .description {
   width: 250px;
   font-size: 16px;
@@ -143,8 +183,12 @@ input[type="radio"]:checked {
   line-height: 120%;
   border: 1px solid grey;
   z-index: 1000;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
 
+/* Start marker style */
 .start-marker {
   background-color: #00cc00;
   border-radius: 50%;
@@ -156,35 +200,56 @@ input[type="radio"]:checked {
   font-size: 14px;
   box-shadow: 0px 0px 10px rgba(0, 204, 0, 0.8);
   border: 2px solid #fff;
-  /* Kích thước marker có thể cần điều chỉnh */
   width: 30px;
   height: 30px;
 }
 
+/* End marker style (kept hidden by default) */
 .end-marker {
   display: none;
   opacity: 0;
   pointer-events: none;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  z-index: 100;
 }
 
-/* CSS cho nút "Trở về vị trí của tôi" (Leaflet control) */
+/* 'Return to Current Location' button style */
 .leaflet-control-current-location {
   background-color: #fff;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  padding: 5px;
   cursor: pointer;
   text-align: center;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 25px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  z-index: 1001;
 }
 
 .leaflet-control-current-location:hover {
   background-color: #f4f4f4;
+}
+
+/* Default Z-index for control containers */
+.leaflet-top.leaflet-left,
+.leaflet-top.leaflet-right,
+.leaflet-bottom.leaflet-left,
+.leaflet-bottom.leaflet-right {
+  z-index: 1000;
+}
+
+/* --- CSS ĐỂ THAY ICON NÚT FULLSCREEN (Thêm vào cuối file) --- */
+.leaflet-control-zoom-fullscreen {
+  background-image: url('/static/assets/img/icon/full-screen.png') !important;
+  /* Đường dẫn URL tới icon của bạn */
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: contain !important;
+  background-color: transparent !important;
+  font-size: 0 !important;
+  text-indent: -9999px !important;
+}
+
+/* Đảm bảo các pseudo-element (::before, ::after) không hiển thị icon font cũ */
+.leaflet-control-zoom-fullscreen::before,
+.leaflet-control-zoom-fullscreen::after {
+  content: none !important;
 }

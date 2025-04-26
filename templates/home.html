@@ -5,13 +5,53 @@
 {% endblock %}
 
 {% block content %}
-    <section class="bg-white shadow-lg rounded-lg p-8 text-center">
-        <h1 class="text-3xl font-bold text-gray-800 mb-4" data-aos="fade-up">Chào mừng đến với Trang chủ</h1>
-        <p class="text-gray-600 mb-6" data-aos="fade-up" data-aos-delay="200">
-            Khám phá thêm về chúng tôi và các tính năng tuyệt vời của ứng dụng.
-        </p>
-        <a href="/gioi-thieu" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition" data-aos="fade-up" data-aos-delay="400">
-            Xem chi tiết
-        </a>
-    </section>
+{% load static %}
+
+    <div class="container"> 
+        <section class="content-section text-center" data-aos="fade-up">
+            <h1>Chào mừng đến với Trang chủ</h1>
+            <p data-aos="fade-up" data-aos-delay="200">
+                Khám phá thêm về chúng tôi và các tính năng tuyệt vời của ứng dụng.
+            </p>
+            <a href="/gioi-thieu" class="btn-custom" data-aos="fade-up" data-aos-delay="400">
+                Xem chi tiết
+            </a>
+        </section>
+    </div>
+
+    <div class="my-5"></div>
+
+    <div class="container-fluid px-0"> 
+        <div class="row g-0 align-items-center mb-5"> 
+            <div class="col-md-6 bg-primary text-white p-lg-5 p-4"> 
+                <img src="{% static 'assets/img/placeholder-monitor-map-search.jpg' %}" alt="Bản đồ tìm kiếm cơ sở y tế, công an, cứu hỏa" class="img-fluid rounded shadow-sm">
+            </div>
+            
+            <div class="col-md-6 p-lg-5 p-4">
+                <h2 class="display-6 fw-bold mb-3">Bản đồ Tìm kiếm Cơ sở</h2> 
+                <p class="lead mb-4">
+                    Sử dụng bản đồ để nhanh chóng định vị các bệnh viện, sở công an, và trạm cứu hỏa gần bạn hoặc tại một khu vực cụ thể.
+                </p>
+                <div class="text-center mt-4"> 
+                    <a href="{% url 'maps:tim-kiem' %}" class="btn btn-outline-primary btn-lg mb-2">Bắt đầu Tìm kiếm</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-0 align-items-center">
+            <div class="col-md-6 order-md-1 p-lg-5 p-4"> 
+                <h2 class="display-6 fw-bold mb-3">Bản đồ Chỉ đường Khẩn cấp</h2> 
+                <p class="lead mb-4">
+                    Tính năng này giúp bạn tìm đường đi ngắn nhất và nhanh nhất đến các bệnh viện, trụ sở công an, hoặc trạm cứu hỏa trong trường hợp khẩn cấp.
+                </p>
+                <div class="text-center mt-4">
+                    <a href="{% url 'maps:emergency-road' %}" class="btn btn-outline-primary btn-lg mb-2">Tìm đường đi ngay</a>
+                </div>
+            </div>
+            
+            <div class="col-md-6 order-md-2 bg-primary text-white p-lg-5 p-4"> 
+                <img src="{% static 'assets/img/placeholder-multi-map-emergency.jpg' %}" alt="Bản đồ chỉ đường khẩn cấp ngắn nhất" class="img-fluid rounded shadow-sm">
+            </div>
+        </div>
+    </div>
 {% endblock %}

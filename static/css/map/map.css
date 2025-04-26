@@ -105,11 +105,10 @@
     background-color: #fff;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    padding: 5px;
     cursor: pointer;
     text-align: center;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 25px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
 }
 
@@ -124,4 +123,22 @@
     border: 1px solid grey;
     background-color: white;
     z-index: 1001;
+}
+
+/* --- CSS ĐỂ THAY ICON NÚT FULLSCREEN (Thêm vào cuối file) --- */
+.leaflet-control-zoom-fullscreen {
+    background-image: url('/static/assets/img/icon/full-screen.png') !important;
+    /* Đường dẫn URL tới icon của bạn */
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: contain !important;
+    background-color: transparent !important;
+    font-size: 0 !important;
+    text-indent: -9999px !important;
+}
+
+/* Đảm bảo các pseudo-element (::before, ::after) không hiển thị icon font cũ */
+.leaflet-control-zoom-fullscreen::before,
+.leaflet-control-zoom-fullscreen::after {
+    content: none !important;
 }
