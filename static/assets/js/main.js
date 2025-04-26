@@ -1,4 +1,3 @@
-// @ts-nocheck
 /*-----------------------------------------------------------------------------------
 
     Template Name: Poco - Agency Bootstrap4 HTML5 Template
@@ -13,29 +12,15 @@
     JS INDEX
     ===================
 
-    01. Ui Variables	
-    02. Search Field
-    03. Hamburget Menu	
-    04. Magnify popup	
-    05. Slick Sliders
-        . Branding
-        . Branding-item
-        . Banner Branding	
-        . Testimonial
-        . Testimonial-2
-        . client Review
-        . client Image
-    06. Counter js
-        . Skill Progressbar 	
-   
+    01. Sticky Header
+    02. Back to Top
+    03. Hamburger Menu
+    04. AOS Init
 
 -----------------------------------------------------------------------------------*/
 
 (function ($) {
   'use strict';
-
-  /*UI VARS*/
-  let logo = document.querySelector('.logo-04');
 
   /* Sticky Header */
   window.addEventListener('scroll', function () {
@@ -46,22 +31,14 @@
     });
   });
 
-  /* back to top button */
+  /* Back to Top */
   var topBtn = $('#to-top');
   topBtn.on('click', function (e) {
     e.preventDefault();
     $('html, body').animate({ scrollTop: 0 }, '600');
   });
 
-  /* search box open */
-  $('.search-bar').on('click', function () {
-    $('.search-box').addClass('search-open');
-  });
-  $('.search-close').on('click', function () {
-    $('.search-box').removeClass('search-open');
-  });
-
-  /* humberger menu */
+  /* Hamburger Menu */
   function toggleSidebar() {
     $('header aside').toggleClass('active');
     $('.hamburger-menu').toggleClass('open');
@@ -86,19 +63,18 @@
     toggleSidebar();
   });
 
-  // aos js init
+  /* AOS Init */
   AOS.init({
     duration: 1000,
     once: true,
   });
 
+  function disableScrolling() {
+    document.body.style.overflow = 'hidden';
+  }
+
+  function enableScrolling() {
+    document.body.style.overflow = 'auto';
+  }
+
 })(jQuery);
-
-// Add the missing functions
-function disableScrolling() {
-  document.body.style.overflow = 'hidden';
-}
-
-function enableScrolling() {
-  document.body.style.overflow = 'auto';
-}

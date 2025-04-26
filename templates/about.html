@@ -1,14 +1,89 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 
-{% block title %} 
-    Giới thiệu 
+{% block title %}
+    Giới thiệu
 {% endblock %}
 
-{%block content %}
-    <h1>Trang giới thiệu</h1>
-    <p data-aos="fade-up">Muốn quay trở lại 
-        <a href="/" style="color: red; font-weight: bold; text-decoration: underline;">
-            trang chủ
-        </a>
-    </p>
+{% block content %}
+        <div class="container my-5">
+
+            <div class="card shadow-sm mb-5">
+                <div class="card-body p-4 p-md-5 text-center"> 
+                    <h1 class="display-5 fw-bold text-primary mb-4" data-aos="fade-up">Giới thiệu về Dự án</h1>
+                    <p class="lead mb-4" data-aos="fade-up" data-aos-delay="100"> 
+                        Chúng tôi là đội ngũ đam mê ứng dụng công nghệ Hệ thống Thông tin Địa lý (GIS) và Trí tuệ nhân tạo (AI) để mang đến những giải pháp thiết thực, hỗ trợ cộng đồng trong các tình huống khẩn cấp và nhu cầu tìm kiếm thông tin thiết yếu hàng ngày.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-5">
+                <div class="card-body p-4 p-md-5">
+                     <h2 class="text-center fw-bold mb-4" data-aos="fade-up">Mục tiêu của chúng tôi</h2>
+                     <p data-aos="fade-up" data-aos-delay="100">
+                        Dự án tập trung vào việc xây dựng một hệ thống bản đồ thông minh, cho phép người dùng dễ dàng **tìm kiếm, xem thông tin chi tiết và nhận chỉ đường** đến các dịch vụ quan trọng như bệnh viện, trạm cứu hỏa, và đồn công an. Đặc biệt, hệ thống chú trọng vào việc **hỗ trợ tìm đường ngắn nhất** đến các cơ sở y tế và an ninh gần nhất trong các tình huống khẩn cấp, tận dụng sức mạnh của GIS và các thuật toán tối ưu.
+                     </p>
+                     <p data-aos="fade-up" data-aos-delay="150">
+                        Chúng tôi tin rằng việc cung cấp thông tin chính xác, kịp thời và dễ dàng truy cập về các dịch vụ thiết yếu này sẽ góp phần nâng cao chất lượng cuộc sống và sự an toàn cho cộng đồng.
+                     </p>
+                </div>
+            </div>
+        
+            <div class="card shadow-sm mb-5">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Tính năng nổi bật</h2>
+                    <div class="row gy-4">
+                        <div class="col-md-6 d-flex align-items-start" data-aos="fade-up" data-aos-delay="100">
+                            <div>
+                                <h4 class="fw-semibold">Tìm kiếm & Hiển thị Dịch vụ</h4>
+                                <p class="text-muted">Dễ dàng tìm kiếm và xem vị trí các bệnh viện, trạm cứu hỏa, đồn công an trên bản đồ trực quan.</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6 d-flex align-items-start" data-aos="fade-up" data-aos-delay="150">
+                            <div>
+                                <h4 class="fw-semibold">Thông tin Chi tiết & Liên lạc</h4>
+                                <p class="text-muted">Hiển thị đầy đủ thông tin cần thiết như địa chỉ, số điện thoại, giờ làm việc, và hình ảnh (nếu có) của từng địa điểm.</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6 d-flex align-items-start" data-aos="fade-up" data-aos-delay="200">
+                            <div>
+                                <h4 class="fw-semibold">Hỗ trợ Chỉ đường Khẩn cấp</h4>
+                                <p class="text-muted">Cung cấp chức năng tìm và dẫn đường đến các bệnh viện, đồn công an, trạm cứu hỏa <span class="fw-bold">gần nhất</span> một cách nhanh chóng và tối ưu.</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6 d-flex align-items-start" data-aos="fade-up" data-aos-delay="250">
+                            <div>
+                                <h4 class="fw-semibold">Lọc theo Loại hình Dịch vụ</h4>
+                                <p class="text-muted">Cho phép người dùng lọc và chỉ hiển thị các loại hình dịch vụ mong muốn (ví dụ: chỉ bệnh viện, chỉ trạm cứu hỏa).</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6 d-flex align-items-start" data-aos="fade-up" data-aos-delay="300">
+                            <div>
+                                <h4 class="fw-semibold">Nền tảng GIS Mạnh mẽ</h4>
+                                <p class="text-muted">Ứng dụng công nghệ Hệ thống Thông tin Địa lý (GIS) để quản lý, phân tích và hiển thị dữ liệu không gian hiệu quả.</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6 d-flex align-items-start" data-aos="fade-up" data-aos-delay="350">
+                            <div>
+                                <h4 class="fw-semibold">Giao diện Thân thiện</h4>
+                                <p class="text-muted">Thiết kế giao diện trực quan, dễ sử dụng</p>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        
+            {# --- Nút quay lại trang chủ --- #}
+            <div class="text-center" data-aos="fade-up">
+                 {# Sử dụng class btn của Bootstrap thay vì btn-custom #}
+                <a href="/" class="btn btn-secondary btn-lg"> {# Giả sử 'index' là name của url trang chủ #}
+                    <i class="bi bi-arrow-left-circle me-2"></i> Quay lại Trang chủ
+                </a>
+            </div>
+        </div>
 {% endblock %}

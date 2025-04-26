@@ -7,7 +7,7 @@ app_name = 'maps'
 urlpatterns = [
     # URL cho các trang HTML (giữ nguyên)
     path('', views.simplemap, name="home"), # Trang chủ (có thể trùng với emergency-road)
-    path('co-ban/', views.simplemap, name="co-ban"), # Trang bản đồ cơ bản
+    path('tim-kiem/', views.simplemap, name="tim-kiem"), # Trang bản đồ cơ bản
     path('emergency-road/', views.simplemap2, name="emergency-road"), # Trang bản đồ tìm đường
 
     # URL cho API lấy locations ban đầu (GeoJSON)

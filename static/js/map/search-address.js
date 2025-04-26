@@ -151,16 +151,68 @@ sidebarRouting.className = 'sidebar sidebar-right hidden';
 mapContainer.appendChild(sidebarRouting);
 
 function adjustControlPositions() {
+    // Đảm bảo các sidebars đã được thêm vào DOM và map container tồn tại
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) return;
+
+    const sidebarPopup = mapContainer.querySelector('#sidebar-popup');
+    const sidebarRouting = mapContainer.querySelector('#sidebar-routing');
+
+    if (!sidebarPopup || !sidebarRouting) {
+        // Sidebars chưa sẵn sàng, không thể điều chỉnh vị trí control
+        return;
+    }
+
     const isPopupVisible = !sidebarPopup.classList.contains('hidden');
     const isRoutingVisible = !sidebarRouting.classList.contains('hidden');
-    const zoomControl = document.querySelector('.leaflet-control-zoom');
-    const fullscreenControl = document.querySelector('.leaflet-control-fullscreen');
-    const leftMargin = isPopupVisible ? '310px' : '10px';
-    if (zoomControl) zoomControl.style.marginLeft = leftMargin;
-    if (fullscreenControl) fullscreenControl.style.marginLeft = leftMargin;
-    const currentLocationControl = document.querySelector('.leaflet-control-current-location');
-    const rightMargin = isRoutingVisible ? '310px' : '10px';
-    if (currentLocationControl) currentLocationControl.style.marginRight = rightMargin;
+
+    // Khoảng cách dịch chuyển khi sidebar mở (bằng chiều rộng sidebar)
+    const offset = '310px'; // Dựa trên chiều rộng sidebar (~300px) cộng thêm padding nếu cần
+
+    // Điều chỉnh container control bên trái (.leaflet-top.leaflet-left)
+    const leftContainer = document.querySelector('.leaflet-top.leaflet-left');
+    if (leftContainer) {
+        // Di chuyển toàn bộ container bằng thuộc tính 'left'
+        const targetLeft = isPopupVisible ? offset : '0px';
+        // Chỉ áp dụng style nếu giá trị đích khác với hiện tại để tránh lặp không cần thiết
+        if (leftContainer.style.left !== targetLeft) {
+            leftContainer.style.transition = 'left 0.3s ease-in-out';
+            leftContainer.style.left = targetLeft;
+        }
+
+        // Đặt lại các style inline trên các control riêng lẻ để đảm bảo tính thống nhất
+        ['.leaflet-control-zoom', '.leaflet-control-fullscreen'].forEach(selector => {
+            const control = document.querySelector(selector);
+            if (control) {
+                control.style.marginLeft = '';
+                control.style.position = '';
+                control.style.zIndex = '';
+                control.style.transition = '';
+            }
+        });
+    }
+
+    // Điều chỉnh container control bên phải (.leaflet-top.leaflet-right)
+    const rightContainer = document.querySelector('.leaflet-top.leaflet-right');
+    if (rightContainer) {
+        // Di chuyển toàn bộ container bằng thuộc tính 'right'
+        const targetRight = isRoutingVisible ? offset : '0px';
+        if (rightContainer.style.right !== targetRight) {
+            rightContainer.style.transition = 'right 0.3s ease-in-out';
+            rightContainer.style.right = targetRight;
+        }
+
+        // Đặt lại các style inline trên control riêng lẻ
+        ['.leaflet-control-current-location'].forEach(selector => {
+            const control = document.querySelector(selector);
+            if (control) {
+                control.style.marginRight = '';
+                control.style.position = '';
+                control.style.zIndex = '';
+                control.style.transition = '';
+            }
+        });
+    }
 }
 
 function showPopupSidebar(content, isStart) {
@@ -206,29 +258,68 @@ function showRoutingSidebar(route) {
     const distance = (route.summary.totalDistance / 1000).toFixed(1);
     const time = Math.round(route.summary.totalTime / 60);
     let instructionsHTML = '<ul class="instructions-list">';
-    route.instructions.forEach((instruction) => {
+    
+    // Lấy tọa độ từ route.coordinates (mảng các đối tượng LatLng)
+    const routeCoordinates = route.coordinates || [];
+    
+    route.instructions.forEach((instruction, idx) => {
         const stepDistance = instruction.distance > 0 ? `${Math.round(instruction.distance)} m` : '';
         const directionText = VietnameseDirections.getText(instruction);
         const directionIcon = VietnameseDirections.getIcon(instruction);
+        
+        // Lấy tọa độ cho instruction này bằng instruction.index
+        const coordIndex = instruction.index;
+        let lat = null;
+        let lng = null;
+        if (typeof coordIndex === 'number' && routeCoordinates[coordIndex]) {
+            const coord = routeCoordinates[coordIndex]; // Đối tượng LatLng
+            lat = coord.lat;
+            lng = coord.lng;
+        }
+        
+        // Chỉ thêm thuộc tính tọa độ nếu chúng hợp lệ
+        const coordAttr = (typeof lat === 'number' && typeof lng === 'number' && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180)
+            ? `data-lat="${lat}" data-lng="${lng}"`
+            : '';
+        
         instructionsHTML += `
-            <li class="instruction-item">
+            <li class="instruction-item" ${coordAttr}>
                 <span class="instruction-icon">${directionIcon}</span>
                 <span class="instruction-text">${directionText} ${instruction.road ? `vào ${escapeHtml(instruction.road)}` : ''}</span>
                 <span class="instruction-distance">${stepDistance}</span>
             </li>`;
     });
     instructionsHTML += '</ul>';
+    
     const content = `
         <h3>Tuyến đường</h3>
         <p>Khoảng cách: ${distance} km, Thời gian: ~${time} phút</p>
         ${instructionsHTML}
         <button class="close-button" id="close-routing">Đóng</button>
     `;
+    
     sidebarRouting.innerHTML = `<div class="sidebar-content">${content}</div>`;
     sidebarRouting.classList.remove('hidden');
     adjustControlPositions();
+    
+    // Thêm sự kiện click cho các instruction-item
+    const instructionItems = sidebarRouting.querySelectorAll('.instruction-item');
+    instructionItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const lat = parseFloat(item.getAttribute('data-lat'));
+            const lng = parseFloat(item.getAttribute('data-lng'));
+            if (typeof lat === 'number' && typeof lng === 'number' && !isNaN(lat) && !isNaN(lng)) {
+                console.log(`Jumping to instruction location: [${lat}, ${lng}]`);
+                map.setView([lat, lng], 18); // Tăng mức zoom lên 18 để phóng to hơn
+            } else {
+                console.warn('Invalid coordinates for instruction:', item);
+            }
+        });
+    });
+    
     document.getElementById('close-routing').onclick = () => {
-        sidebarRouting.classList.add('hidden'); adjustControlPositions();
+        sidebarRouting.classList.add('hidden');
+        adjustControlPositions();
     };
 }
 

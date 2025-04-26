@@ -1,0 +1,453 @@
+/* File: static/css/header.css */
+
+/* ================================== */
+/* Header & Navigation Styles         */
+/* ================================== */
+
+.header-area {
+    background: linear-gradient(90deg, #2c3e50, #3498db);
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1002;
+    transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.menu-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.logo img {
+    height: 50px;
+    display: block;
+    transition: height 0.3s ease-in-out;
+}
+
+/* --- Desktop Menu --- */
+.main-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(calc(-50% - 75px));
+}
+
+.main-menu li {
+    position: relative;
+}
+
+.main-menu a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    display: block;
+    position: relative;
+}
+
+.main-menu a:not(.active) {
+    color: #ffffff !important;
+    opacity: 1;
+    font-weight: 600;
+    text-shadow: none;
+}
+
+.main-menu a:not(.active):hover {
+    color: #00cc00;
+}
+
+.main-menu a.active {
+    color: #00cc00;
+    font-weight: 700;
+    opacity: 1;
+    text-shadow: none;
+}
+
+.main-menu a.active::before {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 3px;
+    background-color: #00cc00;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* --- Sub Menu --- */
+.dropdown .sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    min-width: 150px;
+    z-index: 1000;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+    padding: 5px 0;
+    border-radius: 4px;
+    border-top: 3px solid var(--sidebar-active-bg, #007bff);
+}
+
+.dropdown:hover>.sub-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.sub-menu li a {
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.sub-menu li a:hover {
+    background-color: var(--sidebar-link-hover-bg, #f0f0f0);
+    color: var(--sidebar-active-bg, #007bff);
+}
+
+/* --- Mobile Menu Container --- */
+aside {
+    width: 100%;
+    visibility: hidden;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1040;
+    /* Đã tăng z-index trong code gốc của bạn, giữ nguyên */
+}
+
+aside.active {
+    visibility: visible;
+}
+
+aside.active .sidebar-menu {
+    transition: transform 0.3s ease-in-out;
+    /* Sửa lại transition chỉ cho transform */
+    transform: translateX(0%);
+}
+
+aside.active .overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Overlay --- */
+aside .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1041;
+    /* Dưới sidebar */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Đậm hơn một chút so với gốc */
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* --- Sidebar Panel --- */
+.sidebar-menu {
+    width: var(--sidebar-width, 350px);
+    /* Dùng biến CSS, sửa giá trị dự phòng thành 350px như gốc */
+    max-width: 85%;
+    /* Giới hạn chiều rộng (giữ nguyên từ code gốc header.css) */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1042;
+    /* Trên overlay */
+    transition: transform 0.3s ease-in-out;
+    /* Thêm transition chuẩn cho sidebar */
+    transform: translateX(-100%);
+    overflow-y: auto;
+    background-color: var(--sidebar-bg-color, rgb(241, 249, 255));
+    /* Dùng biến CSS, sửa màu dự phòng như gốc */
+    padding: 20px 15px 50px;
+    box-sizing: border-box;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-menu .logo {
+    margin-bottom: 20px;
+    /* Giữ 20px như code gốc */
+    text-align: center;
+    /* Thêm căn giữa logo trong sidebar */
+}
+
+.sidebar-menu .logo img {
+    height: 40px;
+    /* Giữ 40px như code gốc header.css */
+}
+
+/* Menu trong sidebar */
+.sidebar-menu ul.main-menu {
+    padding: 0;
+    margin: 15px 0 20px 0;
+    /* Giữ margin-top 15px và margin-bottom 20px */
+    list-style: none;
+}
+
+.sidebar-menu ul.main-menu li {
+    padding-right: 0;
+    margin-bottom: 5px;
+}
+
+.sidebar-menu ul.main-menu li a {
+    width: 100%;
+    display: block;
+    padding: 10px 0;
+    /* Giữ padding gốc 10px 0 */
+    color: var(--sidebar-text-color, #333);
+    /* Dùng biến CSS, sửa màu dự phòng #333 */
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    /* Giữ transition gốc */
+    border-radius: 4px;
+    /* Thêm border-radius */
+    font-size: 16px;
+    /* Giữ font-size gốc */
+}
+
+.sidebar-menu ul.main-menu li a:hover {
+    color: var(--sidebar-link-hover-text, #6c757d);
+    /* Dùng biến CSS, sửa màu hover gốc #6c757d */
+    background-color: var(--sidebar-link-hover-bg, #e9ecef);
+    /* Thêm background hover */
+}
+
+.sidebar-menu ul.main-menu li a.active {
+    color: var(--sidebar-active-text, #ffffff);
+    background-color: var(--sidebar-active-bg, #007bff);
+    font-weight: 500;
+}
+
+/* Nút liên hệ trong sidebar */
+.sidebar-menu .contacprimary__button {
+    margin-top: 15px;
+    /* Giữ margin-top gốc */
+    display: block;
+    padding: 10px 15px;
+    /* Giữ padding gốc */
+    background-color: #343a40;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    font-weight: 500;
+    /* Thêm font-weight */
+}
+
+.sidebar-menu .contacprimary__button:hover {
+    background-color: #23272b;
+}
+
+.sidebar-menu .contacprimary__button img {
+    margin-right: 8px;
+    vertical-align: middle;
+    height: 1em;
+    filter: brightness(0) invert(1);
+}
+
+/* --- Hamburger & Close Icons --- */
+.hamburger-menu,
+.close-sidebar {
+    position: relative;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hamburger-menu {
+    display: none;
+    margin-left: auto;
+}
+
+.close-sidebar {
+    position: absolute;
+    top: 15px;
+    /* Giữ vị trí gốc */
+    right: 15px;
+    /* Giữ vị trí gốc */
+    margin: 0;
+    z-index: 16;
+    /* Giữ z-index gốc */
+}
+
+.hamburger-menu span,
+.close-sidebar span {
+    opacity: 1;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    /* Giữ chiều cao gốc 2px */
+    border-radius: 10px;
+    position: absolute;
+    transform: rotate(0deg);
+    transition: 0.4s ease-in-out;
+    /* Giữ transition gốc */
+}
+
+.hamburger-menu span {
+    background-color: var(--hamburger-color, #ffffff);
+}
+
+/* Màu hamburger khi header sticky */
+.header-area.sticky .hamburger-menu span {
+    background-color: #333;
+}
+
+
+.close-sidebar span {
+    background-color: var(--close-btn-color, #6c757d);
+    /* Dùng biến CSS, sửa màu dự phòng #6c757d */
+}
+
+/* Vị trí các thanh hamburger */
+.hamburger-menu span:nth-child(1) {
+    top: 0;
+}
+
+.hamburger-menu span:nth-child(2) {
+    top: 9px;
+    /* Giữ vị trí gốc */
+}
+
+.hamburger-menu span:nth-child(3) {
+    top: 18px;
+    /* Giữ vị trí gốc */
+}
+
+/* Vị trí các thanh nút đóng (X) */
+.close-sidebar span:nth-child(1) {
+    top: 9px;
+    /* Cần top 9px để căn giữa khi xoay */
+}
+
+.close-sidebar span:nth-child(2) {
+    top: 9px;
+    /* Cần top 9px để căn giữa khi xoay */
+}
+
+/* Hiệu ứng transform khi mở/đóng */
+.hamburger-menu.open span:nth-child(1),
+.close-sidebar span:nth-child(1) {
+    transform: translateY(9px) rotate(135deg);
+    /* Giữ transform gốc */
+}
+
+.hamburger-menu.open span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(160px);
+    /* Giữ transform gốc */
+}
+
+.hamburger-menu.open span:nth-child(3),
+.close-sidebar span:nth-child(2) {
+    transform: translateY(-9px) rotate(-135deg);
+    /* Giữ transform gốc */
+}
+
+/* --- Sticky Header Styles --- */
+.header-area.sticky {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    z-index: 1010;
+    padding: 10px 0px;
+}
+
+.header-area.sticky .logo img {
+    height: 40px;
+}
+
+.header-area.sticky .main-menu a {
+    font-weight: 600;
+    text-shadow: none;
+    opacity: 1;
+    padding: 8px 10px;
+}
+
+.header-area.sticky .main-menu a:not(.active) {
+    color: #333;
+}
+
+.header-area.sticky .main-menu a:not(.active):hover {
+    color: var(--sidebar-active-bg, #007bff);
+}
+
+.header-area.sticky .main-menu a.active {
+    color: var(--sidebar-active-bg, #007bff);
+    font-weight: 700;
+}
+
+.header-area.sticky .main-menu a.active::before {
+    background-color: var(--sidebar-active-bg, #007bff);
+    bottom: -2px;
+}
+
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 1199.98px) {
+
+    /* Sử dụng breakpoint của header.css */
+    aside,
+    .hamburger-menu {
+        display: block;
+        /* Hiển thị khi < 1200px */
+    }
+
+    .hamburger-menu {
+        display: flex;
+        /* Cần flex để các span hoạt động đúng */
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .menu-area .main-menu {
+        display: none !important;
+        /* Ẩn menu desktop */
+    }
+}
+
+@media (max-width: 767.98px) {
+    /* Không có thay đổi cụ thể cho aside/menu ở đây */
+}
+
+
+@media (min-width: 320px) and (max-width: 574.98px) {
+
+    /* Sử dụng breakpoint của header.css */
+    .sidebar-menu {
+        width: 280px;
+        /* Giữ nguyên chiều rộng sidebar nhỏ */
+    }
+}
