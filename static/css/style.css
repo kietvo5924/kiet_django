@@ -42,6 +42,7 @@ main {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 100;
+    /* Main content z-index */
 }
 
 h1 {
@@ -73,6 +74,7 @@ a:hover {
     width: 100%;
     position: relative;
     z-index: 1;
+    /* Map z-index */
     margin-bottom: 20px;
 }
 
@@ -87,6 +89,7 @@ a:hover {
     line-height: 1.4;
     border: 1px solid #ccc;
     z-index: 500;
+    /* Description z-index */
 }
 
 /* Map Markers */
@@ -97,6 +100,7 @@ a:hover {
 .start-marker,
 .end-marker {
     z-index: 400;
+    /* Marker z-index */
 }
 
 .police-marker {
@@ -148,6 +152,7 @@ a:hover {
     left: 10px;
     width: 280px;
     z-index: 1001;
+    /* Search z-index */
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -198,6 +203,7 @@ a:hover {
     border: 1px solid #ddd;
     background-color: #fff;
     z-index: 1001;
+    /* Autocomplete z-index */
     width: 100%;
     border-radius: 0 0 4px 4px;
     border-top: none;
@@ -210,6 +216,7 @@ a:hover {
 .leaflet-control-fullscreen,
 .leaflet-control-current-location {
     z-index: 600 !important;
+    /* Leaflet controls z-index */
     margin-left: 10px !important;
     margin-top: 10px !important;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) !important;
@@ -249,6 +256,7 @@ a:hover {
         max-width: none;
         margin: 0;
         z-index: 1001;
+        /* Đảm bảo search vẫn cao trên mobile */
     }
 
     .autocomplete-list {
@@ -264,9 +272,6 @@ a:hover {
         font-size: 22px;
     }
 
-    /* Footer responsive styles đã chuyển qua footer.css */
-
-    /* Leaflet controls responsive margins */
     .leaflet-right .leaflet-control {
         margin-right: 10px !important;
     }

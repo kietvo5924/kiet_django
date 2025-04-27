@@ -36,7 +36,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="{% if request.path == '/maps/tim-kiem/' %}active{% endif %}" href="{% url 'maps:tim-kiem' %}">Tìm kiếm</a>
-                         </li>
+                        </li>
                     <li>
                         <a class="{% if request.path == '/maps/emergency-road/' %}active{% endif %}" href="{% url 'maps:emergency-road' %}">Khẩn cấp</a>
                     </li>
@@ -84,6 +84,16 @@
         {% block script %}
         {% endblock %}
     </main>
+
+    <div class="df-messenger-container"> {# --- Dialogflow Messenger --- #}
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <df-messenger
+            chat-title="Hỗ trợ Khẩn cấp"
+            agent-id="b348fe55-24ed-423e-874d-e7c1ad9c544f"
+            language-code="vi"
+            chat-icon="{% static 'assets/icons/emergency_chat_icon.png' %}"
+        ></df-messenger>
+    </div>
 
     <footer class="footer-area">
         <div class="container">
