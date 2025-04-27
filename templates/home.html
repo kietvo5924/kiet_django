@@ -54,13 +54,4 @@
             </div>
         </div>
     </div>
-
-    {# --- Dialogflow Messenger --- #}
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger
-        chat-title="Hỗ trợ Khẩn cấp"  {# Đổi tiêu đề cho phù hợp #}
-        agent-id="b348fe55-24ed-423e-874d-e7c1ad9c544f"
-        language-code="vi"
-        chat-icon="{% static 'assets/icons/emergency_chat_icon.png' %}" {# Thêm thuộc tính này #}
-    ></df-messenger>
 {% endblock %}
